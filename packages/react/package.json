@@ -3,13 +3,19 @@
     "version": "0.1.0",
     "description": "React viewer and editors for Vyva documents and decks.",
     "type": "module",
-    "sideEffects": ["**/*.css", "./src/fonts.ts", "./dist/fonts.js"],
+    "sideEffects": [
+        "**/*.css",
+        "./src/fonts.ts",
+        "./dist/fonts.js"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Pollium/Vyva.git",
         "directory": "packages/react"
     },
-    "files": ["dist"],
+    "files": [
+        "dist"
+    ],
     "exports": {
         "./DocumentEditor": "./src/components/document/DocumentEditor/index.tsx",
         "./DeckEditor": "./src/components/deck/DeckEditor/index.tsx",
@@ -19,6 +25,7 @@
         "./SaveStatus": "./src/components/editor/SaveStatus/index.tsx",
         "./MonacoCodeEditor": "./src/components/MonacoCodeEditor/index.tsx",
         "./use-vyva-session": "./src/hooks/use-vyva-session.ts",
+        "./markup": "./src/utils/markup.ts",
         "./contracts/*": "./src/contracts/*.ts",
         "./messages/*": "./src/messages/*.ts",
         "./fonts": "./src/fonts.ts",
@@ -59,6 +66,10 @@
             "./use-vyva-session": {
                 "types": "./dist/hooks/use-vyva-session.d.ts",
                 "default": "./dist/hooks/use-vyva-session.js"
+            },
+            "./markup": {
+                "types": "./dist/utils/markup.d.ts",
+                "default": "./dist/utils/markup.js"
             },
             "./contracts/*": {
                 "types": "./dist/contracts/*.d.ts",

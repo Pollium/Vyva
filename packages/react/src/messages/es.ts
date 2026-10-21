@@ -7,6 +7,12 @@ const es: Messages = {
         hue: 'Tono',
         hexCode: 'Código hexadecimal',
         actionsOf: (subject) => `Acciones de ${subject}`
+    },
+    deck: {
+        presentation: 'Presentación',
+        leavePresentation: 'Salir de la presentación',
+        slide: (number) => `Diapositiva ${number}`,
+        slideOf: (number, total) => `Diapositiva ${number} de ${total}`
     }
 };
 
