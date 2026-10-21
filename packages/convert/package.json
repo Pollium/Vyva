@@ -1,0 +1,39 @@
+{
+    "name": "@vyva/convert",
+    "version": "0.1.0",
+    "description": "Server-side tools for Vyva content: clean what clients send, import Word, PowerPoint, PDF and Markdown files, and export to PDF, Word, PowerPoint and HTML.",
+    "type": "module",
+    "sideEffects": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pollium/Vyva.git",
+        "directory": "packages/convert"
+    },
+    "files": ["dist"],
+    "exports": {
+        "./*": "./src/*.ts"
+    },
+    "publishConfig": {
+        "access": "public",
+        "exports": {
+            "./*": {
+                "types": "./dist/*.d.ts",
+                "default": "./dist/*.js"
+            }
+        }
+    },
+    "scripts": {
+        "build": "tsdown",
+        "typecheck": "tsc -p tsconfig.json",
+        "lint": "oxlint --deny-warnings",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@vyva/core": "workspace:*",
+        "sanitize-html": "^2.18.0"
+    },
+    "devDependencies": {
+        "@types/node": "^26.6.4",
+        "@types/sanitize-html": "^2.16.2"
+    }
+}
