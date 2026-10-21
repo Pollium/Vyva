@@ -1,0 +1,26 @@
+{
+    "name": "playground",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -p tsconfig.json && vite build",
+        "typecheck": "tsc -p tsconfig.json",
+        "lint": "oxlint --deny-warnings"
+    },
+    "dependencies": {
+        "@vyva/core": "workspace:*",
+        "@vyva/react": "workspace:*",
+        "react": "^19.2.7",
+        "react-aria-components": "^1.21.0",
+        "react-dom": "^19.2.7"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "4.3.3",
+        "@types/react": "^19.2.18",
+        "@types/react-dom": "^19.2.4",
+        "@vitejs/plugin-react": "6.1.1",
+        "tailwindcss": "4.3.3",
+        "vite": "8.2.2"
+    }
+}
