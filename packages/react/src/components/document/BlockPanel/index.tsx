@@ -71,7 +71,7 @@ const BlockPanel = ({ editor, isLocked }: BlockPanelProps) => {
     if(state.kind === 'table') return <TableSection editor={editor} isLocked={isLocked} />;
 
     if(state.kind === 'code'){
-        const languages: SelectOption<string>[] = [{ value: PLAIN_TEXT, label: t.document.plainText }, ...CODE_LANGUAGES, { value: 'xml', label: t.document.htmlOrXml }];
+        const languages: SelectOption<string>[] = [{ value: PLAIN_TEXT, label: t.editor.plainText }, ...CODE_LANGUAGES, { value: 'xml', label: t.document.htmlOrXml }];
 
         return (
             <PanelSection title={t.document.code}>

@@ -42,7 +42,9 @@ const es: Messages = {
         addColumnLeft: 'Agregar una columna a la izquierda',
         addColumnRight: 'Agregar una columna a la derecha',
         removeRow: 'Quitar la fila',
-        removeColumn: 'Quitar la columna'
+        removeColumn: 'Quitar la columna',
+        plainText: 'Texto plano',
+        font: 'Fuente'
     },
     document: {
         content: 'Contenido del documento',
@@ -79,7 +81,6 @@ const es: Messages = {
         outlineEmpty: 'Los títulos del documento aparecen aquí.',
         untitledSection: 'Sección sin título',
         newSection: 'Nueva sección',
-        plainText: 'Texto plano',
         htmlOrXml: 'HTML o XML',
         code: 'Código',
         codeLanguage: 'Lenguaje del código',
@@ -128,7 +129,6 @@ const es: Messages = {
         },
         marginSide: (side) => `${side} (mm)`,
         text: 'Texto',
-        font: 'Fuente',
         baseSize: 'Tamaño base (pt)',
         textColorShort: 'Texto',
         accent: 'Acento',
@@ -181,7 +181,144 @@ const es: Messages = {
         zoomAt: (level) => `Zoom: ${level}`,
         zoomIn: 'Acercar',
         zoomOut: 'Alejar',
-        zoomToFit: 'Ajustar a la ventana'
+        zoomToFit: 'Ajustar a la ventana',
+        tools: 'Herramientas de la diapositiva',
+        finishWriting: 'Terminar de escribir',
+        done: 'Listo',
+        addText: 'Agregar texto',
+        text: 'Texto',
+        addImage: 'Agregar imagen',
+        image: 'Imagen',
+        addShape: 'Agregar forma',
+        shape: 'Forma',
+        shapes: {
+            rect: 'Rectángulo',
+            rounded: 'Rectángulo redondeado',
+            ellipse: 'Elipse',
+            triangle: 'Triángulo',
+            line: 'Línea',
+            arrow: 'Flecha'
+        },
+        addTable: 'Agregar tabla',
+        table: 'Tabla',
+        addCode: 'Agregar código',
+        code: 'Código',
+        replaceImage: 'Reemplazar la imagen',
+        replace: 'Reemplazar',
+        editCode: 'Editar el código',
+        editCodeShort: 'Editar código',
+        editTable: 'Editar la tabla',
+        editTableShort: 'Editar tabla',
+        improve: 'Mejorar',
+        improveHint: 'Pedir a la IA que lo mejore',
+        selectedTextSize: 'Tamaño del texto seleccionado',
+        auto: 'Auto',
+        strikethrough: 'Tachado',
+        selectedTextColor: 'Color del texto seleccionado',
+        bullets: 'Viñetas',
+        numbering: 'Numeración',
+        kinds: {
+            text: 'Texto',
+            shape: 'Forma',
+            image: 'Imagen',
+            table: 'Tabla',
+            code: 'Código'
+        },
+        elementCount: (count) => `${count} elementos`,
+        selectedText: 'Texto seleccionado',
+        textStyle: 'Estilo del texto',
+        lineHeight: 'Interlineado',
+        lineHeightOf: (value) => `${value} interlineado`,
+        verticalAligns: {
+            top: 'Texto arriba',
+            middle: 'Texto al centro',
+            bottom: 'Texto abajo'
+        },
+        fontColor: 'Color de letra',
+        boxFill: 'Relleno del cuadro',
+        shapeKind: 'Tipo de forma',
+        fill: 'Relleno',
+        border: 'Borde',
+        borderWidth: 'Grosor del borde',
+        noBorder: 'Sin borde',
+        strokeColor: 'Color del borde',
+        imageFit: 'Ajuste de la imagen',
+        imageFits: {
+            cover: 'Rellenar',
+            contain: 'Ajustar'
+        },
+        corners: 'Esquinas',
+        squareCorners: 'Esquinas rectas',
+        roundCorners: 'Redonda',
+        cornerRadius: (radius) => `Esquinas ${radius}`,
+        arrangeAndAlign: 'Orden y alineación',
+        order: 'Orden',
+        arranges: {
+            front: 'Traer al frente',
+            forward: 'Traer adelante',
+            backward: 'Enviar atrás',
+            back: 'Enviar al fondo'
+        },
+        lock: 'Bloquear',
+        unlock: 'Desbloquear',
+        alignOnSlide: 'Alinear en la diapositiva',
+        alignTogether: 'Alinear entre sí',
+        placements: {
+            left: 'Alinear al borde izquierdo',
+            center: 'Centrar horizontalmente',
+            right: 'Alinear al borde derecho',
+            top: 'Alinear al borde superior',
+            middle: 'Centrar verticalmente',
+            bottom: 'Alinear al borde inferior'
+        },
+        opacity: 'Opacidad',
+        positionAndSize: 'Posición y tamaño',
+        frame: {
+            x: 'X',
+            y: 'Y',
+            w: 'Ancho',
+            h: 'Alto',
+            rotation: 'Giro'
+        },
+        tableFontSize: 'Tamaño de letra de la tabla',
+        tableHeader: 'Encabezado',
+        headerColor: 'Color del encabezado',
+        borders: 'Bordes',
+        borderColor: 'Color de los bordes',
+        rowsAndColumns: 'Filas y columnas',
+        colors: 'Colores',
+        colorSchemes: {
+            dark: 'Fondo oscuro',
+            light: 'Fondo claro'
+        },
+        themeColors: {
+            background: 'Fondo',
+            text: 'Texto',
+            accent: 'Acento',
+            muted: 'Secundario'
+        },
+        footerLeft: 'Pie de página, a la izquierda',
+        footerCenter: 'Pie de página, al centro',
+        format: 'Formato',
+        formats: {
+            '16:9': 'Panorámico 16:9',
+            '4:3': 'Clásico 4:3',
+            '1:1': 'Cuadrado 1:1',
+            'a4-portrait': 'A4 vertical',
+            'a4-landscape': 'A4 horizontal'
+        },
+        thisSlide: 'Esta diapositiva',
+        background: 'Fondo',
+        slideBackground: 'Fondo de esta diapositiva',
+        useImage: 'Usar una imagen',
+        changeImage: 'Cambiar la imagen',
+        backgroundFit: 'Ajuste',
+        backgroundFits: {
+            cover: 'Cubrir la diapositiva',
+            contain: 'Mostrar la imagen completa'
+        },
+        dimImage: 'Oscurecer la imagen',
+        themeBackground: 'Volver al fondo del tema'
     }
 };
 

@@ -1,5 +1,7 @@
 import type { SelectionAction } from '../contracts/selection-action';
+import type { Align, Arrange } from '../utils/deck/deck-ops';
 import type { BlockStyle } from '../utils/document-blocks';
+import type { CodeElement, DeckFormat, ImageElement, ShapeKind, SlideElement, TextStyle } from '@vyva/core/content';
 
 const en = {
     ui: {
@@ -43,7 +45,9 @@ const en = {
         addColumnLeft: 'Add a column to the left',
         addColumnRight: 'Add a column to the right',
         removeRow: 'Remove the row',
-        removeColumn: 'Remove the column'
+        removeColumn: 'Remove the column',
+        plainText: 'Plain text',
+        font: 'Font'
     },
     document: {
         content: 'Document content',
@@ -80,7 +84,6 @@ const en = {
         outlineEmpty: 'The document headings show up here.',
         untitledSection: 'Untitled section',
         newSection: 'New section',
-        plainText: 'Plain text',
         htmlOrXml: 'HTML or XML',
         code: 'Code',
         codeLanguage: 'Code language',
@@ -129,7 +132,6 @@ const en = {
         },
         marginSide: (side: string) => `${side} (mm)`,
         text: 'Text',
-        font: 'Font',
         baseSize: 'Base size (pt)',
         textColorShort: 'Text',
         accent: 'Accent',
@@ -182,7 +184,144 @@ const en = {
         zoomAt: (level: string) => `Zoom: ${level}`,
         zoomIn: 'Zoom in',
         zoomOut: 'Zoom out',
-        zoomToFit: 'Fit to the window'
+        zoomToFit: 'Fit to the window',
+        tools: 'Slide tools',
+        finishWriting: 'Finish writing',
+        done: 'Done',
+        addText: 'Add text',
+        text: 'Text',
+        addImage: 'Add an image',
+        image: 'Image',
+        addShape: 'Add a shape',
+        shape: 'Shape',
+        shapes: {
+            rect: 'Rectangle',
+            rounded: 'Rounded rectangle',
+            ellipse: 'Ellipse',
+            triangle: 'Triangle',
+            line: 'Line',
+            arrow: 'Arrow'
+        } satisfies Record<ShapeKind, string>,
+        addTable: 'Add a table',
+        table: 'Table',
+        addCode: 'Add code',
+        code: 'Code',
+        replaceImage: 'Replace the image',
+        replace: 'Replace',
+        editCode: 'Edit the code',
+        editCodeShort: 'Edit code',
+        editTable: 'Edit the table',
+        editTableShort: 'Edit table',
+        improve: 'Improve',
+        improveHint: 'Ask the AI to improve it',
+        selectedTextSize: 'Size of the selected text',
+        auto: 'Auto',
+        strikethrough: 'Strikethrough',
+        selectedTextColor: 'Color of the selected text',
+        bullets: 'Bullets',
+        numbering: 'Numbering',
+        kinds: {
+            text: 'Text',
+            shape: 'Shape',
+            image: 'Image',
+            table: 'Table',
+            code: 'Code'
+        } satisfies Record<SlideElement['type'], string>,
+        elementCount: (count: number) => `${count} elements`,
+        selectedText: 'Selected text',
+        textStyle: 'Text style',
+        lineHeight: 'Line spacing',
+        lineHeightOf: (value: string) => `${value} line spacing`,
+        verticalAligns: {
+            top: 'Text at the top',
+            middle: 'Text in the middle',
+            bottom: 'Text at the bottom'
+        } satisfies Record<TextStyle['verticalAlign'], string>,
+        fontColor: 'Font color',
+        boxFill: 'Box fill',
+        shapeKind: 'Shape type',
+        fill: 'Fill',
+        border: 'Border',
+        borderWidth: 'Border width',
+        noBorder: 'No border',
+        strokeColor: 'Border color',
+        imageFit: 'Image fit',
+        imageFits: {
+            cover: 'Fill',
+            contain: 'Fit'
+        } satisfies Record<ImageElement['fit'], string>,
+        corners: 'Corners',
+        squareCorners: 'Square corners',
+        roundCorners: 'Round',
+        cornerRadius: (radius: number) => `Corners ${radius}`,
+        arrangeAndAlign: 'Order and alignment',
+        order: 'Order',
+        arranges: {
+            front: 'Bring to front',
+            forward: 'Bring forward',
+            backward: 'Send backward',
+            back: 'Send to back'
+        } satisfies Record<Arrange, string>,
+        lock: 'Lock',
+        unlock: 'Unlock',
+        alignOnSlide: 'Align on the slide',
+        alignTogether: 'Align with each other',
+        placements: {
+            left: 'Align to the left edge',
+            center: 'Center horizontally',
+            right: 'Align to the right edge',
+            top: 'Align to the top edge',
+            middle: 'Center vertically',
+            bottom: 'Align to the bottom edge'
+        } satisfies Record<Align, string>,
+        opacity: 'Opacity',
+        positionAndSize: 'Position and size',
+        frame: {
+            x: 'X',
+            y: 'Y',
+            w: 'Width',
+            h: 'Height',
+            rotation: 'Rotation'
+        },
+        tableFontSize: 'Font size of the table',
+        tableHeader: 'Header',
+        headerColor: 'Header color',
+        borders: 'Borders',
+        borderColor: 'Color of the borders',
+        rowsAndColumns: 'Rows and columns',
+        colors: 'Colors',
+        colorSchemes: {
+            dark: 'Dark background',
+            light: 'Light background'
+        } satisfies Record<CodeElement['colorScheme'], string>,
+        themeColors: {
+            background: 'Background',
+            text: 'Text',
+            accent: 'Accent',
+            muted: 'Secondary'
+        },
+        footerLeft: 'Footer, on the left',
+        footerCenter: 'Footer, in the center',
+        format: 'Format',
+        formats: {
+            '16:9': 'Widescreen 16:9',
+            '4:3': 'Standard 4:3',
+            '1:1': 'Square 1:1',
+            'a4-portrait': 'A4 portrait',
+            'a4-landscape': 'A4 landscape'
+        } satisfies Record<DeckFormat, string>,
+        thisSlide: 'This slide',
+        background: 'Background',
+        slideBackground: 'Background of this slide',
+        useImage: 'Use an image',
+        changeImage: 'Change the image',
+        backgroundFit: 'Fit',
+        backgroundFits: {
+            cover: 'Cover the slide',
+            contain: 'Show the whole image'
+        },
+        dimImage: 'Darken the image',
+        themeBackground: 'Back to the theme background'
     }
 };
 

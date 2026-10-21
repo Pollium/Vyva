@@ -20,8 +20,8 @@ const TextSettings = ({ design, onChange }: TextSettingsProps) => {
 
     return (
         <PanelDisclosure title={t.document.text} summary={`${design.font} · ${design.baseSize} pt`}>
-            <PanelRow label={t.document.font}>
-                <SelectInput label={t.document.font} hideLabel className='vy:w-40' value={design.font} options={FONT_OPTIONS} onChange={(font) => onChange({ ...design, font })} />
+            <PanelRow label={t.editor.font}>
+                <SelectInput label={t.editor.font} hideLabel className='vy:w-40' value={design.font} options={FONT_OPTIONS} onChange={(font) => onChange({ ...design, font })} />
             </PanelRow>
             <NumberInput label={t.document.baseSize} value={design.baseSize} minValue={MIN_BASE_SIZE} maxValue={MAX_BASE_SIZE} onChange={(baseSize) => onChange({ ...design, baseSize })} />
             <div className='vy:grid vy:grid-cols-2 vy:gap-x-3 vy:gap-y-2'>

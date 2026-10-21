@@ -65,12 +65,16 @@ export interface DeckTheme{
     frame?: DeckFrame;
 }
 
+export const MAX_FOOTER_TEXT = 120;
+
 export interface DeckFooter{
     left: string & tags.MaxLength<120>;
     center: string & tags.MaxLength<120>;
 }
 
 export type SlideFrame = 'full' | 'footer' | 'none';
+
+export const MAX_BACKGROUND_DIM = 0.9;
 
 export type SlideBackground =
     | { type: 'color'; color: Color }
