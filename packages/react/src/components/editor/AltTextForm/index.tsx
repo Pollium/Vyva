@@ -1,9 +1,8 @@
 import Button from '../../ui/Button';
 import TextInput from '../../ui/TextInput';
 import { useMessages } from '../../../messages/context';
+import { MAX_ALT_TEXT } from '@vyva/core/content';
 import { useState } from 'react';
-
-const MAX_ALT_TEXT = 300;
 
 interface AltTextFormProps{
     value: string;

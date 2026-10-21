@@ -105,6 +105,8 @@ export interface TextElement extends ElementFrame{
     fill: Color | null;
 }
 
+export const MAX_ALT_TEXT = 300;
+
 export interface ImageElement extends ElementFrame{
     type: 'image';
     fileId: string & tags.Format<'uuid'>;
