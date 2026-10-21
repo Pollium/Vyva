@@ -3,3 +3,5 @@ packages:
     - apps/*
 
 linkWorkspacePackages: true
+
+minimumReleaseAge: 20160
