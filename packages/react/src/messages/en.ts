@@ -167,7 +167,22 @@ const en = {
         boxText: 'Text of the box',
         shapeText: 'Text of the shape',
         writeHere: 'Write here',
-        cellOf: (row: number, column: number) => `Cell in row ${row}, column ${column}`
+        cellOf: (row: number, column: number) => `Cell in row ${row}, column ${column}`,
+        slides: 'Slides',
+        goToSlide: (number: number) => `Go to slide ${number}`,
+        slideSubject: (number: number) => `slide ${number}`,
+        changeLayout: 'Change the layout',
+        duplicate: 'Duplicate',
+        moveUp: 'Move up',
+        moveDown: 'Move down',
+        moveLeft: 'Move left',
+        moveRight: 'Move right',
+        delete: 'Delete',
+        zoom: 'Zoom',
+        zoomAt: (level: string) => `Zoom: ${level}`,
+        zoomIn: 'Zoom in',
+        zoomOut: 'Zoom out',
+        zoomToFit: 'Fit to the window'
     }
 };
 

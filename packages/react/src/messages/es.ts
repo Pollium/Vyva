@@ -166,7 +166,22 @@ const es: Messages = {
         boxText: 'Texto del cuadro',
         shapeText: 'Texto de la forma',
         writeHere: 'Escribe aquí',
-        cellOf: (row, column) => `Celda de la fila ${row}, columna ${column}`
+        cellOf: (row, column) => `Celda de la fila ${row}, columna ${column}`,
+        slides: 'Diapositivas',
+        goToSlide: (number) => `Ir a la diapositiva ${number}`,
+        slideSubject: (number) => `la diapositiva ${number}`,
+        changeLayout: 'Cambiar diseño',
+        duplicate: 'Duplicar',
+        moveUp: 'Mover arriba',
+        moveDown: 'Mover abajo',
+        moveLeft: 'Mover a la izquierda',
+        moveRight: 'Mover a la derecha',
+        delete: 'Eliminar',
+        zoom: 'Zoom',
+        zoomAt: (level) => `Zoom: ${level}`,
+        zoomIn: 'Acercar',
+        zoomOut: 'Alejar',
+        zoomToFit: 'Ajustar a la ventana'
     }
 };
 
