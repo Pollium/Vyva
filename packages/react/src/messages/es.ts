@@ -160,7 +160,13 @@ const es: Messages = {
         presentation: 'Presentación',
         leavePresentation: 'Salir de la presentación',
         slide: (number) => `Diapositiva ${number}`,
-        slideOf: (number, total) => `Diapositiva ${number} de ${total}`
+        slideOf: (number, total) => `Diapositiva ${number} de ${total}`,
+        canvasOf: (number) => `Lienzo de la diapositiva ${number}`,
+        clickToWrite: 'Haz clic para escribir',
+        boxText: 'Texto del cuadro',
+        shapeText: 'Texto de la forma',
+        writeHere: 'Escribe aquí',
+        cellOf: (row, column) => `Celda de la fila ${row}, columna ${column}`
     }
 };
 

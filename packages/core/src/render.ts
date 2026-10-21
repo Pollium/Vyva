@@ -221,6 +221,8 @@ export const imageCss = (element: Extract<SlideElement, { type: 'image' }>): str
 export const deckTextColor = (deck: DeckContent): string => color(deck.theme.text, '#1d2433');
 export const deckFont = (deck: DeckContent): string => font(deck.theme.font);
 
+export const MISSING_IMAGE_FILL = '#e5e7eb';
+
 const elementHtml = (element: SlideElement, deck: DeckContent, fileUrl: FileUrl, slideHeight: number): string => {
     let inner = '';
     if(element.type === 'text'){
@@ -228,7 +230,7 @@ const elementHtml = (element: SlideElement, deck: DeckContent, fileUrl: FileUrl,
     }else if(element.type === 'image'){
         const url = fileUrl(element.fileId);
         inner = url === null
-            ? `<div style="width:100%;height:100%;background:#e5e7eb"></div>`
+            ? `<div style="width:100%;height:100%;background:${MISSING_IMAGE_FILL}"></div>`
             : `<img src="${attr(url)}" alt="${attr(element.alt)}" style="${imageCss(element)}">`;
     }else if(element.type === 'shape'){
         inner = shapeHtml(element, deck);

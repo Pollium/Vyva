@@ -161,7 +161,13 @@ const en = {
         presentation: 'Presentation',
         leavePresentation: 'Leave the presentation',
         slide: (number: number) => `Slide ${number}`,
-        slideOf: (number: number, total: number) => `Slide ${number} of ${total}`
+        slideOf: (number: number, total: number) => `Slide ${number} of ${total}`,
+        canvasOf: (number: number) => `Canvas of slide ${number}`,
+        clickToWrite: 'Click to write',
+        boxText: 'Text of the box',
+        shapeText: 'Text of the shape',
+        writeHere: 'Write here',
+        cellOf: (row: number, column: number) => `Cell in row ${row}, column ${column}`
     }
 };
 
