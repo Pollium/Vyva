@@ -75,7 +75,7 @@ const BlockPanel = ({ editor, isLocked }: BlockPanelProps) => {
 
         return (
             <PanelSection title={t.document.code}>
-                <PanelRow label={t.document.language}>
+                <PanelRow label={t.editor.language}>
                     <SelectInput
                         label={t.document.codeLanguage}
                         hideLabel
@@ -94,14 +94,14 @@ const BlockPanel = ({ editor, isLocked }: BlockPanelProps) => {
         <PanelSection title={t.document.blockStyles[state.block]}>
             <PanelRow label={t.document.alignment}>
                 {TEXT_ALIGNS.map((align) => (
-                    <ToolButton key={align.value} label={t.document.textAligns[align.value]} isActive={state.align === align.value} disabled={isLocked} onClick={() => chain().setTextAlign(align.value).run()}>
+                    <ToolButton key={align.value} label={t.editor.textAligns[align.value]} isActive={state.align === align.value} disabled={isLocked} onClick={() => chain().setTextAlign(align.value).run()}>
                         <align.icon className='vy:size-4' />
                     </ToolButton>
                 ))}
             </PanelRow>
-            <PanelRow label={t.document.fontSize}>
+            <PanelRow label={t.editor.fontSize}>
                 <SelectInput
-                    label={t.document.fontSize}
+                    label={t.editor.fontSize}
                     hideLabel
                     className='vy:w-36'
                     value={SIZES.includes(state.size) ? state.size : AUTO_SIZE}
@@ -113,9 +113,9 @@ const BlockPanel = ({ editor, isLocked }: BlockPanelProps) => {
                     }}
                 />
             </PanelRow>
-            <PanelRow label={t.document.highlight}>
+            <PanelRow label={t.editor.highlight}>
                 <ColorMenu
-                    label={t.document.highlight}
+                    label={t.editor.highlight}
                     value={state.highlight}
                     allowNone
                     isDisabled={isLocked}

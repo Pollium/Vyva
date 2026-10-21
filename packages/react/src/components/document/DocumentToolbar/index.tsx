@@ -65,9 +65,9 @@ const DocumentToolbar = ({ editor, isLocked, onInsertImage }: DocumentToolbarPro
             />
             <ToolDivider />
 
-            <ToolButton label={t.document.bold} isActive={state.isBold} disabled={isLocked} onClick={() => chain().toggleBold().run()}><Bold className='vy:size-4' /></ToolButton>
-            <ToolButton label={t.document.italic} isActive={state.isItalic} disabled={isLocked} onClick={() => chain().toggleItalic().run()}><Italic className='vy:size-4' /></ToolButton>
-            <ToolButton label={t.document.underline} isActive={state.isUnderline} disabled={isLocked} onClick={() => chain().toggleUnderline().run()}><Underline className='vy:size-4' /></ToolButton>
+            <ToolButton label={t.editor.bold} isActive={state.isBold} disabled={isLocked} onClick={() => chain().toggleBold().run()}><Bold className='vy:size-4' /></ToolButton>
+            <ToolButton label={t.editor.italic} isActive={state.isItalic} disabled={isLocked} onClick={() => chain().toggleItalic().run()}><Italic className='vy:size-4' /></ToolButton>
+            <ToolButton label={t.editor.underline} isActive={state.isUnderline} disabled={isLocked} onClick={() => chain().toggleUnderline().run()}><Underline className='vy:size-4' /></ToolButton>
             <ColorMenu
                 label={t.document.textColor}
                 value={state.color}

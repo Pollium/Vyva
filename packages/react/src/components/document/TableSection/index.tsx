@@ -25,16 +25,16 @@ const TableSection = ({ editor, isLocked }: TableSectionProps) => {
 
     return (
         <PanelSection title={t.document.table}>
-            <ToggleField label={t.document.headerRow} isSelected={state.isHeaderRow} isDisabled={isLocked} onChange={() => chain().toggleHeaderRow().run()} />
+            <ToggleField label={t.editor.headerRow} isSelected={state.isHeaderRow} isDisabled={isLocked} onChange={() => chain().toggleHeaderRow().run()} />
             <PanelRow label={t.document.rows}>
-                <ToolButton label={t.document.addRowAbove} disabled={isLocked} onClick={() => chain().addRowBefore().run()}><BetweenHorizontalStart className='vy:size-4' /></ToolButton>
-                <ToolButton label={t.document.addRowBelow} disabled={isLocked} onClick={() => chain().addRowAfter().run()}><BetweenHorizontalEnd className='vy:size-4' /></ToolButton>
-                <ToolButton label={t.document.removeRow} disabled={isLocked} onClick={() => chain().deleteRow().run()}><Minus className='vy:size-4' /></ToolButton>
+                <ToolButton label={t.editor.addRowAbove} disabled={isLocked} onClick={() => chain().addRowBefore().run()}><BetweenHorizontalStart className='vy:size-4' /></ToolButton>
+                <ToolButton label={t.editor.addRowBelow} disabled={isLocked} onClick={() => chain().addRowAfter().run()}><BetweenHorizontalEnd className='vy:size-4' /></ToolButton>
+                <ToolButton label={t.editor.removeRow} disabled={isLocked} onClick={() => chain().deleteRow().run()}><Minus className='vy:size-4' /></ToolButton>
             </PanelRow>
             <PanelRow label={t.document.columns}>
-                <ToolButton label={t.document.addColumnLeft} disabled={isLocked} onClick={() => chain().addColumnBefore().run()}><BetweenVerticalStart className='vy:size-4' /></ToolButton>
-                <ToolButton label={t.document.addColumnRight} disabled={isLocked} onClick={() => chain().addColumnAfter().run()}><BetweenVerticalEnd className='vy:size-4' /></ToolButton>
-                <ToolButton label={t.document.removeColumn} disabled={isLocked} onClick={() => chain().deleteColumn().run()}><Minus className='vy:size-4' /></ToolButton>
+                <ToolButton label={t.editor.addColumnLeft} disabled={isLocked} onClick={() => chain().addColumnBefore().run()}><BetweenVerticalStart className='vy:size-4' /></ToolButton>
+                <ToolButton label={t.editor.addColumnRight} disabled={isLocked} onClick={() => chain().addColumnAfter().run()}><BetweenVerticalEnd className='vy:size-4' /></ToolButton>
+                <ToolButton label={t.editor.removeColumn} disabled={isLocked} onClick={() => chain().deleteColumn().run()}><Minus className='vy:size-4' /></ToolButton>
             </PanelRow>
             <PanelRow label={t.document.cells}>
                 <ToolButton label={t.document.mergeOrSplit} disabled={isLocked || !state.canMergeOrSplit} onClick={() => chain().mergeOrSplit().run()}><TableCellsMerge className='vy:size-4' /></ToolButton>
