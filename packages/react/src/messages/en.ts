@@ -1,7 +1,23 @@
 import type { SelectionAction } from '../contracts/selection-action';
 import type { Align, Arrange } from '../utils/deck/deck-ops';
+import type { LayoutPresetId } from '../utils/deck/layout-presets';
 import type { BlockStyle } from '../utils/document-blocks';
 import type { CodeElement, DeckFormat, ImageElement, ShapeKind, SlideElement, TextStyle } from '@vyva/core/content';
+import type { SlideLayout, SlideSpec } from '@vyva/core/slide-layouts';
+
+const LAYOUT_SAMPLES: Record<SlideLayout, Omit<SlideSpec, 'layout'>> = {
+    title: { title: 'Presentation title', subtitle: 'Subject · Unit' },
+    section: { title: 'New section', subtitle: 'What comes next' },
+    bullets: { title: 'Title', bullets: ['First point', 'Second point', 'Third point'] },
+    'two-columns': { title: 'Comparison', left: { heading: 'Option A', bullets: ['Advantage', 'Drawback'] }, right: { heading: 'Option B', bullets: ['Advantage', 'Drawback'] } },
+    'image-left': { title: 'Title', bullets: ['Main point', 'Detail'] },
+    'image-right': { title: 'Title', bullets: ['Main point', 'Detail'] },
+    'image-full': { title: 'Title over the image', subtitle: 'Subtitle' },
+    quote: { quote: 'A sentence that makes people think', quoteAuthor: 'Author' },
+    table: { title: 'Table', rows: [['Column 1', 'Column 2', 'Column 3'], ['', '', ''], ['', '', '']] },
+    'big-number': { title: 'Key figure', number: '42%', numberLabel: 'What this number means' },
+    closing: { title: 'Thank you!', subtitle: 'Questions?' }
+};
 
 const en = {
     ui: {
@@ -321,7 +337,30 @@ const en = {
             contain: 'Show the whole image'
         },
         dimImage: 'Darken the image',
-        themeBackground: 'Back to the theme background'
+        themeBackground: 'Back to the theme background',
+        layouts: {
+            title: 'Cover',
+            section: 'Section',
+            bullets: 'Title and bullets',
+            'two-columns': 'Two columns',
+            'image-left': 'Image on the left',
+            'image-right': 'Image on the right',
+            'image-full': 'Background image',
+            quote: 'Quote',
+            table: 'Table',
+            'big-number': 'Key figure',
+            closing: 'Closing',
+            blank: 'Blank'
+        } satisfies Record<LayoutPresetId, string>,
+        layoutSamples: LAYOUT_SAMPLES,
+        newSlide: 'New slide',
+        changeLayoutOf: (number: number) => `Change the layout of slide ${number}`,
+        relayoutHint: 'The title, the texts and the image stay. Whatever does not fit the new layout is left on the slide for you to place.',
+        firstRowHeader: 'First row as the header',
+        tableLimits: (rows: number, columns: number) => `Up to ${rows} rows and ${columns} columns. Enter adds a line inside the cell.`,
+        saveTable: 'Save the table',
+        saveCode: 'Save the code',
+        loadingEditor: 'Loading the editor…'
     }
 };
 

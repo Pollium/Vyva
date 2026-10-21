@@ -318,7 +318,42 @@ const es: Messages = {
             contain: 'Mostrar la imagen completa'
         },
         dimImage: 'Oscurecer la imagen',
-        themeBackground: 'Volver al fondo del tema'
+        themeBackground: 'Volver al fondo del tema',
+        layouts: {
+            title: 'Portada',
+            section: 'Sección',
+            bullets: 'Título y viñetas',
+            'two-columns': 'Dos columnas',
+            'image-left': 'Imagen a la izquierda',
+            'image-right': 'Imagen a la derecha',
+            'image-full': 'Imagen de fondo',
+            quote: 'Cita',
+            table: 'Tabla',
+            'big-number': 'Dato destacado',
+            closing: 'Cierre',
+            blank: 'En blanco'
+        },
+        layoutSamples: {
+            title: { title: 'Título de la presentación', subtitle: 'Asignatura · Unidad' },
+            section: { title: 'Nueva sección', subtitle: 'Lo que viene a continuación' },
+            bullets: { title: 'Título', bullets: ['Primer punto', 'Segundo punto', 'Tercer punto'] },
+            'two-columns': { title: 'Comparación', left: { heading: 'Opción A', bullets: ['Ventaja', 'Desventaja'] }, right: { heading: 'Opción B', bullets: ['Ventaja', 'Desventaja'] } },
+            'image-left': { title: 'Título', bullets: ['Punto principal', 'Detalle'] },
+            'image-right': { title: 'Título', bullets: ['Punto principal', 'Detalle'] },
+            'image-full': { title: 'Título sobre la imagen', subtitle: 'Bajada' },
+            quote: { quote: 'Una frase que invite a pensar', quoteAuthor: 'Autor' },
+            table: { title: 'Tabla', rows: [['Columna 1', 'Columna 2', 'Columna 3'], ['', '', ''], ['', '', '']] },
+            'big-number': { title: 'Dato clave', number: '42 %', numberLabel: 'Qué significa este número' },
+            closing: { title: '¡Gracias!', subtitle: '¿Preguntas?' }
+        },
+        newSlide: 'Nueva diapositiva',
+        changeLayoutOf: (number) => `Cambiar el diseño de la diapositiva ${number}`,
+        relayoutHint: 'Se conservan el título, los textos y la imagen. Lo que no cabe en el diseño nuevo queda en la diapositiva para que lo ubiques.',
+        firstRowHeader: 'Primera fila como encabezado',
+        tableLimits: (rows, columns) => `Hasta ${rows} filas y ${columns} columnas. Enter agrega una línea dentro de la celda.`,
+        saveTable: 'Guardar tabla',
+        saveCode: 'Guardar código',
+        loadingEditor: 'Cargando el editor…'
     }
 };
 
