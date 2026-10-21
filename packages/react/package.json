@@ -132,6 +132,7 @@
     "devDependencies": {
         "@monaco-editor/react": "4.7.0",
         "@tailwindcss/cli": "4.3.3",
+        "@testing-library/react": "16.3.3",
         "@types/react": "^19.2.18",
         "@types/react-dom": "^19.2.4",
         "happy-dom": "^20.11.1",
