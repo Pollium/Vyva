@@ -1,0 +1,227 @@
+@media (width < 64rem) {
+    .vy-doc.vy-doc--editor {
+        width: 100%;
+        max-width: 794px;
+    }
+
+    .vy-sheet {
+        padding-bottom: env(safe-area-inset-bottom);
+        transition: translate 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .vy-sheet[data-state="closed"] {
+        translate: 0 100%;
+        visibility: hidden;
+        transition:
+            translate 200ms cubic-bezier(0.22, 1, 0.36, 1),
+            visibility 0s linear 200ms;
+    }
+}
+
+@media (40rem <= width < 64rem) {
+    .vy-sheet {
+        padding-bottom: 0;
+    }
+
+    .vy-sheet[data-state="closed"] {
+        translate: calc(100% + 1.5rem) 0;
+    }
+}
+
+@media (width < 48rem) {
+    .vy-doc.vy-doc--editor {
+        min-height: 100%;
+        padding: 1.5rem 1.25rem 3rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vy-sheet,
+    .vy-sheet[data-state="closed"] {
+        transition-duration: 0s;
+    }
+}
+
+.vy-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.vy-doc--editor .ProseMirror {
+    min-height: 60vh;
+    outline: none;
+}
+
+.vy-doc--editor .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    color: #9aa4b2;
+    pointer-events: none;
+}
+
+.vy-doc--editor .tableWrapper {
+    overflow-x: auto;
+    margin: 0 0 1em;
+}
+
+.vy-doc--editor .tableWrapper table {
+    margin: 0;
+}
+
+.vy-doc--editor td,
+.vy-doc--editor th {
+    position: relative;
+}
+
+.vy-doc--editor .selectedCell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(47 111 237 / 0.12);
+    pointer-events: none;
+}
+
+.vy-doc--editor .column-resize-handle {
+    position: absolute;
+    top: 0;
+    right: -2px;
+    bottom: -2px;
+    width: 4px;
+    background: #2f6fed;
+    pointer-events: none;
+}
+
+.vy-doc--editor .resize-cursor {
+    cursor: col-resize;
+}
+
+.vy-doc--editor img.ProseMirror-selectednode {
+    outline: 3px solid #2f6fed;
+    outline-offset: 2px;
+}
+
+.vy-doc--editor [data-resize-container] {
+    margin: 0 0 0.7em;
+}
+
+.vy-doc--editor [data-resize-container]:has(img[data-align="center"]) {
+    justify-content: center;
+}
+
+.vy-doc--editor [data-resize-container]:has(img[data-align="right"]) {
+    justify-content: flex-end;
+}
+
+.vy-doc--editor [data-resize-container] img {
+    display: block;
+    max-width: 100%;
+}
+
+.vy-doc--editor [data-resize-handle] {
+    z-index: 2;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #2f6fed;
+    border-radius: 3px;
+    background: #fff;
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+.vy-doc--editor [data-resize-handle="top-left"] { transform: translate(-50%, -50%); cursor: nwse-resize; }
+.vy-doc--editor [data-resize-handle="top-right"] { transform: translate(50%, -50%); cursor: nesw-resize; }
+.vy-doc--editor [data-resize-handle="bottom-left"] { transform: translate(-50%, 50%); cursor: nesw-resize; }
+.vy-doc--editor [data-resize-handle="bottom-right"] { transform: translate(50%, 50%); cursor: nwse-resize; }
+
+.vy-doc--editor [data-resize-container]:hover [data-resize-handle],
+.vy-doc--editor [data-resize-container].ProseMirror-selectednode [data-resize-handle],
+.vy-doc--editor [data-resize-container][data-resize-state="true"] [data-resize-handle] {
+    opacity: 1;
+}
+
+.vy-doc--editor [data-resize-container].ProseMirror-selectednode img {
+    outline: 3px solid #2f6fed;
+    outline-offset: 2px;
+}
+
+.vy-text--editing .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.vy-doc--editor .vy-doc-header--editable,
+.vy-doc--editor .vy-doc-footer--editable {
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.vy-doc--editor .vy-doc-header--editable:hover,
+.vy-doc--editor .vy-doc-footer--editable:hover {
+    background: rgb(47 111 237 / 0.06);
+}
+
+.vy-doc--editor div[data-type="page-break"] {
+    --vy-sheet-bleed: 12px;
+    position: relative;
+    height: 28px;
+    margin: 2em calc(-1 * (var(--vy-doc-pad-right) + var(--vy-sheet-bleed))) 2em calc(-1 * (var(--vy-doc-pad-left) + var(--vy-sheet-bleed)));
+    border-top: 0;
+    background: color-mix(in oklab, var(--vy-color-foreground) 3%, var(--vy-color-canvas));
+}
+
+.vy-doc--editor div[data-type="page-break"]::after {
+    content: var(--vy-page-break-label);
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--vy-color-muted);
+    font-size: 11px;
+    font-family: system-ui, sans-serif;
+}
+
+.vy-doc--editor div[data-type="page-break"].ProseMirror-selectednode::after {
+    color: var(--vy-color-foreground);
+}
+
+.vy-doc--editor pre .hljs-comment,
+.vy-doc--editor pre .hljs-quote,
+.vy-doc--editor pre .hljs-meta {
+    color: #8b949e;
+}
+
+.vy-doc--editor pre .hljs-keyword,
+.vy-doc--editor pre .hljs-selector-tag {
+    color: #ff7b72;
+}
+
+.vy-doc--editor pre .hljs-string,
+.vy-doc--editor pre .hljs-attr,
+.vy-doc--editor pre .hljs-regexp {
+    color: #a5d6ff;
+}
+
+.vy-doc--editor pre .hljs-number,
+.vy-doc--editor pre .hljs-literal,
+.vy-doc--editor pre .hljs-symbol {
+    color: #79c0ff;
+}
+
+.vy-doc--editor pre .hljs-title,
+.vy-doc--editor pre .hljs-section,
+.vy-doc--editor pre .hljs-name {
+    color: #d2a8ff;
+}
+
+.vy-doc--editor pre .hljs-built_in,
+.vy-doc--editor pre .hljs-type,
+.vy-doc--editor pre .hljs-variable {
+    color: #ffa657;
+}
+
+.vy-moveable.moveable-control-box {
+    --moveable-color: #2f6fed;
+}

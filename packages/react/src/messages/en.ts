@@ -6,6 +6,23 @@ const en = {
         hexCode: 'Hex code',
         actionsOf: (subject: string) => `Actions for ${subject}`
     },
+    editor: {
+        sidePanel: 'Side panel',
+        panels: 'Editor panels',
+        properties: 'Properties',
+        closePanel: 'Close the panel',
+        panelBusy: ', working',
+        apply: 'Apply',
+        otherColor: 'Other color',
+        removeColor: 'Remove color',
+        link: 'Link',
+        linkAddress: 'Link address',
+        linkInvalid: 'Use an address that starts with https:// or mailto:',
+        removeLink: 'Remove link',
+        altText: 'Alternative text',
+        altTextHint: 'Screen readers read it out, and exports to PowerPoint and Word keep it.',
+        altTextPlaceholder: 'Describe the image for someone who cannot see it'
+    },
     session: {
         newerVersion: 'There is a newer version of this content.',
         seeNewer: 'See the new one',

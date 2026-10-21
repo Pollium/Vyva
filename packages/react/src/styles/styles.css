@@ -2,6 +2,7 @@
 
 @import "tailwindcss/theme.css" layer(theme) prefix(vy);
 @import "tailwindcss/utilities.css" layer(utilities) prefix(vy);
+@import "./editor.css";
 
 @source "../";
 

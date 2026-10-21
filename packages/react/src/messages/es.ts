@@ -8,6 +8,23 @@ const es: Messages = {
         hexCode: 'Código hexadecimal',
         actionsOf: (subject) => `Acciones de ${subject}`
     },
+    editor: {
+        sidePanel: 'Panel lateral',
+        panels: 'Paneles del editor',
+        properties: 'Propiedades',
+        closePanel: 'Cerrar el panel',
+        panelBusy: ', trabajando',
+        apply: 'Aplicar',
+        otherColor: 'Otro color',
+        removeColor: 'Quitar color',
+        link: 'Enlace',
+        linkAddress: 'Dirección del enlace',
+        linkInvalid: 'Usa una dirección que empiece con https:// o mailto:',
+        removeLink: 'Quitar enlace',
+        altText: 'Texto alternativo',
+        altTextHint: 'Lo leen los lectores de pantalla y aparece en el PowerPoint y el Word exportados.',
+        altTextPlaceholder: 'Describe la imagen para quien no puede verla'
+    },
     session: {
         newerVersion: 'Hay una versión más nueva de este contenido.',
         seeNewer: 'Ver la nueva',
