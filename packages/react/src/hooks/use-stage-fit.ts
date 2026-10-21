@@ -4,7 +4,7 @@ const PADDING = 48;
 const COMPACT_PADDING = 12;
 const COMPACT_VIEWPORT = 640;
 const MIN_SCALE = 0.1;
-const INITIAL_FIT = 0.5;
+export const INITIAL_FIT = 0.5;
 
 interface StageSize{
     width: number;

@@ -353,7 +353,9 @@ const es: Messages = {
         tableLimits: (rows, columns) => `Hasta ${rows} filas y ${columns} columnas. Enter agrega una línea dentro de la celda.`,
         saveTable: 'Guardar tabla',
         saveCode: 'Guardar código',
-        loadingEditor: 'Cargando el editor…'
+        loadingEditor: 'Cargando el editor…',
+        newTableColumns: ['Columna 1', 'Columna 2', 'Columna 3'],
+        newCode: 'SELECT nombre, nota\nFROM Estudiante\nWHERE nota >= 4.0\nORDER BY nota DESC;'
     }
 };
 

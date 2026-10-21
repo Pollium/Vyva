@@ -360,7 +360,9 @@ const en = {
         tableLimits: (rows: number, columns: number) => `Up to ${rows} rows and ${columns} columns. Enter adds a line inside the cell.`,
         saveTable: 'Save the table',
         saveCode: 'Save the code',
-        loadingEditor: 'Loading the editor…'
+        loadingEditor: 'Loading the editor…',
+        newTableColumns: ['Column 1', 'Column 2', 'Column 3'],
+        newCode: 'SELECT name, grade\nFROM Student\nWHERE grade >= 4.0\nORDER BY grade DESC;'
     }
 };
 

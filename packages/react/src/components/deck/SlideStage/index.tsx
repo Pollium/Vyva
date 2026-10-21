@@ -112,8 +112,9 @@ const SlideStage = (props: SlideStageProps) => {
         <div
             ref={viewport}
             role='region'
+            tabIndex={-1}
             aria-label={t.deck.canvasOf(slideIndex + 1)}
-            className='vy:relative vy:flex vy:min-h-0 vy:flex-1 vy:overflow-auto'
+            className='vy:relative vy:flex vy:min-h-0 vy:flex-1 vy:overflow-auto vy:outline-none'
             onPointerDown={startMarquee}
             onPointerMove={marquee.move}
             onPointerUp={marquee.end}
