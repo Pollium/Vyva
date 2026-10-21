@@ -9,7 +9,9 @@
         "url": "git+https://github.com/Pollium/Vyva.git",
         "directory": "packages/convert"
     },
-    "files": ["dist"],
+    "files": [
+        "dist"
+    ],
     "exports": {
         "./*": "./src/*.ts"
     },
@@ -30,10 +32,15 @@
     },
     "dependencies": {
         "@vyva/core": "workspace:*",
+        "docx": "^9.9.0",
+        "htmlparser2": "^10.1.0",
+        "pptxgenjs": "^4.0.1",
         "sanitize-html": "^2.18.0"
     },
     "devDependencies": {
         "@types/node": "^26.6.4",
-        "@types/sanitize-html": "^2.16.2"
+        "@types/sanitize-html": "^2.16.2",
+        "fflate": "^0.8.3",
+        "mammoth": "1.13.0"
     }
 }
