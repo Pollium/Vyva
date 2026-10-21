@@ -1,0 +1,41 @@
+{
+    "name": "@vyva/ai",
+    "version": "0.1.0",
+    "description": "Give an AI model a readable view of Vyva documents and decks, and apply the edits it asks for.",
+    "type": "module",
+    "sideEffects": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pollium/Vyva.git",
+        "directory": "packages/ai"
+    },
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        "./*": "./src/*.ts"
+    },
+    "publishConfig": {
+        "access": "public",
+        "exports": {
+            "./*": {
+                "types": "./dist/*.d.ts",
+                "default": "./dist/*.js"
+            }
+        }
+    },
+    "scripts": {
+        "build": "tsdown",
+        "typecheck": "tsc -p tsconfig.json",
+        "lint": "oxlint --deny-warnings",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@joplin/turndown-plugin-gfm": "^1.0.68",
+        "@vyva/core": "workspace:*",
+        "turndown": "^7.2.4"
+    },
+    "devDependencies": {
+        "@types/turndown": "^5.0.6"
+    }
+}
