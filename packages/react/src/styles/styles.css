@@ -15,6 +15,7 @@
     --color-accent: #18181b;
     --color-danger: #dc2626;
     --color-warning: #b45309;
+    --color-selection: #2f6fed;
 }
 
 :root.dark,
