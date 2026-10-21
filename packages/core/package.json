@@ -1,0 +1,40 @@
+{
+    "name": "@vyva/core",
+    "version": "0.1.0",
+    "description": "The Vyva content model for documents and decks, and the one renderer that turns it into HTML.",
+    "type": "module",
+    "sideEffects": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pollium/Vyva.git",
+        "directory": "packages/core"
+    },
+    "files": ["dist"],
+    "exports": {
+        "./*": "./src/*.ts"
+    },
+    "publishConfig": {
+        "access": "public",
+        "exports": {
+            "./*": {
+                "types": "./dist/*.d.ts",
+                "default": "./dist/*.js"
+            }
+        }
+    },
+    "scripts": {
+        "build": "tsdown",
+        "typecheck": "tsc -p tsconfig.json",
+        "lint": "oxlint --deny-warnings",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "highlight.js": "^11.11.1",
+        "katex": ">=0.16.47 <1",
+        "markdown-it": "^14.3.2",
+        "typia": "^12.1.1"
+    },
+    "devDependencies": {
+        "@types/markdown-it": "^14.2.0"
+    }
+}
