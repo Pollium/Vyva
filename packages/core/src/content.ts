@@ -134,6 +134,10 @@ export interface ShapeElement extends ElementFrame{
     text?: ShapeText;
 }
 
+export const MAX_TABLE_ROWS = 60;
+export const MAX_TABLE_COLUMNS = 20;
+export const MAX_CELL_TEXT = 4000;
+
 export interface TableElement extends ElementFrame{
     type: 'table';
     rows: Array<Array<string & tags.MaxLength<4000>> & tags.MaxItems<20>> & tags.MaxItems<60>;
@@ -145,6 +149,8 @@ export interface TableElement extends ElementFrame{
 
 export const CODE_LANGUAGES = ['sql', 'python', 'javascript', 'typescript', 'java', 'c', 'cpp', 'csharp', 'bash', 'html', 'css', 'json', 'plaintext'] as const;
 export type CodeLanguage = typeof CODE_LANGUAGES[number];
+
+export const MAX_CODE_TEXT = 20000;
 
 export interface CodeElement extends ElementFrame{
     type: 'code';

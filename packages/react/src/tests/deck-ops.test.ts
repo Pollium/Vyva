@@ -1,8 +1,8 @@
-import { DECK_SIZES, type DeckContent, type SlideElement, type TextElement } from '@vyva/core/content';
+import { DECK_SIZES, MAX_TABLE_COLUMNS, type DeckContent, type SlideElement, type TextElement } from '@vyva/core/content';
 import { DECK_THEME } from '@vyva/core/themes';
 import { describe, expect, it } from 'vitest';
 import { align, arrange, moveSlide, newText, removeElements, removeSlide, withTextStyle } from '../utils/deck/deck-ops';
-import { MAX_TABLE_COLUMNS, insertColumn, insertRow, removeColumn, removeRow } from '../utils/deck/table-ops';
+import { insertColumn, insertRow, removeColumn, removeRow } from '../utils/deck/table-ops';
 
 const box = (id: string, x: number, y: number, isLocked = false): SlideElement => ({
     id,

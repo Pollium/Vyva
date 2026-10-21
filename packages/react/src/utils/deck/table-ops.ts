@@ -1,5 +1,4 @@
-export const MAX_TABLE_ROWS = 60;
-export const MAX_TABLE_COLUMNS = 20;
+import { MAX_TABLE_COLUMNS, MAX_TABLE_ROWS } from '@vyva/core/content';
 
 export const columnsOf = (rows: string[][]): number => Math.max(1, ...rows.map((row) => row.length));
 
