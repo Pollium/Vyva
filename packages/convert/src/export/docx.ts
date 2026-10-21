@@ -142,7 +142,7 @@ class DocxComposer{
             return [new Table({
                 width: { size: 100, type: WidthType.PERCENTAGE },
                 rows: block.rows.map((row) => new TableRow({
-                    tableHeader: row.every((cell) => cell.header),
+                    ...(row.every((cell) => cell.header) ? { tableHeader: true } : {}),
                     children: Array.from({ length: columns }, (_, index) => {
                         const cell = row[index] ?? { runs: [], header: false };
                         return new TableCell({

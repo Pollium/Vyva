@@ -19,6 +19,7 @@ describe('exportContent', () => {
         expect(html).toContain('<h1>Subnetting IPv4</h1>');
         expect(html).toContain('<strong>/24</strong>');
         expect(html).toContain('<table>');
+        expect(html).toContain('<td><p>254</p></td>');
         expect(html).toContain('<li>Class A</li>');
         expect(html).toContain('<img');
         expect(html).toContain('ip addr show');
