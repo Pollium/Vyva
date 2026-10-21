@@ -90,15 +90,24 @@ importers:
       docx:
         specifier: ^9.9.0
         version: 9.9.0
+      fflate:
+        specifier: ^0.8.3
+        version: 0.8.3
       htmlparser2:
         specifier: ^10.1.0
         version: 10.1.0
+      mammoth:
+        specifier: ^1.13.0
+        version: 1.13.0
       pptxgenjs:
         specifier: ^4.0.1
         version: 4.0.1
       sanitize-html:
         specifier: ^2.18.0
         version: 2.18.0
+      unpdf:
+        specifier: ^1.8.1
+        version: 1.8.1
     devDependencies:
       '@types/node':
         specifier: ^26.6.4
@@ -106,12 +115,6 @@ importers:
       '@types/sanitize-html':
         specifier: ^2.16.2
         version: 2.16.2
-      fflate:
-        specifier: ^0.8.3
-        version: 0.8.3
-      mammoth:
-        specifier: 1.13.0
-        version: 1.13.0
 
   packages/core:
     dependencies:
@@ -2300,6 +2303,15 @@ packages:
   undici-types@8.9.0:
     resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
+  unpdf@1.8.1:
+    resolution: {integrity: sha512-xkURhy2SoGpOIH0a1gLHNkASPIQYonadDJs2AQwPEfUakafeD9EA1WTWWsaR++gfTCXJpV27W7tU1nXuk82UKQ==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@napi-rs/canvas': ^0.1.69 || ^1.0.0
+    peerDependenciesMeta:
+      '@napi-rs/canvas':
+        optional: true
+
   use-sync-external-store@1.7.0:
     resolution: {integrity: sha512-6L+EeigHMQhdaIPNIFUKwfWJSwWFQ8gJbJ2DLOs5sDIegTwR9fRxvnM3uciHKjIZhFz+KAv2emhWMRvDmMcY8A==}
     peerDependencies:
@@ -4315,6 +4327,8 @@ snapshots:
   undici-types@6.21.0: {}
 
   undici-types@8.9.0: {}
+
+  unpdf@1.8.1: {}
 
   use-sync-external-store@1.7.0(react@19.3.0):
     dependencies:

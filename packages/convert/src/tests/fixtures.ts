@@ -12,6 +12,30 @@ export const FAKE_PDF = Buffer.from('%PDF-1.4\n1 0 obj<<>>endobj\ntrailer<<>>\n%
 export const readImage = async (fileId: string): Promise<StoredImage | null> =>
     fileId === FILE_ID ? { data: PNG_BYTES, contentType: 'image/png' } : null;
 
+export const pdfWith = (pages: string[]): Buffer => {
+    const objects = [
+        '<< /Type /Catalog /Pages 2 0 R >>',
+        `<< /Type /Pages /Kids [${pages.map((_, index) => `${4 + index * 2} 0 R`).join(' ')}] /Count ${pages.length} >>`,
+        '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+        ...pages.flatMap((text, index) => {
+            const stream = `BT /F1 24 Tf 72 720 Td (${text}) Tj ET`;
+            return [
+                `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents ${5 + index * 2} 0 R /Resources << /Font << /F1 3 0 R >> >> >>`,
+                `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`
+            ];
+        })
+    ];
+    let body = '%PDF-1.4\n';
+    const offsets: number[] = [];
+    for(const [index, object] of objects.entries()){
+        offsets.push(body.length);
+        body += `${index + 1} 0 obj\n${object}\nendobj\n`;
+    }
+    const table = offsets.map((offset) => `${String(offset).padStart(10, '0')} 00000 n \n`).join('');
+
+    return Buffer.from(`${body}xref\n0 ${objects.length + 1}\n0000000000 65535 f \n${table}trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${body.length}\n%%EOF\n`, 'latin1');
+};
+
 export const SAMPLE_DOCUMENT: DocumentContent = {
     kind: 'document',
     design: { ...DEFAULT_DOCUMENT_DESIGN, font: 'Lora', headerText: 'Networks · Unit 1', footerText: 'Internal use', showPageNumbers: true },
