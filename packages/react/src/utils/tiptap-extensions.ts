@@ -33,8 +33,6 @@ export const PageBreak = Node.create({
     }
 });
 
-export type ImageAlign = 'left' | 'center' | 'right';
-
 const PIXELS = /^(\d+(?:\.\d+)?)px$/;
 
 export const FileImage = Image.extend({

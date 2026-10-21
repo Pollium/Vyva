@@ -7,6 +7,7 @@ import ToolButton from '../../editor/ToolButton';
 import SelectInput, { type SelectOption } from '../../ui/SelectInput';
 import { useMessages } from '../../../messages/context';
 import { blockStyleOf, settleSelection } from '../../../utils/document-blocks';
+import { textAttribute } from '../../../utils/editor-attributes';
 import type { Editor } from '@tiptap/react';
 import { useEditorState } from '@tiptap/react';
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight, Highlighter } from 'lucide-react';
@@ -59,9 +60,9 @@ const BlockPanel = ({ editor, isLocked }: BlockPanelProps) => {
             kind: current.isActive('image') ? 'image' : current.isActive('table') ? 'table' : current.isActive('codeBlock') ? 'code' : 'text',
             block: blockStyleOf(current),
             align: TEXT_ALIGNS.find(({ value }) => current.isActive({ textAlign: value }))?.value ?? 'left',
-            size: String(current.getAttributes('textStyle').fontSize ?? '').replace('px', ''),
-            highlight: (current.getAttributes('highlight').color as string | undefined) ?? null,
-            language: (current.getAttributes('codeBlock').language as string | null | undefined) ?? PLAIN_TEXT
+            size: (textAttribute(current, 'textStyle', 'fontSize') ?? '').replace('px', ''),
+            highlight: textAttribute(current, 'highlight', 'color'),
+            language: textAttribute(current, 'codeBlock', 'language') ?? PLAIN_TEXT
         })
     });
     const chain = () => editor.chain().focus();

@@ -6,6 +6,7 @@ import ToolDivider from '../../editor/ToolDivider';
 import SelectInput from '../../ui/SelectInput';
 import { useMessages } from '../../../messages/context';
 import { BLOCK_STYLES, blockStyleOf, headingLevelOf, settleSelection, type BlockStyle } from '../../../utils/document-blocks';
+import { textAttribute } from '../../../utils/editor-attributes';
 import type { Editor } from '@tiptap/react';
 import { useEditorState } from '@tiptap/react';
 import { Baseline, Bold, Italic, Link2, List, ListOrdered, Redo2, Underline, Undo2 } from 'lucide-react';
@@ -25,14 +26,14 @@ const DocumentToolbar = ({ editor, isLocked, onInsertImage }: DocumentToolbarPro
             canUndo: current.can().undo(),
             canRedo: current.can().redo(),
             block: blockStyleOf(current),
-            color: (current.getAttributes('textStyle').color as string | undefined) ?? null,
+            color: textAttribute(current, 'textStyle', 'color'),
             isBold: current.isActive('bold'),
             isItalic: current.isActive('italic'),
             isUnderline: current.isActive('underline'),
             isBullet: current.isActive('bulletList'),
             isOrdered: current.isActive('orderedList'),
             isLink: current.isActive('link'),
-            link: (current.getAttributes('link').href as string | undefined) ?? null,
+            link: textAttribute(current, 'link', 'href'),
             isTable: current.isActive('table')
         })
     });

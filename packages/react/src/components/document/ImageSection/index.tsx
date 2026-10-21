@@ -4,7 +4,7 @@ import PanelSection from '../../editor/PanelSection';
 import ToolButton from '../../editor/ToolButton';
 import SelectInput, { type SelectOption } from '../../ui/SelectInput';
 import { useMessages } from '../../../messages/context';
-import type { ImageAlign } from '../../../utils/tiptap-extensions';
+import { textAttribute } from '../../../utils/editor-attributes';
 import type { Editor } from '@tiptap/react';
 import { useEditorState } from '@tiptap/react';
 import { AlignCenter, AlignLeft, AlignRight } from 'lucide-react';
@@ -20,6 +20,8 @@ const IMAGE_ALIGNS = [
     { value: 'right', icon: AlignRight }
 ] as const;
 
+const widthOf = (value: unknown): string | number | null => typeof value === 'string' || typeof value === 'number' ? value : null;
+
 interface ImageSectionProps{
     editor: Editor;
     isLocked: boolean;
@@ -30,9 +32,9 @@ const ImageSection = ({ editor, isLocked }: ImageSectionProps) => {
     const state = useEditorState({
         editor,
         selector: ({ editor: current }) => ({
-            align: (current.getAttributes('image').align as ImageAlign | null | undefined) ?? 'center',
-            alt: (current.getAttributes('image').alt as string | null | undefined) ?? '',
-            width: current.getAttributes('image').width as string | number | null | undefined
+            align: IMAGE_ALIGNS.find(({ value }) => value === current.getAttributes('image').align)?.value ?? 'center',
+            alt: textAttribute(current, 'image', 'alt') ?? '',
+            width: widthOf(current.getAttributes('image').width)
         })
     });
     const chain = () => editor.chain().focus();
