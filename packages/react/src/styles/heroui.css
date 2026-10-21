@@ -1,0 +1,12 @@
+:root,
+:root.dark,
+:root[data-theme="dark"] {
+    --vy-color-foreground: var(--foreground);
+    --vy-color-background: var(--background);
+    --vy-color-muted: var(--muted);
+    --vy-color-canvas: var(--canvas, var(--background));
+    --vy-color-surface: var(--surface);
+    --vy-color-accent: var(--accent);
+    --vy-color-danger: var(--danger);
+    --vy-color-warning: var(--warning);
+}

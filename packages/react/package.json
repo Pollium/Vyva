@@ -1,0 +1,131 @@
+{
+    "name": "@vyva/react",
+    "version": "0.1.0",
+    "description": "React viewer and editors for Vyva documents and decks.",
+    "type": "module",
+    "sideEffects": ["**/*.css", "./src/fonts.ts", "./dist/fonts.js"],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pollium/Vyva.git",
+        "directory": "packages/react"
+    },
+    "files": ["dist"],
+    "exports": {
+        "./DocumentEditor": "./src/components/document/DocumentEditor/index.tsx",
+        "./DeckEditor": "./src/components/deck/DeckEditor/index.tsx",
+        "./Viewer": "./src/components/Viewer/index.tsx",
+        "./Canvas": "./src/components/Canvas/index.tsx",
+        "./PresentMode": "./src/components/PresentMode/index.tsx",
+        "./SaveStatus": "./src/components/editor/SaveStatus/index.tsx",
+        "./MonacoCodeEditor": "./src/components/MonacoCodeEditor/index.tsx",
+        "./use-vyva-session": "./src/hooks/use-vyva-session.ts",
+        "./contracts/*": "./src/contracts/*.ts",
+        "./messages/*": "./src/messages/*.ts",
+        "./fonts": "./src/fonts.ts",
+        "./styles.css": "./src/styles/styles.css",
+        "./heroui.css": "./src/styles/heroui.css"
+    },
+    "publishConfig": {
+        "access": "public",
+        "exports": {
+            "./DocumentEditor": {
+                "types": "./dist/components/document/DocumentEditor/index.d.ts",
+                "default": "./dist/components/document/DocumentEditor/index.js"
+            },
+            "./DeckEditor": {
+                "types": "./dist/components/deck/DeckEditor/index.d.ts",
+                "default": "./dist/components/deck/DeckEditor/index.js"
+            },
+            "./Viewer": {
+                "types": "./dist/components/Viewer/index.d.ts",
+                "default": "./dist/components/Viewer/index.js"
+            },
+            "./Canvas": {
+                "types": "./dist/components/Canvas/index.d.ts",
+                "default": "./dist/components/Canvas/index.js"
+            },
+            "./PresentMode": {
+                "types": "./dist/components/PresentMode/index.d.ts",
+                "default": "./dist/components/PresentMode/index.js"
+            },
+            "./SaveStatus": {
+                "types": "./dist/components/editor/SaveStatus/index.d.ts",
+                "default": "./dist/components/editor/SaveStatus/index.js"
+            },
+            "./MonacoCodeEditor": {
+                "types": "./dist/components/MonacoCodeEditor/index.d.ts",
+                "default": "./dist/components/MonacoCodeEditor/index.js"
+            },
+            "./use-vyva-session": {
+                "types": "./dist/hooks/use-vyva-session.d.ts",
+                "default": "./dist/hooks/use-vyva-session.js"
+            },
+            "./contracts/*": {
+                "types": "./dist/contracts/*.d.ts",
+                "default": "./dist/contracts/*.js"
+            },
+            "./messages/*": {
+                "types": "./dist/messages/*.d.ts",
+                "default": "./dist/messages/*.js"
+            },
+            "./fonts": {
+                "types": "./dist/fonts.d.ts",
+                "default": "./dist/fonts.js"
+            },
+            "./styles.css": "./dist/styles.css",
+            "./heroui.css": "./dist/heroui.css"
+        }
+    },
+    "scripts": {
+        "build": "tsdown && tailwindcss -i src/styles/styles.css -o dist/styles.css --minify && cp src/styles/heroui.css dist/heroui.css",
+        "typecheck": "tsc -p tsconfig.json",
+        "lint": "oxlint --deny-warnings",
+        "test": "vitest run"
+    },
+    "peerDependencies": {
+        "@monaco-editor/react": "^4.7.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "peerDependenciesMeta": {
+        "@monaco-editor/react": {
+            "optional": true
+        }
+    },
+    "dependencies": {
+        "@fontsource-variable/inter": "^5.3.0",
+        "@fontsource-variable/jetbrains-mono": "^5.3.0",
+        "@fontsource-variable/lora": "^5.3.0",
+        "@fontsource-variable/merriweather": "^5.3.0",
+        "@fontsource-variable/montserrat": "^5.3.0",
+        "@fontsource-variable/open-sans": "^5.3.0",
+        "@fontsource-variable/playfair-display": "^5.3.0",
+        "@fontsource-variable/roboto": "^5.3.0",
+        "@tiptap/extension-code-block-lowlight": "^3.31.4",
+        "@tiptap/extension-highlight": "^3.31.4",
+        "@tiptap/extension-image": "^3.31.4",
+        "@tiptap/extension-list": "^3.31.4",
+        "@tiptap/extension-table": "^3.31.4",
+        "@tiptap/extension-text-align": "^3.31.4",
+        "@tiptap/extension-text-style": "^3.31.4",
+        "@tiptap/extensions": "^3.31.4",
+        "@tiptap/pm": "^3.31.4",
+        "@tiptap/react": "^3.31.4",
+        "@tiptap/starter-kit": "^3.31.4",
+        "@vyva/core": "workspace:*",
+        "lowlight": "^3.3.0",
+        "lucide-react": "^1.39.0",
+        "react-aria-components": "^1.21.0",
+        "react-moveable": "^0.56.0"
+    },
+    "devDependencies": {
+        "@monaco-editor/react": "4.7.0",
+        "@tailwindcss/cli": "4.3.3",
+        "@types/react": "^19.2.18",
+        "@types/react-dom": "^19.2.4",
+        "happy-dom": "^20.11.1",
+        "react": "^19.2.7",
+        "react-dom": "^19.2.7",
+        "tailwindcss": "4.3.3"
+    }
+}

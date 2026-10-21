@@ -1,0 +1,29 @@
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme) prefix(vy);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(vy);
+
+@source "../";
+
+@theme {
+    --color-foreground: #18181b;
+    --color-background: #ffffff;
+    --color-muted: #71717a;
+    --color-canvas: #f4f4f5;
+    --color-surface: #ffffff;
+    --color-accent: #18181b;
+    --color-danger: #dc2626;
+    --color-warning: #b45309;
+}
+
+:root.dark,
+:root[data-theme="dark"] {
+    --vy-color-foreground: #fafafa;
+    --vy-color-background: #18181b;
+    --vy-color-muted: #a1a1aa;
+    --vy-color-canvas: #09090b;
+    --vy-color-surface: #27272a;
+    --vy-color-accent: #fafafa;
+    --vy-color-danger: #f87171;
+    --vy-color-warning: #fbbf24;
+}
