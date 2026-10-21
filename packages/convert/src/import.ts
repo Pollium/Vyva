@@ -1,6 +1,7 @@
 import { ConvertError } from './errors';
 import { importDocx, importMarkdown, importPdf, importPlainText } from './import/documents';
 import type { SaveImage } from './import/images';
+import { importPptx } from './import/pptx';
 import type { Content } from '@vyva/core/content';
 import { unzipSync } from 'fflate';
 
@@ -12,7 +13,7 @@ const TEXT_SAMPLE_BYTES = 64 * 1024;
 const MAX_FILENAME = 200;
 const BOM = /^﻿/;
 
-type Detected = 'docx' | 'pdf' | 'markdown' | 'text';
+type Detected = 'docx' | 'pptx' | 'pdf' | 'markdown' | 'text';
 
 export interface ImportOptions{
     saveImage: SaveImage;
@@ -55,7 +56,10 @@ const isUtf8Text = (buffer: Buffer): boolean => {
 
 const detect = (buffer: Buffer, filename: string): Detected | null => {
     const parts = zipParts(buffer);
-    if(parts !== null) return parts.has('word/document.xml') ? 'docx' : null;
+    if(parts !== null){
+        if(parts.has('word/document.xml')) return 'docx';
+        return parts.has('ppt/presentation.xml') ? 'pptx' : null;
+    }
     if(buffer.subarray(0, PDF_SIGNATURE.length).toString('latin1') === PDF_SIGNATURE) return 'pdf';
     if(!isUtf8Text(buffer)) return null;
 
@@ -68,6 +72,7 @@ const detect = (buffer: Buffer, filename: string): Detected | null => {
 
 const convert = async (detected: Detected, buffer: Buffer, filename: string, saveImage: SaveImage): Promise<ImportedContent> => {
     if(detected === 'docx') return importDocx(buffer, filename, saveImage);
+    if(detected === 'pptx') return importPptx(buffer, filename, saveImage);
     if(detected === 'pdf') return importPdf(buffer, filename);
 
     const text = buffer.toString('utf8').replace(BOM, '');

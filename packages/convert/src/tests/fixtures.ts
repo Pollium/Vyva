@@ -2,6 +2,7 @@ import type { StoredImage } from '../export/bundle';
 import type { DeckContent, DocumentContent } from '@vyva/core/content';
 import { layoutSlide } from '@vyva/core/slide-layouts';
 import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@vyva/core/themes';
+import PptxGenJS from 'pptxgenjs';
 
 export const PNG_BYTES = Buffer.from('89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4890000000d49444154789c636000000000050001a5f645400000000049454e44ae426082', 'hex');
 
@@ -60,4 +61,45 @@ export const SAMPLE_DECK: DeckContent = {
         layoutSlide({ layout: 'image-right', title: 'Topology', bullets: ['Router', 'Switch'], imageFileId: FILE_ID, imageAlt: 'Topology' }, '16:9', DECK_THEME),
         layoutSlide({ layout: 'table', title: 'Prefixes', rows: [['Prefix', 'Hosts'], ['/24', '254']] }, '16:9', DECK_THEME)
     ]
+};
+
+const written = async (deck: PptxGenJS): Promise<Uint8Array> => {
+    const data = await deck.write({ outputType: 'uint8array' });
+    if(!(data instanceof Uint8Array)) throw new TypeError('PptxGenJS did not write the presentation as bytes');
+    return data;
+};
+
+export const pptxWithNotes = (text: string, notes: string): Promise<Uint8Array> => {
+    const deck = new PptxGenJS();
+    const slide = deck.addSlide();
+    slide.addText(text, { x: 1, y: 1, w: 8, h: 1 });
+    slide.addNotes(notes);
+    return written(deck);
+};
+
+export const pptxTemplate = (): Promise<Uint8Array> => {
+    const deck = new PptxGenJS();
+    deck.layout = 'LAYOUT_WIDE';
+    deck.defineSlideMaster({
+        title: 'SCHOOL',
+        background: { color: '0F2A52' },
+        objects: [
+            { rect: { x: 0, y: 6.8, w: 13.33, h: 0.7, fill: { color: 'C4572E' } } },
+            { image: { x: 11.5, y: 0.3, w: 1.2, h: 1.2, data: `image/png;base64,${PNG_BYTES.toString('base64')}` } },
+            { text: { text: 'Vyva University', options: { x: 0.4, y: 6.9, w: 6, h: 0.5, fontSize: 12, color: 'FFFFFF' } } },
+            { placeholder: { options: { name: 'title', type: 'title', x: 0.6, y: 0.5, w: 10, h: 1.2, fontSize: 40, color: 'FFFFFF' }, text: '' } },
+            { placeholder: { options: { name: 'body', type: 'body', x: 0.6, y: 2, w: 10, h: 4 }, text: '' } }
+        ]
+    });
+
+    const cover = deck.addSlide({ masterName: 'SCHOOL' });
+    cover.addText('Computer networks', { placeholder: 'title' });
+    cover.addText('Unit 1', { placeholder: 'body' });
+
+    const goals = deck.addSlide({ masterName: 'SCHOOL' });
+    goals.addText('Goals of the class', { placeholder: 'title' });
+    goals.addText('First goal\nSecond goal', { placeholder: 'body' });
+    goals.addShape(deck.ShapeType.rect, { x: 11, y: 2, w: 1.5, h: 1.5, fill: { color: deck.SchemeColor.accent1 } });
+
+    return written(deck);
 };
