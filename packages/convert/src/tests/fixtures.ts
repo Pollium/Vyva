@@ -7,6 +7,8 @@ export const PNG_BYTES = Buffer.from('89504e470d0a1a0a0000000d494844520000000100
 
 export const FILE_ID = '01a14188-5cb4-776b-815b-c6e977d07bbe';
 
+export const FAKE_PDF = Buffer.from('%PDF-1.4\n1 0 obj<<>>endobj\ntrailer<<>>\n%%EOF\n');
+
 export const readImage = async (fileId: string): Promise<StoredImage | null> =>
     fileId === FILE_ID ? { data: PNG_BYTES, contentType: 'image/png' } : null;
 
