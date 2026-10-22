@@ -37,7 +37,7 @@ const SelectInput = <T extends string>({ label, value, options, onChange, isDisa
             <ChevronDown className='vy:size-4 vy:shrink-0 vy:text-muted' aria-hidden='true' />
         </Button>
 
-        <Popover className='vy:min-w-(--trigger-width)'>
+        <Popover className='vy-ui vy:min-w-(--trigger-width)'>
             <ListBox className='vy:max-h-72 vy:overflow-y-auto vy:p-1.5 vy:outline-none'>
                 {options.map((option) => (
                     <ListBoxItem

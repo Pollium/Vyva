@@ -1,6 +1,7 @@
 @layer theme, base, components, utilities;
 
 @import "tailwindcss/theme.css" layer(theme) prefix(vy);
+@import "./reset.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities) prefix(vy);
 @import "./editor.css";
 

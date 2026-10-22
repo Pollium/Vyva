@@ -30,7 +30,7 @@ const SaveStatus = ({ session }: SaveStatusProps) => {
 
     if(saveState === 'conflict'){
         return (
-            <span role='alert' className='vy:flex vy:flex-wrap vy:items-center vy:gap-x-2 vy:gap-y-0.5 vy:text-[0.8125rem] vy:text-warning'>
+            <span role='alert' className='vy-ui vy:flex vy:flex-wrap vy:items-center vy:gap-x-2 vy:gap-y-0.5 vy:text-[0.8125rem] vy:text-warning'>
                 <AlertTriangle className='vy:size-3.5 vy:shrink-0' aria-hidden='true' />
                 {t.session.newerVersion}
                 <Button size='sm' variant='tertiary' isDisabled={isBusy} onPress={() => setConfirming(true)}>{t.session.seeNewer}</Button>
@@ -53,7 +53,7 @@ const SaveStatus = ({ session }: SaveStatusProps) => {
     }
     if(saveState === 'failed'){
         return (
-            <span role='alert' className='vy:flex vy:flex-wrap vy:items-center vy:gap-x-2 vy:gap-y-0.5 vy:text-[0.8125rem] vy:text-danger'>
+            <span role='alert' className='vy-ui vy:flex vy:flex-wrap vy:items-center vy:gap-x-2 vy:gap-y-0.5 vy:text-[0.8125rem] vy:text-danger'>
                 <AlertTriangle className='vy:size-3.5 vy:shrink-0' aria-hidden='true' />
                 <span className='vy:min-w-0 vy:truncate' title={failure?.message}>{t.session.saveFailed(failure?.message ?? null)}</span>
                 <Button size='sm' variant='tertiary' onPress={() => void session.flush()}>{t.session.retry}</Button>

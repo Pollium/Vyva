@@ -21,7 +21,7 @@ const ActionMenu = ({ subject, children }: ActionMenuProps) => {
                 <EllipsisVertical className='vy:size-4' aria-hidden='true' />
             </Button>
 
-            <Popover placement='bottom end'>
+            <Popover placement='bottom end' className='vy-ui'>
                 <Menu className='vy:min-w-44 vy:p-1.5 vy:outline-none'>{children}</Menu>
             </Popover>
         </MenuTrigger>

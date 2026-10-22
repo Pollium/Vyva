@@ -72,7 +72,7 @@ const PresentMode = ({ deck, start, fileUrl, onClose }: PresentModeProps) => {
             tabIndex={-1}
             onClick={(event) => go(event.clientX < box.width * BACK_ZONE ? -1 : 1)}
             onKeyDown={onKeyDown}
-            className={`vy:fixed vy:inset-0 ${LAYERS.present} vy:flex vy:items-center vy:justify-center vy:bg-black vy:outline-none`}
+            className={`vy-ui vy:fixed vy:inset-0 ${LAYERS.present} vy:flex vy:items-center vy:justify-center vy:bg-black vy:outline-none`}
         >
             <div style={{ width: width * fit, height: height * fit }}>
                 {markup === null ? null : <Canvas markup={markup} label={t.deck.slideOf(index + 1, last + 1)} />}

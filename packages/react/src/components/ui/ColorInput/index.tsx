@@ -24,7 +24,7 @@ const ColorInput = ({ label, value, onChange, onChangeEnd }: ColorInputProps) =>
                     <span className='vy:min-w-0 vy:truncate vy:text-[0.8125rem] vy:text-foreground'>{label}</span>
                 </Button>
 
-                <Popover placement='bottom start' className='vy:w-60 vy:p-3'>
+                <Popover placement='bottom start' className='vy-ui vy:w-60 vy:p-3'>
                     <Dialog aria-label={label} className='vy:flex vy:flex-col vy:gap-3 vy:outline-none'>
                         <ColorArea aria-label={label} colorSpace='hsb' xChannel='saturation' yChannel='brightness' onChangeEnd={onChangeEnd} className='vy:aspect-square vy:w-full vy:rounded-lg'>
                             <ColorThumb className={THUMB} />

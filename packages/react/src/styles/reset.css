@@ -1,0 +1,77 @@
+.vy-ui {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.vy-ui,
+.vy-ui *,
+.vy-ui *::before,
+.vy-ui *::after,
+.vy-ui *::backdrop,
+.vy-ui *::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+}
+
+.vy-ui :where(h1, h2, h3, h4, h5, h6) {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.vy-ui :where(ol, ul, menu) {
+    list-style: none;
+}
+
+.vy-ui :where(a) {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.vy-ui :where(img, svg, video, canvas, audio, iframe, embed, object) {
+    display: block;
+    vertical-align: middle;
+}
+
+.vy-ui :where(img, video) {
+    max-width: 100%;
+    height: auto;
+}
+
+.vy-ui :where(table) {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+}
+
+.vy-ui :where(button, input, select, optgroup, textarea),
+.vy-ui *::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+}
+
+.vy-ui :where(button, input:where([type="button"], [type="reset"], [type="submit"])) {
+    appearance: button;
+}
+
+.vy-ui :where(textarea) {
+    resize: vertical;
+}
+
+.vy-ui :where(input, textarea)::placeholder {
+    opacity: 1;
+    color: color-mix(in oklab, currentcolor 50%, transparent);
+}
+
+.vy-ui [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+}

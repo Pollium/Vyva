@@ -15,7 +15,7 @@ const Viewer = ({ content, fileUrl, label }: ViewerProps) => {
 
     if(content.kind === 'deck'){
         return (
-            <ol aria-label={label} className='vy:flex vy:flex-col vy:gap-6'>
+            <ol aria-label={label} className='vy-ui vy:flex vy:flex-col vy:gap-6'>
                 {content.slides.map((slide, index) => {
                     const markup = slideMarkup(content, index, fileUrl);
                     if(markup === null) return null;
@@ -32,7 +32,7 @@ const Viewer = ({ content, fileUrl, label }: ViewerProps) => {
     }
 
     return (
-        <div className='vy:mx-auto vy:w-full vy:max-w-[794px]'>
+        <div className='vy-ui vy:mx-auto vy:w-full vy:max-w-[794px]'>
             <Canvas markup={documentMarkup(content, fileUrl)} label={label} className='vy:rounded-md vy:border vy:border-foreground/10 vy:bg-white vy:shadow-sm' />
         </div>
     );

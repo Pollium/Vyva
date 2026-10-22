@@ -37,7 +37,7 @@ const ToolButton = ({ label, isActive, variant = 'icon', disabled = false, class
     return (
         <TooltipTrigger delay={TOOLTIP_DELAY_MS}>
             {isActive === undefined ? <Button {...shared}>{children}</Button> : <ToggleButton {...shared} isSelected={isActive}>{children}</ToggleButton>}
-            <Tooltip offset={TOOLTIP_OFFSET} className={`${LAYERS.popover} vy:rounded-md vy:bg-foreground vy:px-2 vy:py-1 vy:text-[0.75rem] vy:text-background vy:shadow-md`}>{label}</Tooltip>
+            <Tooltip offset={TOOLTIP_OFFSET} className={`vy-ui ${LAYERS.popover} vy:rounded-md vy:bg-foreground vy:px-2 vy:py-1 vy:text-[0.75rem] vy:text-background vy:shadow-md`}>{label}</Tooltip>
         </TooltipTrigger>
     );
 };

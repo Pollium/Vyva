@@ -23,7 +23,7 @@ const Modal = ({ isOpen, onOpenChange, title, width = 'default', children }: Mod
     const t = useMessages();
 
     return (
-        <ModalOverlay isOpen={isOpen} onOpenChange={onOpenChange} isDismissable className={`vy:fixed vy:inset-0 ${LAYERS.modal} vy:flex vy:items-center vy:justify-center vy:bg-black/40 vy:p-4`}>
+        <ModalOverlay isOpen={isOpen} onOpenChange={onOpenChange} isDismissable className={`vy-ui vy:fixed vy:inset-0 ${LAYERS.modal} vy:flex vy:items-center vy:justify-center vy:bg-black/40 vy:p-4`}>
             <AriaModal className={`vy:max-h-full vy:w-full vy:overflow-y-auto vy:rounded-3xl vy:bg-background vy:text-foreground vy:shadow-xl vy:ring-1 vy:ring-foreground/10 vy:outline-none ${WIDTHS[width]}`}>
                 <Dialog className='vy:relative vy:flex vy:flex-col vy:gap-4 vy:p-6 vy:outline-none'>
                     <Heading slot='title' className='vy:break-words vy:pe-8 vy:text-[1.0625rem] vy:font-semibold'>{title}</Heading>

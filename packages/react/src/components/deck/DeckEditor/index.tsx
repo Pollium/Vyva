@@ -80,7 +80,7 @@ const DeckEditor = ({ session, readOnly, fileUrl: hostFileUrl, imagePicker: Pick
     const table = dialog?.kind === 'table' ? slide.elements.find((element): element is TableElement => element.id === dialog.id && element.type === 'table') ?? null : null;
 
     return (
-        <div onKeyDown={onKeyDown} className='vy:flex vy:h-full vy:min-h-0 vy:min-w-0 vy:flex-1 vy:flex-col vy:bg-foreground/[0.03] vy:text-foreground vy:max-lg:landscape:grid vy:max-lg:landscape:grid-cols-[auto_minmax(0,1fr)] vy:max-lg:landscape:grid-rows-[minmax(0,1fr)_auto] vy:lg:flex-row vy:lg:gap-3 vy:lg:p-3'>
+        <div onKeyDown={onKeyDown} className='vy-ui vy:flex vy:h-full vy:min-h-0 vy:min-w-0 vy:flex-1 vy:flex-col vy:bg-foreground/[0.03] vy:text-foreground vy:max-lg:landscape:grid vy:max-lg:landscape:grid-cols-[auto_minmax(0,1fr)] vy:max-lg:landscape:grid-rows-[minmax(0,1fr)_auto] vy:lg:flex-row vy:lg:gap-3 vy:lg:p-3'>
             <style>{CONTENT_CSS}</style>
             <SlideRail
                 deck={deck}

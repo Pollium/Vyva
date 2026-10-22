@@ -28,7 +28,7 @@ const ZoomControl = ({ scale, isFit, onZoom }: ZoomControlProps) => {
                 {percent(scale)}
                 <ChevronUp className='vy:size-3.5' aria-hidden='true' />
             </Button>
-            <Popover placement='top'>
+            <Popover placement='top' className='vy-ui'>
                 <Menu aria-label={t.deck.zoom} className='vy:min-w-48 vy:p-1.5 vy:outline-none'>
                     <MenuItem isDisabled={larger === undefined} onAction={() => larger !== undefined && onZoom(larger)}>{t.deck.zoomIn}</MenuItem>
                     <MenuItem isDisabled={smaller === undefined} onAction={() => smaller !== undefined && onZoom(smaller)}>{t.deck.zoomOut}</MenuItem>

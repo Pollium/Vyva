@@ -45,7 +45,7 @@ const DocumentEditor = ({ session, readOnly, fileUrl, imagePicker: Picker, panel
     };
 
     return (
-        <div className='vy:flex vy:h-full vy:min-h-0 vy:min-w-0 vy:flex-1 vy:flex-col vy:bg-foreground/[0.03] vy:text-foreground vy:lg:flex-row vy:lg:gap-3 vy:lg:p-3'>
+        <div className='vy-ui vy:flex vy:h-full vy:min-h-0 vy:min-w-0 vy:flex-1 vy:flex-col vy:bg-foreground/[0.03] vy:text-foreground vy:lg:flex-row vy:lg:gap-3 vy:lg:p-3'>
             <style>{CONTENT_CSS}</style>
             <DocumentOutline editor={editor} isLocked={readOnly} />
 

@@ -33,7 +33,7 @@ const ToolPopover = ({ label, icon, isActive, isDisabled = false, variant = 'ico
                 {icon}
             </ToolButton>
 
-            <Popover placement='bottom start' style={{ width }}>
+            <Popover placement='bottom start' style={{ width }} className='vy-ui'>
                 <Dialog aria-label={label} className='vy:p-3 vy:outline-none'>
                     {children(() => setOpen(false))}
                 </Dialog>

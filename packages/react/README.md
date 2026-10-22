@@ -17,6 +17,8 @@ import '@pollium/vyva-react/fonts';
 - **`styles.css`** is already built. Every class starts with `vy:`, so it never collides with the
   host's styles. Colors come from `--vy-color-*` variables, which the host can override. Dark mode
   turns on with `.dark` or `data-theme="dark"` on `:root`.
+- **No reset is needed.** Vyva resets the browser's default styles inside its own UI and leaves the
+  rest of the page alone. Its UI takes the font of the page around it.
 - **HeroUI hosts** also import `@pollium/vyva-react/heroui.css`, which points those variables at HeroUI's
   own colors.
 - **`fonts`** loads the eight fonts documents and decks can use. Leave it out if the host already
