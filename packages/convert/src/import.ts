@@ -1,6 +1,7 @@
 import { ConvertError } from './errors';
 import { importDocx, importMarkdown, importPdf, importPlainText } from './import/documents';
 import type { SaveImage } from './import/images';
+import { importPdfSlides, isLandscapePdf, type PdfSlides } from './import/pdf-slides';
 import { importPptx } from './import/pptx';
 import type { Content } from '@pollium/vyva-core/content';
 import { unzipSync } from 'fflate';
@@ -18,6 +19,7 @@ type Detected = 'docx' | 'pptx' | 'pdf' | 'markdown' | 'text';
 export interface ImportOptions{
     saveImage: SaveImage;
     maxBytes?: number;
+    pdfSlides?: PdfSlides;
 }
 
 export interface ImportedContent{
@@ -70,10 +72,12 @@ const detect = (buffer: Buffer, filename: string): Detected | null => {
     return null;
 };
 
-const convert = async (detected: Detected, buffer: Buffer, filename: string, saveImage: SaveImage): Promise<ImportedContent> => {
+const convert = async (detected: Detected, buffer: Buffer, filename: string, { saveImage, pdfSlides }: ImportOptions): Promise<ImportedContent> => {
     if(detected === 'docx') return importDocx(buffer, filename, saveImage);
     if(detected === 'pptx') return importPptx(buffer, filename, saveImage);
-    if(detected === 'pdf') return importPdf(buffer, filename);
+    if(detected === 'pdf'){
+        return pdfSlides !== undefined && await isLandscapePdf(buffer) ? importPdfSlides(buffer, filename, saveImage, pdfSlides) : importPdf(buffer, filename);
+    }
 
     const text = buffer.toString('utf8').replace(BOM, '');
     return detected === 'markdown' ? importMarkdown(text, filename) : importPlainText(text, filename);
@@ -81,7 +85,8 @@ const convert = async (detected: Detected, buffer: Buffer, filename: string, sav
 
 const isEmpty = (content: Content): boolean => content.kind === 'document' ? content.blocks.length === 0 : content.slides.length === 0;
 
-export const importFile = async (data: Uint8Array, filename: string, { saveImage, maxBytes = MAX_IMPORT_BYTES }: ImportOptions): Promise<ImportedContent> => {
+export const importFile = async (data: Uint8Array, filename: string, options: ImportOptions): Promise<ImportedContent> => {
+    const { maxBytes = MAX_IMPORT_BYTES } = options;
     if(data.length > maxBytes) throw new ConvertError('too-large', `The file is larger than ${maxBytes} bytes`);
 
     const buffer = Buffer.from(data.buffer, data.byteOffset, data.byteLength);
@@ -89,7 +94,7 @@ export const importFile = async (data: Uint8Array, filename: string, { saveImage
     const detected = detect(buffer, name);
     if(detected === null) throw new ConvertError('unsupported', `${name} is not a file Vyva can import`);
 
-    const imported = await convert(detected, buffer, name, saveImage);
+    const imported = await convert(detected, buffer, name, options);
     if(isEmpty(imported.content)) throw new ConvertError('empty', `${name} has nothing to import`);
 
     return imported;

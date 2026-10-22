@@ -37,3 +37,6 @@ This file is a router, not a manual. Read the file that matches your task before
 - **A real PDF needs Gotenberg.** The tests fake it. To look at an actual PDF, run
   `docker run --rm -d -p 3990:3000 gotenberg/gotenberg:8` and export through
   `gotenberg({ url: 'http://127.0.0.1:3990' })`; `pdftoppm` turns the pages into images.
+- **A PDF turned into slides needs LibreOffice.** The tests fake `pdfSlides`. To import a real one,
+  pass `libreOffice()`, which runs the `soffice` on the machine with a profile of its own, so it
+  never fights an open LibreOffice for the lock.

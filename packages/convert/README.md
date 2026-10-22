@@ -70,8 +70,19 @@ const { title, content } = await importFile(upload.bytes, upload.filename, {
   by what their zip holds, and PDF by its signature. Only Markdown (`.md`) and text (`.txt`) are
   recognized by their extension, and only when they are valid UTF-8.
 - Word, PDF, Markdown and text files become documents, and PowerPoint files become decks. A deck
-  keeps its theme colors and font. What its slide master draws comes in locked, behind the slide's
-  own elements.
+  keeps its theme colors and the font most of its text uses. What its slide master draws comes in
+  locked, behind the slide's own elements, and freeform shapes come in as polygons.
+- With `pdfSlides`, a PDF whose pages are landscape becomes a deck instead: each page a slide, with
+  its pictures and shapes where they were, and the loose lines a PDF keeps joined back into
+  paragraphs and lists. A portrait PDF stays a document. `pdfSlides` takes the PDF and returns it as
+  a PowerPoint file; `libreOffice()` from `@pollium/vyva-convert/libreoffice` does that with the
+  `soffice` on the machine (`command` changes the path), one conversion per call:
+
+  ```ts
+  import { libreOffice } from '@pollium/vyva-convert/libreoffice';
+
+  await importFile(upload.bytes, upload.filename, { saveImage, pdfSlides: libreOffice() });
+  ```
 - `saveImage` stores each image and returns its file id, which must be a UUID. Return `null` to
   leave the image out. If it throws, the import fails with your error.
 - Files over 25 MB (`maxBytes` changes the limit) and files it cannot read are refused.
@@ -87,3 +98,4 @@ a bug or a broken file, so log it.
 | `too-large` | The file, or what it unzips to, is over the limit |
 | `empty` | The file has nothing to import |
 | `pdf-failed` | The PDF engine could not be reached or answered with an error |
+| `slides-failed` | `pdfSlides` could not turn a PDF into slides |
