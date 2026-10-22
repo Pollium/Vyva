@@ -216,7 +216,8 @@ const en = {
             ellipse: 'Ellipse',
             triangle: 'Triangle',
             line: 'Line',
-            arrow: 'Arrow'
+            arrow: 'Arrow',
+            polygon: 'Freeform'
         } satisfies Record<ShapeKind, string>,
         addTable: 'Add a table',
         table: 'Table',

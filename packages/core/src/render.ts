@@ -133,13 +133,15 @@ export const shapeSvg = (element: Extract<SlideElement, { type: 'shape' }>): str
     const { w, h } = element;
     const paint = `fill="${fill}" stroke="${stroke}" stroke-width="${width}"`;
     const inset = width / 2;
+    const points = (element.points ?? []).map((point) => `${number(point.x, 0, 1, 0) * w},${number(point.y, 0, 1, 0) * h}`).join(' ');
     const shapes: Record<typeof element.shape, string> = {
         rect: `<rect x="${inset}" y="${inset}" width="${Math.max(0, w - width)}" height="${Math.max(0, h - width)}" ${paint}/>`,
         rounded: `<rect x="${inset}" y="${inset}" width="${Math.max(0, w - width)}" height="${Math.max(0, h - width)}" rx="${Math.min(w, h) * 0.18}" ${paint}/>`,
         ellipse: `<ellipse cx="${w / 2}" cy="${h / 2}" rx="${Math.max(0, w / 2 - inset)}" ry="${Math.max(0, h / 2 - inset)}" ${paint}/>`,
         triangle: `<polygon points="${w / 2},${inset} ${w - inset},${h - inset} ${inset},${h - inset}" ${paint}/>`,
         line: `<line x1="0" y1="${h / 2}" x2="${w}" y2="${h / 2}" stroke="${stroke === 'none' ? fill : stroke}" stroke-width="${Math.max(width, 2)}"/>`,
-        arrow: `<line x1="0" y1="${h / 2}" x2="${w - Math.max(width, 2) * 3}" y2="${h / 2}" stroke="${stroke === 'none' ? fill : stroke}" stroke-width="${Math.max(width, 2)}"/><polygon points="${w},${h / 2} ${w - Math.max(width, 2) * 4},${h / 2 - Math.max(width, 2) * 2.5} ${w - Math.max(width, 2) * 4},${h / 2 + Math.max(width, 2) * 2.5}" fill="${stroke === 'none' ? fill : stroke}"/>`
+        arrow: `<line x1="0" y1="${h / 2}" x2="${w - Math.max(width, 2) * 3}" y2="${h / 2}" stroke="${stroke === 'none' ? fill : stroke}" stroke-width="${Math.max(width, 2)}"/><polygon points="${w},${h / 2} ${w - Math.max(width, 2) * 4},${h / 2 - Math.max(width, 2) * 2.5} ${w - Math.max(width, 2) * 4},${h / 2 + Math.max(width, 2) * 2.5}" fill="${stroke === 'none' ? fill : stroke}"/>`,
+        polygon: points === '' ? `<rect width="${w}" height="${h}" ${paint}/>` : `<polygon points="${points}" ${paint}/>`
     };
 
     return `<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">${shapes[element.shape] ?? shapes.rect}</svg>`;

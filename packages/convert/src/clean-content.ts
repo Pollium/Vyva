@@ -23,7 +23,12 @@ const cleanElement = (element: SlideElement, font: FontFamily): SlideElement => 
         const height = textHeight(html, element.style, font, element.w);
         return Number.isFinite(height) && height > 0 ? withTextHeight({ ...element, html }, height) : { ...element, html };
     }
-    if(element.type !== 'shape' || element.text === undefined) return element;
+    if(element.type !== 'shape') return element;
+    if(element.points !== undefined && element.shape !== 'polygon'){
+        const { points: _points, ...plain } = element;
+        return cleanElement(plain, font);
+    }
+    if(element.text === undefined) return element;
 
     const { text, ...bare } = element;
     const html = TEXT_SHAPES.includes(element.shape) ? cleanHtml(text.html) : '';

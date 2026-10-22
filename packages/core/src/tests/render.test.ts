@@ -252,6 +252,14 @@ describe('manual slide editing', () => {
         expect(html.match(/Sensor/g)).toHaveLength(1);
     });
 
+    it('draws a polygon through its points scaled to the box, and a plain box when it has none', () => {
+        const stripe = { ...frame, id: 'franja', type: 'shape' as const, shape: 'polygon' as const, fill: '#117cc2', stroke: null, strokeWidth: 0, points: [{ x: 1, y: 0 }, { x: 1, y: 0.5 }, { x: 0, y: 1 }] };
+        const html = renderSlide({ id: 's', background: null, elements: [stripe, { ...stripe, id: 'caja', points: undefined }] }, deckOf([]), noFiles);
+
+        expect(html).toContain('<polygon points="400,0 400,100 0,200" fill="#117cc2"');
+        expect(html).toContain('<rect width="400" height="200" fill="#117cc2"');
+    });
+
     it('changes the layout of a slide and keeps its title, texts and image', () => {
         const source = layoutSlide({ layout: 'two-columns', title: 'IPv4 o IPv6', left: { text: 'Treinta y dos bits' }, right: { text: 'Ciento veintiocho bits' } }, '16:9', theme);
         const withImage = { ...source, elements: [...source.elements, { ...frame, id: 'foto', type: 'image' as const, fileId: FILE, fit: 'cover' as const, radius: 0, alt: 'Router', credit: null }] };

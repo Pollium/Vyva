@@ -95,14 +95,24 @@ const addImage = (slide: PptxGenJS.Slide, element: ImageElement, bundle: ExportB
     });
 };
 
+const CUSTOM_GEOMETRY = 'custGeom' as PptxGenJS.SHAPE_NAME;
+
 const SHAPES = {
     rect: 'rect',
     rounded: 'roundRect',
     ellipse: 'ellipse',
     triangle: 'triangle',
     line: 'line',
-    arrow: 'line'
+    arrow: 'line',
+    polygon: CUSTOM_GEOMETRY
 } as const satisfies Record<ShapeElement['shape'], PptxGenJS.SHAPE_NAME>;
+
+const BOX_CORNERS = [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 1, y: 1 }, { x: 0, y: 1 }];
+
+const outline = (element: ShapeElement): PptxGenJS.ShapeProps['points'] => [
+    ...(element.points ?? BOX_CORNERS).map((point) => ({ x: inch(point.x * element.w), y: inch(point.y * element.h) })),
+    { close: true as const }
+];
 
 const addShape = (slide: PptxGenJS.Slide, element: ShapeElement, deck: DeckContent) => {
     const isLine = element.shape === 'line' || element.shape === 'arrow';
@@ -114,7 +124,8 @@ const addShape = (slide: PptxGenJS.Slide, element: ShapeElement, deck: DeckConte
         ...(lineColor === null || (element.strokeWidth === 0 && !isLine)
             ? { line: { type: 'none' as const } }
             : { line: { color: hex(lineColor), width: Math.max(0.5, element.strokeWidth * PT_PER_PX), ...(element.shape === 'arrow' ? { endArrowType: 'triangle' as const } : {}) } }),
-        ...(element.shape === 'rounded' ? { rectRadius: 0.18 } : {})
+        ...(element.shape === 'rounded' ? { rectRadius: 0.18 } : {}),
+        ...(element.shape === 'polygon' ? { points: outline(element) } : {})
     };
 
     if(element.text !== undefined && TEXT_SHAPES.includes(element.shape) && element.text.html.trim() !== ''){

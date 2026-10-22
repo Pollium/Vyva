@@ -56,6 +56,15 @@ describe('cleanContent', () => {
         expect(cleaned.footer).toEqual({ left: 'Unit 1', center: '' });
     });
 
+    it('keeps the points of a polygon and drops them from a shape that was changed to another kind', () => {
+        const points = [{ x: 0, y: 0 }, { x: 1, y: 0.5 }, { x: 0, y: 1 }];
+        const cleaned = cleanDeck(deckWith([{ ...box, id: 'stripe', shape: 'polygon', points }, { ...box, id: 'was', shape: 'rect', points }]));
+        const [stripe, changed] = cleaned.slides[0].elements;
+
+        expect(stripe).toMatchObject({ shape: 'polygon', points });
+        expect(changed).not.toHaveProperty('points');
+    });
+
     it('saves a text box as tall as its text, keeping the edge its vertical alignment anchors to', () => {
         const style: TextStyle = { fontSize: 54, color: '#e6edf3', align: 'left', verticalAlign: 'bottom', lineHeight: 1.1, isBold: true };
         const title: TextElement = { id: 'title', type: 'text', x: 108, y: 364, w: 1705, h: 260, rotation: 0, opacity: 1, isLocked: false, fill: null, html: '<p>SQL from scratch</p>', style };

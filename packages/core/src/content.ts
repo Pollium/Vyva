@@ -120,7 +120,7 @@ export interface ImageElement extends ElementFrame{
     credit: (string & tags.MaxLength<300>) | null;
 }
 
-export type ShapeKind = 'rect' | 'rounded' | 'ellipse' | 'triangle' | 'line' | 'arrow';
+export type ShapeKind = 'rect' | 'rounded' | 'ellipse' | 'triangle' | 'line' | 'arrow' | 'polygon';
 
 export const TEXT_SHAPES: readonly ShapeKind[] = ['rect', 'rounded', 'ellipse', 'triangle'];
 
@@ -129,12 +129,20 @@ export interface ShapeText{
     style: TextStyle;
 }
 
+export const MAX_SHAPE_POINTS = 200;
+
+export interface ShapePoint{
+    x: number & tags.Minimum<0> & tags.Maximum<1>;
+    y: number & tags.Minimum<0> & tags.Maximum<1>;
+}
+
 export interface ShapeElement extends ElementFrame{
     type: 'shape';
     shape: ShapeKind;
     fill: Color | null;
     stroke: Color | null;
     strokeWidth: number & tags.Minimum<0> & tags.Maximum<80>;
+    points?: ShapePoint[] & tags.MinItems<3> & tags.MaxItems<200>;
     text?: ShapeText;
 }
 

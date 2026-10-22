@@ -20,10 +20,11 @@ interface ShapeSectionProps{
 const ShapeSection = ({ shape, isLocked, onPatch }: ShapeSectionProps) => {
     const t = useMessages();
     const strokeLabel = (width: number) => width === 0 ? t.deck.noBorder : `${width} px`;
+    const kinds: ShapeKind[] = [...SHAPES.map(({ value }) => value), ...(shape.shape === 'polygon' ? ['polygon' as const] : [])];
 
     return (
         <PanelSection title={t.deck.shape}>
-            <SelectInput label={t.deck.shapeKind} hideLabel isDisabled={isLocked} value={shape.shape} options={SHAPES.map(({ value }) => ({ value, label: t.deck.shapes[value] }))} onChange={(kind: ShapeKind) => onPatch((current) => ({ ...current, shape: kind }))} />
+            <SelectInput label={t.deck.shapeKind} hideLabel isDisabled={isLocked} value={shape.shape} options={kinds.map((value) => ({ value, label: t.deck.shapes[value] }))} onChange={(kind: ShapeKind) => onPatch((current) => ({ ...current, shape: kind }))} />
             <PanelRow label={t.deck.fill}>
                 <ColorMenu label={t.deck.fill} value={shape.fill} allowNone isDisabled={isLocked} onPick={(fill) => onPatch((current) => ({ ...current, fill }))} icon={<PaintBucket className='vy:size-4' />} />
             </PanelRow>

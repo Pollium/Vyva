@@ -197,7 +197,8 @@ const es: Messages = {
             ellipse: 'Elipse',
             triangle: 'Triángulo',
             line: 'Línea',
-            arrow: 'Flecha'
+            arrow: 'Flecha',
+            polygon: 'Forma libre'
         },
         addTable: 'Agregar tabla',
         table: 'Tabla',
