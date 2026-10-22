@@ -28,7 +28,8 @@
         "build": "tsdown",
         "typecheck": "tsc -p tsconfig.json",
         "lint": "oxlint --deny-warnings",
-        "test": "vitest run"
+        "test": "vitest run",
+        "font-widths": "node scripts/font-widths.ts"
     },
     "dependencies": {
         "@fontsource-variable/inter": "^5.3.0",

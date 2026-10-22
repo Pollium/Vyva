@@ -41,6 +41,9 @@ pnpm --filter playground dev
 pnpm build && pnpm typecheck && pnpm lint && pnpm test
 ```
 
+`pnpm --filter @pollium/vyva-convert font-widths` measures the fonts' glyph widths again with Chrome
+(`CHROME_PATH`, `google-chrome` by default). Run it after changing `FONT_FAMILIES`.
+
 `pnpm release` builds every package and publishes the ones whose version is not on npm yet. It needs
 `npm login` with access to the pollium organization.
 
