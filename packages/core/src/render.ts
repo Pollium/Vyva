@@ -39,7 +39,7 @@ export const withImageSources = (html: string, fileUrl: FileUrl): string =>
 export const CONTENT_CSS = `
 .vy-doc{box-sizing:border-box;width:${A4.width}px;min-height:${A4.height}px;background:#fff;color:var(--vy-doc-text);font-family:var(--vy-doc-font);font-size:var(--vy-doc-size);line-height:1.55;padding:var(--vy-doc-pad-top) var(--vy-doc-pad-right) var(--vy-doc-pad-bottom) var(--vy-doc-pad-left);overflow-wrap:break-word}
 .vy-doc *{box-sizing:border-box}
-.vy-doc h1,.vy-doc h2,.vy-doc h3,.vy-doc h4{color:var(--vy-doc-accent);line-height:1.2;margin:1.1em 0 .45em}
+.vy-doc h1,.vy-doc h2,.vy-doc h3,.vy-doc h4{color:var(--vy-doc-accent);font-weight:700;line-height:1.2;margin:1.1em 0 .45em}
 .vy-doc h1{font-size:2em;margin-top:0}.vy-doc h2{font-size:1.5em}.vy-doc h3{font-size:1.2em}.vy-doc h4{font-size:1.05em}
 .vy-doc p{margin:0 0 .7em}.vy-doc ul,.vy-doc ol{margin:0 0 .8em;padding-left:1.4em}.vy-doc ul{list-style:disc}.vy-doc ol{list-style:decimal}.vy-doc li{margin:.15em 0}.vy-doc li>p{margin:0}
 .vy-doc ul[data-type="taskList"]{list-style:none;padding-left:.2em}.vy-doc li[data-type="taskItem"]{display:flex;gap:.5em}
@@ -53,7 +53,7 @@ export const CONTENT_CSS = `
 .vy-doc th{background:color-mix(in srgb,var(--vy-doc-accent) 12%,#fff);font-weight:600}
 .vy-doc pre{margin:0 0 1em;padding:.8em 1em;border-radius:6px;background:#0f1720;color:#e6edf3;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.88em;white-space:pre-wrap}
 .vy-doc :not(pre)>code{padding:.1em .3em;border-radius:4px;background:#eef0f3;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.9em}
-.vy-doc a{color:var(--vy-doc-accent)}.vy-doc img{max-width:100%;height:auto}.vy-doc hr{border:0;border-top:1px solid #d5d9e0;margin:1.2em 0}
+.vy-doc a{color:var(--vy-doc-accent);text-decoration:underline}.vy-doc img{max-width:100%;height:auto}.vy-doc hr{border:0;border-top:1px solid #d5d9e0;margin:1.2em 0}
 .vy-doc img[data-align]{display:block}.vy-doc img[data-align="center"]{margin-left:auto;margin-right:auto}.vy-doc img[data-align="right"]{margin-left:auto}
 .vy-doc mark{padding:0 .1em}
 .vy-doc div[data-type="page-break"]{height:0;margin:1.5em 0;border-top:1px dashed #c9ced6;break-after:page}
@@ -68,7 +68,7 @@ export const CONTENT_CSS = `
 .vy-text:empty{min-height:1lh}
 .vy-text p{margin:0 0 .35em}.vy-text p:last-child{margin-bottom:0}
 .vy-text ul,.vy-text ol{margin:0;padding-left:1.15em}.vy-text ul{list-style:disc}.vy-text ol{list-style:decimal}.vy-text li{margin:0 0 .35em}.vy-text li>p{margin:0}
-.vy-text a{color:inherit}
+.vy-text a{color:inherit;text-decoration:underline}
 .vy-table{width:100%;height:100%;border-collapse:collapse;table-layout:fixed}
 .vy-code{margin:0;width:100%;height:100%;overflow:hidden;padding:.7em .9em;border-radius:12px;font-family:'JetBrains Mono','JetBrains Mono Variable',ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.45;white-space:pre;tab-size:4;text-align:left;font-variant-ligatures:none}
 .vy-code code{font:inherit}
