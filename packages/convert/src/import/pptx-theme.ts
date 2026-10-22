@@ -29,6 +29,12 @@ const FONT_SUBSTITUTES: Record<string, FontFamily> = {
     consolas: 'JetBrains Mono'
 };
 
+export const familyOf = (name: string | null): FontFamily | null => {
+    if(name === null) return null;
+
+    return FONT_FAMILIES.find((font) => font.toLowerCase() === name.toLowerCase()) ?? FONT_SUBSTITUTES[name.toLowerCase()] ?? null;
+};
+
 export interface PptxTheme{
     colors: Record<string, string>;
     bodyFont: string | null;
@@ -129,13 +135,6 @@ export default class Palette{
         return stop === undefined ? null : this.color(stop);
     }
 
-    #font(): FontFamily | null{
-        const name = this.#theme.bodyFont;
-        if(name === null) return null;
-
-        return FONT_FAMILIES.find((font) => font.toLowerCase() === name.toLowerCase()) ?? FONT_SUBSTITUTES[name.toLowerCase()] ?? null;
-    }
-
     deckTheme(): DeckTheme{
         const fallback = DECK_THEME;
         const slot = (name: string) => {
@@ -144,7 +143,7 @@ export default class Palette{
         };
 
         return {
-            font: this.#font() ?? fallback.font,
+            font: familyOf(this.#theme.bodyFont) ?? fallback.font,
             background: slot('bg1') ?? fallback.background,
             text: slot('tx1') ?? fallback.text,
             accent: slot('accent1') ?? fallback.accent,

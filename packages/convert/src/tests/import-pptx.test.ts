@@ -1,10 +1,11 @@
 import { exportContent } from '../export';
 import { importFile } from '../import';
 import type { NewImage } from '../import/images';
-import { pptxTemplate, pptxWithNotes, readImage, SAMPLE_DECK } from './fixtures';
+import { pptxOfLines, pptxTemplate, pptxWithNotes, readImage, SAMPLE_DECK } from './fixtures';
 import type { DeckContent, ShapeElement, TextStyle } from '@pollium/vyva-core/content';
 import { layoutSlide } from '@pollium/vyva-core/slide-layouts';
 import { DECK_THEME } from '@pollium/vyva-core/themes';
+import PptxGenJS from 'pptxgenjs';
 import { describe, expect, it } from 'vitest';
 
 const storing = () => {
@@ -87,5 +88,44 @@ describe('importFile with PowerPoint', () => {
 
         expect(shape?.type === 'shape' ? shape.text?.html : '').toContain('DHT22');
         expect(shape?.type === 'shape' ? shape.text?.style.verticalAlign : '').toBe('middle');
+    });
+
+    it('keeps a freeform shape as a polygon through PowerPoint, and a freeform box as a rectangle', async () => {
+        const frame = { rotation: 0, opacity: 1, isLocked: false, fill: '#117cc2', stroke: null, strokeWidth: 0 };
+        const stripe: ShapeElement = { ...frame, id: 'stripe', type: 'shape', shape: 'polygon', x: 100, y: 0, w: 600, h: 300, points: [{ x: 1, y: 0 }, { x: 1, y: 0.6 }, { x: 0, y: 1 }, { x: 0.4, y: 0 }] };
+        const box: ShapeElement = { ...stripe, id: 'box', x: 900, points: [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 1, y: 1 }, { x: 0, y: 1 }] };
+        const deck: DeckContent = { kind: 'deck', format: '16:9', theme: DECK_THEME, slides: [{ id: 'one', background: null, elements: [stripe, box] }] };
+
+        const pptx = await exportContent(deck, 'pptx', { title: 'Stripes', readImage });
+        const { content } = await importDeck(pptx.data, 'stripes.pptx');
+        const [polygon, rect] = [100, 900].map((x) => content.slides[0].elements.find((element) => element.type === 'shape' && element.x === x));
+
+        expect(polygon).toMatchObject({ type: 'shape', shape: 'polygon', x: 100, w: 600, fill: '#117cc2' });
+        expect(polygon?.type === 'shape' ? polygon.points : []).toEqual(stripe.points);
+        expect(rect).toMatchObject({ type: 'shape', shape: 'rect', x: 900 });
+        expect(rect?.type === 'shape' ? rect.points : []).toBeUndefined();
+    });
+
+    it('widens a text box that must not wrap, and makes bold only the runs that are', async () => {
+        const deck = new PptxGenJS();
+        deck.addSlide().addText([{ text: 'Unidad', options: { bold: true } }, { text: ' tres de la materia' }], { x: 1, y: 1, w: 0.6, h: 0.4, wrap: false, fontSize: 18 });
+        const data = await deck.write({ outputType: 'uint8array' });
+        if(!(data instanceof Uint8Array)) throw new TypeError('PptxGenJS did not write bytes');
+
+        const { content } = await importDeck(data, 'cover.pptx');
+        const [text] = content.slides[0].elements;
+
+        expect(text.type).toBe('text');
+        expect(text.w).toBeGreaterThan(Math.round(0.6 * 1920 / 10));
+        expect(text.type === 'text' ? text.style.isBold : true).toBe(false);
+        expect(text.type === 'text' ? text.html : '').toBe('<p><strong>Unidad</strong> tres de la materia</p>');
+    });
+
+    it('takes the deck font from its text when the theme names another one', async () => {
+        const data = await pptxOfLines([{ text: 'Potencial de reposo', x: 1, y: 1, w: 4 }, { text: 'La bomba de sodio y potasio', x: 1, y: 2, w: 5 }]);
+
+        const { content } = await importDeck(data, 'class.pptx');
+
+        expect(content.theme.font).toBe('Open Sans');
     });
 });

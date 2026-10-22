@@ -1,10 +1,11 @@
 import { ConvertError } from '../errors';
 import { imageSaver, type SaveImage } from './images';
-import PptxPackage from './pptx-package';
+import PptxPackage, { type SlideParts } from './pptx-package';
 import SlideReader from './pptx-slide';
-import { all, attr, first, num } from './pptx-xml';
+import { familyOf } from './pptx-theme';
+import { all, attr, first, num, textOf } from './pptx-xml';
 import { titleOf } from './titles';
-import type { DeckContent, DeckFormat, Slide, TextElement } from '@pollium/vyva-core/content';
+import type { DeckContent, DeckFormat, FontFamily, Slide, TextElement } from '@pollium/vyva-core/content';
 import { DECK_SIZES } from '@pollium/vyva-core/content';
 import { unzipSync } from 'fflate';
 import { posix } from 'node:path';
@@ -47,6 +48,19 @@ const deckTitle = (titles: string[], slides: Slide[], filename: string): string 
     return titleOf(title, filename);
 };
 
+const dominantFont = (parts: SlideParts[], themeFont: FontFamily): FontFamily => {
+    const counts = new Map<FontFamily, number>();
+    for(const { slide } of parts){
+        for(const run of all(slide.root, 'a:r')){
+            const typeface = attr(first(run, 'a:latin'), 'typeface');
+            const family = typeface === undefined || typeface.startsWith('+') ? themeFont : familyOf(typeface);
+            if(family !== null) counts.set(family, (counts.get(family) ?? 0) + all(run, 'a:t').map(textOf).join('').length);
+        }
+    }
+
+    return [...counts].sort((a, b) => b[1] - a[1])[0]?.[0] ?? themeFont;
+};
+
 const unzipped = (buffer: Buffer): Record<string, Uint8Array> => {
     let total = 0;
 
@@ -75,8 +89,10 @@ export const importPptx = async (buffer: Buffer, filename: string, saveImage: Sa
         .filter((path): path is string => path !== undefined)
         .slice(0, MAX_SLIDES);
     const allParts = order.map((path) => pptx.parts(path)).filter((parts) => parts !== null);
-    const theme = allParts[0]?.slide.palette.deckTheme();
-    if(theme === undefined) throw new ConvertError('empty', `${filename} has no slides`);
+    const themed = allParts[0]?.slide.palette.deckTheme();
+    if(themed === undefined) throw new ConvertError('empty', `${filename} has no slides`);
+
+    const theme = { ...themed, font: dominantFont(allParts, themed.font) };
 
     const save = imageSaver(saveImage, filename, MAX_IMAGES);
     const saved = new Map<string, Promise<string | null>>();

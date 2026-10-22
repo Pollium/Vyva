@@ -13,7 +13,9 @@ export const FAKE_PDF = Buffer.from('%PDF-1.4\n1 0 obj<<>>endobj\ntrailer<<>>\n%
 export const readImage = async (fileId: string): Promise<StoredImage | null> =>
     fileId === FILE_ID ? { data: PNG_BYTES, contentType: 'image/png' } : null;
 
-export const pdfWith = (pages: string[]): Buffer => {
+export const LETTER = { width: 612, height: 792 };
+
+export const pdfWith = (pages: string[], { width, height } = LETTER): Buffer => {
     const objects = [
         '<< /Type /Catalog /Pages 2 0 R >>',
         `<< /Type /Pages /Kids [${pages.map((_, index) => `${4 + index * 2} 0 R`).join(' ')}] /Count ${pages.length} >>`,
@@ -21,7 +23,7 @@ export const pdfWith = (pages: string[]): Buffer => {
         ...pages.flatMap((text, index) => {
             const stream = `BT /F1 24 Tf 72 720 Td (${text}) Tj ET`;
             return [
-                `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents ${5 + index * 2} 0 R /Resources << /Font << /F1 3 0 R >> >> >>`,
+                `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${width} ${height}] /Contents ${5 + index * 2} 0 R /Resources << /Font << /F1 3 0 R >> >> >>`,
                 `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`
             ];
         })
@@ -101,5 +103,23 @@ export const pptxTemplate = (): Promise<Uint8Array> => {
     goals.addText('First goal\nSecond goal', { placeholder: 'body' });
     goals.addShape(deck.ShapeType.rect, { x: 11, y: 2, w: 1.5, h: 1.5, fill: { color: deck.SchemeColor.accent1 } });
 
+    return written(deck);
+};
+
+export interface LooseLine{
+    text: string;
+    x: number;
+    y: number;
+    w: number;
+    isBold?: boolean;
+}
+
+export const pptxOfLines = (lines: LooseLine[]): Promise<Uint8Array> => {
+    const deck = new PptxGenJS();
+    deck.layout = 'LAYOUT_WIDE';
+    const slide = deck.addSlide();
+    for(const line of lines){
+        slide.addText(line.text, { x: line.x, y: line.y, w: line.w, h: 0.34, fontFace: 'Calibri', fontSize: 18, bold: line.isBold ?? false, wrap: false, margin: 0, valign: 'top' });
+    }
     return written(deck);
 };

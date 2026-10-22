@@ -1,6 +1,8 @@
 import { cleanHtml } from '../clean-html';
 import type { SlidePart, SlideParts } from './pptx-package';
 import { bulletsByDefault, decorOf, isDefined, levelOf, masterLevel, placeholderChain, TITLE_TYPES } from './pptx-placeholders';
+import { unwrappedWidth } from '../text-measure';
+import { outlineOf } from './pptx-geometry';
 import type Palette from './pptx-theme';
 import { all, attr, first, kid, kids, num, tags, textOf, type XmlElement } from './pptx-xml';
 import type { DeckTheme, ImageElement, ShapeElement, ShapeKind, Slide, SlideBackground, SlideElement, TableElement, TextAlign, TextStyle } from '@pollium/vyva-core/content';
@@ -151,6 +153,14 @@ export default class SlideReader{
         return { id: newId(), ...transform, opacity: 1, isLocked };
     }
 
+    #unwrapped<T extends Transform>(frame: T, html: string, style: TextStyle): T{
+        const w = unwrappedWidth(html, style, this.#options.theme.font);
+        if(w <= frame.w) return frame;
+
+        const shift = { left: 0, justify: 0, center: (w - frame.w) / 2, right: w - frame.w }[style.align];
+        return { ...frame, x: Math.round(frame.x - shift), w };
+    }
+
     #pixels(size: string | undefined): number | null{
         const hundredths = num(size);
         return hundredths > 0 ? Math.round(hundredths / 100 * PX_PER_POINT * this.#options.fontScale) : null;
@@ -219,12 +229,16 @@ export default class SlideReader{
         const palette = visit.part.palette;
         const firstRun = all(body, 'a:r').map((run) => kid(run, 'a:rPr')).find(isDefined);
         const firstAlign = ALIGNS[attr(kid(kids(body, 'a:p')[0], 'a:pPr'), 'algn') ?? ''] ?? null;
-        const look = mergeLooks([
-            { ...this.#runLook(firstRun, palette), align: firstAlign },
+        const inherited = mergeLooks([
             ...chain.map((shape) => this.#levelLook(levelOf(shape), palette)),
             this.#levelLook(masterLevel(visit.parts, type), palette),
             { ...NO_LOOK, color: styleColor(chain[0], 'a:fontRef', palette) }
         ]);
+        const look = mergeLooks([{ ...this.#runLook(firstRun, palette), align: firstAlign }, inherited]);
+        const isBold = all(body, 'a:r').every((run) => {
+            const bold = attr(kid(run, 'a:rPr'), 'b');
+            return bold === undefined ? inherited.isBold === true : bold === '1';
+        });
         const isTitle = TITLE_TYPES.includes(type ?? '');
         const anchor = chain.map((shape) => attr(kid(kid(shape, 'p:txBody'), 'a:bodyPr'), 'anchor')).find(isDefined);
         const { theme } = this.#options;
@@ -235,7 +249,7 @@ export default class SlideReader{
             align: look.align ?? 'left',
             verticalAlign: anchor === 'ctr' ? 'middle' : anchor === 'b' ? 'bottom' : 'top',
             lineHeight: 1.2,
-            isBold: look.isBold ?? false
+            isBold
         };
     }
 
@@ -276,18 +290,22 @@ export default class SlideReader{
                 return { ...frame, type: 'shape', shape: kind, fill, stroke, strokeWidth, text: { html, style } };
             }
 
-            return { ...frame, type: 'text', html, fill, style };
+            const wrap = chain.map((link) => attr(kid(kid(link, 'p:txBody'), 'a:bodyPr'), 'wrap')).find(isDefined);
+            return { ...(wrap === 'none' ? this.#unwrapped(frame, html, style) : frame), type: 'text', html, fill, style };
         }
 
         if(fill === null && stroke === null) return null;
 
+        const geometry = chain.map((link) => first(link, 'a:custGeom')).find(isDefined);
+        const outline = geometry === undefined ? null : outlineOf(geometry, kid(props[0], 'a:xfrm'));
         const element: ShapeElement = {
             ...frame,
             type: 'shape',
-            shape: line !== undefined && first(line, 'a:tailEnd') !== undefined && kind === 'line' ? 'arrow' : kind,
+            shape: line !== undefined && first(line, 'a:tailEnd') !== undefined && kind === 'line' ? 'arrow' : outline?.kind ?? kind,
             fill: kind === 'line' ? null : fill,
             stroke,
-            strokeWidth
+            strokeWidth,
+            ...(outline?.kind === 'polygon' ? { points: outline.points } : {})
         };
         return element;
     }

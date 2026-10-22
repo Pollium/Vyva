@@ -100,3 +100,12 @@ export const textHeight = (html: string, style: TextStyle, font: FontFamily, wid
         return height + linesOf(block.glyphs, style.fontSize, (width - indent) * WIDTH_SAFETY) * style.fontSize * style.lineHeight + gap;
     }, 0);
 };
+
+export const unwrappedWidth = (html: string, style: TextStyle, font: FontFamily): number => {
+    const widths = blocksOf(html, font, style.isBold).map((block) => block.glyphs.reduce(
+        (width, glyph) => width + widthOf(glyph, style.fontSize),
+        block.isItem ? LIST_INDENT_EMS * style.fontSize : 0
+    ));
+
+    return Math.ceil(Math.max(0, ...widths) / WIDTH_SAFETY) + 1;
+};
