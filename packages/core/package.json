@@ -1,6 +1,6 @@
 {
     "name": "@pollium/vyva-core",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "The Vyva content model for documents and decks, and the one renderer that turns it into HTML.",
     "type": "module",
     "sideEffects": false,

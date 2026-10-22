@@ -1,6 +1,6 @@
 {
     "name": "@pollium/vyva-ai",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Give an AI model a readable view of Vyva documents and decks, and apply the edits it asks for.",
     "type": "module",
     "sideEffects": false,
