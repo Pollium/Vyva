@@ -1,8 +1,8 @@
 import type { DesignField } from '../DesignPanel';
 import { useMessages } from '../../../messages/context';
 import { EditorContent, type Editor } from '@tiptap/react';
-import type { DocumentDesign } from '@vyva/core/content';
-import { fontStack } from '@vyva/core/themes';
+import type { DocumentDesign } from '@pollium/vyva-core/content';
+import { fontStack } from '@pollium/vyva-core/themes';
 import type { KeyboardEvent } from 'react';
 
 const PX_PER_MM = 3.78;

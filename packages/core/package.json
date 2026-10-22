@@ -1,5 +1,5 @@
 {
-    "name": "@vyva/core",
+    "name": "@pollium/vyva-core",
     "version": "0.1.0",
     "description": "The Vyva content model for documents and decks, and the one renderer that turns it into HTML.",
     "type": "module",
@@ -9,7 +9,9 @@
         "url": "git+https://github.com/Pollium/Vyva.git",
         "directory": "packages/core"
     },
-    "files": ["dist"],
+    "files": [
+        "dist"
+    ],
     "exports": {
         "./*": "./src/*.ts"
     },

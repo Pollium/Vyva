@@ -1,4 +1,4 @@
-import type { Slide } from '@vyva/core/content';
+import type { Slide } from '@pollium/vyva-core/content';
 import { useLayoutEffect, useRef, useState, type RefObject } from 'react';
 
 const sameNodes = (a: readonly Element[], b: readonly Element[]): boolean => a.length === b.length && a.every((node, index) => node === b[index]);

@@ -1,4 +1,4 @@
-import type { Content } from '@vyva/core/content';
+import type { Content } from '@pollium/vyva-core/content';
 
 export interface ContentDraft{
     content: Content | (() => Content);

@@ -1,8 +1,8 @@
 import { cssToStyle } from '../../../utils/deck/css-style';
-import { DECK_SIZES, type DeckContent, type SlideElement } from '@vyva/core/content';
-import { codeHtml } from '@vyva/core/code';
-import { withMath } from '@vyva/core/math';
-import { MISSING_IMAGE_FILL, deckFont, deckTextColor, frameCss, imageCss, shapeHtml, tableHtml, textCss, withImageSources, type FileUrl } from '@vyva/core/render';
+import { DECK_SIZES, type DeckContent, type SlideElement } from '@pollium/vyva-core/content';
+import { codeHtml } from '@pollium/vyva-core/code';
+import { withMath } from '@pollium/vyva-core/math';
+import { MISSING_IMAGE_FILL, deckFont, deckTextColor, frameCss, imageCss, shapeHtml, tableHtml, textCss, withImageSources, type FileUrl } from '@pollium/vyva-core/render';
 import { memo, type ReactNode } from 'react';
 
 interface SlideElementViewProps{

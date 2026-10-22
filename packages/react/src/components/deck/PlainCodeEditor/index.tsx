@@ -1,6 +1,6 @@
 import type { CodeEditorProps } from '../../../contracts/code-editor';
-import { CODE_FONT, CODE_LINE_HEIGHT, CODE_PALETTES } from '@vyva/core/code';
-import { fontStack } from '@vyva/core/themes';
+import { CODE_FONT, CODE_LINE_HEIGHT, CODE_PALETTES } from '@pollium/vyva-core/code';
+import { fontStack } from '@pollium/vyva-core/themes';
 
 const PlainCodeEditor = ({ value, colorScheme, readOnly, label, onChange }: CodeEditorProps) => (
     <textarea

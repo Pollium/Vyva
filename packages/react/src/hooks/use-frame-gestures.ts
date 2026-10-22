@@ -2,7 +2,7 @@ import type { DeckEditing } from '../contracts/deck-editing';
 import type { DeckHistory } from './use-deck-history';
 import { updateElements } from '../utils/deck/deck-ops';
 import { MIN_SIZE, type Frame } from '../utils/deck/geometry';
-import type { Slide, SlideElement } from '@vyva/core/content';
+import type { Slide, SlideElement } from '@pollium/vyva-core/content';
 import type { OnDrag, OnResize, OnRotate } from 'react-moveable';
 import { useCallback, useRef } from 'react';
 

@@ -1,7 +1,7 @@
 import Canvas from '../../Canvas';
 import { slideMarkup } from '../../../utils/markup';
-import type { DeckFormat, DeckTheme, Slide } from '@vyva/core/content';
-import type { FileUrl } from '@vyva/core/render';
+import type { DeckFormat, DeckTheme, Slide } from '@pollium/vyva-core/content';
+import type { FileUrl } from '@pollium/vyva-core/render';
 import { memo, useMemo } from 'react';
 
 interface SlideThumbProps{

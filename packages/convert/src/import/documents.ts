@@ -1,8 +1,8 @@
 import { htmlToBlocks, paragraphsHtml, titleFrom } from './html-to-blocks';
 import { imageSaver, type SaveImage } from './images';
-import type { DocumentBlock, DocumentContent } from '@vyva/core/content';
-import { markdownToBlocks } from '@vyva/core/markdown-blocks';
-import { DEFAULT_DOCUMENT_DESIGN } from '@vyva/core/themes';
+import type { DocumentBlock, DocumentContent } from '@pollium/vyva-core/content';
+import { markdownToBlocks } from '@pollium/vyva-core/markdown-blocks';
+import { DEFAULT_DOCUMENT_DESIGN } from '@pollium/vyva-core/themes';
 import mammoth from 'mammoth';
 import { extractText, getDocumentProxy } from 'unpdf';
 

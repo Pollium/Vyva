@@ -1,5 +1,5 @@
-import { DECK_SIZES, MAX_TABLE_COLUMNS, type DeckContent, type SlideElement, type TextElement } from '@vyva/core/content';
-import { DECK_THEME } from '@vyva/core/themes';
+import { DECK_SIZES, MAX_TABLE_COLUMNS, type DeckContent, type SlideElement, type TextElement } from '@pollium/vyva-core/content';
+import { DECK_THEME } from '@pollium/vyva-core/themes';
 import { describe, expect, it } from 'vitest';
 import { align, arrange, moveSlide, newText, removeElements, removeSlide, withTextStyle } from '../utils/deck/deck-ops';
 import { insertColumn, insertRow, removeColumn, removeRow } from '../utils/deck/table-ops';

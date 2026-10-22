@@ -1,5 +1,5 @@
 {
-    "name": "@vyva/convert",
+    "name": "@pollium/vyva-convert",
     "version": "0.1.0",
     "description": "Server-side tools for Vyva content: clean what clients send, import Word, PowerPoint, PDF and Markdown files, and export to PDF, Word, PowerPoint and HTML.",
     "type": "module",
@@ -39,7 +39,7 @@
         "@fontsource-variable/open-sans": "^5.3.0",
         "@fontsource-variable/playfair-display": "^5.3.0",
         "@fontsource-variable/roboto": "^5.3.0",
-        "@vyva/core": "workspace:*",
+        "@pollium/vyva-core": "workspace:*",
         "docx": "^9.9.0",
         "fflate": "^0.8.3",
         "htmlparser2": "^10.1.0",

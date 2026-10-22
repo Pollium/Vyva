@@ -1,4 +1,4 @@
-import type { Content } from '@vyva/core/content';
+import type { Content } from '@pollium/vyva-core/content';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 const SAVE_DELAY_MS = 1200;

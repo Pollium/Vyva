@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
-import type { Content, DocumentContent } from '@vyva/core/content';
-import { DEFAULT_DOCUMENT_DESIGN } from '@vyva/core/themes';
+import type { Content, DocumentContent } from '@pollium/vyva-core/content';
+import { DEFAULT_DOCUMENT_DESIGN } from '@pollium/vyva-core/themes';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { SaveBlocked, SaveConflict, useVyvaSession, type SessionChange, type Snapshot } from '../hooks/use-vyva-session';
 

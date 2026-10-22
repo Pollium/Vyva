@@ -1,9 +1,9 @@
-import type { CodeElement, DeckContent, DeckTheme, ImageElement, ShapeElement, ShapeKind, Slide, SlideElement, TableElement, TextElement, TextStyle } from '@vyva/core/content';
-import { DECK_SIZES, MAX_ALT_TEXT, TEXT_SHAPES } from '@vyva/core/content';
-import { escapeHtml } from '@vyva/core/escape';
-import { newId } from '@vyva/core/ids';
-import { withoutInlineStyles } from '@vyva/core/inline-style';
-import { shapeTextStyle } from '@vyva/core/slide-layouts';
+import type { CodeElement, DeckContent, DeckTheme, ImageElement, ShapeElement, ShapeKind, Slide, SlideElement, TableElement, TextElement, TextStyle } from '@pollium/vyva-core/content';
+import { DECK_SIZES, MAX_ALT_TEXT, TEXT_SHAPES } from '@pollium/vyva-core/content';
+import { escapeHtml } from '@pollium/vyva-core/escape';
+import { newId } from '@pollium/vyva-core/ids';
+import { withoutInlineStyles } from '@pollium/vyva-core/inline-style';
+import { shapeTextStyle } from '@pollium/vyva-core/slide-layouts';
 import { MIN_SIZE, boundsOf } from './geometry';
 
 export type Arrange = 'front' | 'forward' | 'backward' | 'back';

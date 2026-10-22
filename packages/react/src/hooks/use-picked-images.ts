@@ -1,5 +1,5 @@
 import type { PickedImage } from '../contracts/images';
-import type { FileUrl } from '@vyva/core/render';
+import type { FileUrl } from '@pollium/vyva-core/render';
 import { useCallback, useMemo, useState } from 'react';
 
 export interface PickedImages{

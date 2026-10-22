@@ -1,8 +1,8 @@
 import type { CodeEditorProps } from '../../contracts/code-editor';
 import { useMessages } from '../../messages/context';
-import type { CodeLanguage } from '@vyva/core/content';
-import { CODE_FONT } from '@vyva/core/code';
-import { fontStack } from '@vyva/core/themes';
+import type { CodeLanguage } from '@pollium/vyva-core/content';
+import { CODE_FONT } from '@pollium/vyva-core/code';
+import { fontStack } from '@pollium/vyva-core/themes';
 import Editor from '@monaco-editor/react';
 
 const MONACO_LANGUAGES: Record<CodeLanguage, string> = {

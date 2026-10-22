@@ -2,7 +2,7 @@ import { exportContent } from '../export';
 import { importFile } from '../import';
 import type { NewImage } from '../import/images';
 import { FILE_ID, pdfWith, readImage, SAMPLE_DOCUMENT } from './fixtures';
-import type { Content } from '@vyva/core/content';
+import type { Content } from '@pollium/vyva-core/content';
 import { describe, expect, it } from 'vitest';
 
 const STORED_ID = '01a14188-5cb4-776b-815b-c6e977d07bbf';

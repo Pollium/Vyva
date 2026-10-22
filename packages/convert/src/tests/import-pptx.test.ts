@@ -2,9 +2,9 @@ import { exportContent } from '../export';
 import { importFile } from '../import';
 import type { NewImage } from '../import/images';
 import { pptxTemplate, pptxWithNotes, readImage, SAMPLE_DECK } from './fixtures';
-import type { DeckContent, ShapeElement, TextStyle } from '@vyva/core/content';
-import { layoutSlide } from '@vyva/core/slide-layouts';
-import { DECK_THEME } from '@vyva/core/themes';
+import type { DeckContent, ShapeElement, TextStyle } from '@pollium/vyva-core/content';
+import { layoutSlide } from '@pollium/vyva-core/slide-layouts';
+import { DECK_THEME } from '@pollium/vyva-core/themes';
 import { describe, expect, it } from 'vitest';
 
 const storing = () => {

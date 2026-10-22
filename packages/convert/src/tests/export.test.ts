@@ -3,7 +3,7 @@ import { ConvertError } from '../errors';
 import { exportContent, isExportFormat } from '../export';
 import type { PdfJob } from '../export/pdf';
 import { FAKE_PDF, FILE_ID, readImage, SAMPLE_DECK, SAMPLE_DOCUMENT } from './fixtures';
-import { DEFAULT_DOCUMENT_DESIGN } from '@vyva/core/themes';
+import { DEFAULT_DOCUMENT_DESIGN } from '@pollium/vyva-core/themes';
 import { strFromU8, unzipSync } from 'fflate';
 import mammoth from 'mammoth';
 import { describe, expect, it } from 'vitest';

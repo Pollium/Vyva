@@ -1,4 +1,4 @@
-import type { DeckContent } from '@vyva/core/content';
+import type { DeckContent } from '@pollium/vyva-core/content';
 import type { DeckHistory } from './use-deck-history';
 import { useCallback, useEffect, useRef } from 'react';
 

@@ -1,5 +1,5 @@
-import type { Content } from '@vyva/core/content';
-import { useVyvaSession, type Snapshot } from '@vyva/react/use-vyva-session';
+import type { Content } from '@pollium/vyva-core/content';
+import { useVyvaSession, type Snapshot } from '@pollium/vyva-react/use-vyva-session';
 import { useRef, useState } from 'react';
 
 const SAVE_DELAY_MS = 400;

@@ -3,10 +3,10 @@ import type { SlidePart, SlideParts } from './pptx-package';
 import { bulletsByDefault, decorOf, isDefined, levelOf, masterLevel, placeholderChain, TITLE_TYPES } from './pptx-placeholders';
 import type Palette from './pptx-theme';
 import { all, attr, first, kid, kids, num, tags, textOf, type XmlElement } from './pptx-xml';
-import type { DeckTheme, ImageElement, ShapeElement, ShapeKind, Slide, SlideBackground, SlideElement, TableElement, TextAlign, TextStyle } from '@vyva/core/content';
-import { MAX_CELL_TEXT, MAX_TABLE_COLUMNS, MAX_TABLE_ROWS } from '@vyva/core/content';
-import { escapeHtml } from '@vyva/core/escape';
-import { newId } from '@vyva/core/ids';
+import type { DeckTheme, ImageElement, ShapeElement, ShapeKind, Slide, SlideBackground, SlideElement, TableElement, TextAlign, TextStyle } from '@pollium/vyva-core/content';
+import { MAX_CELL_TEXT, MAX_TABLE_COLUMNS, MAX_TABLE_ROWS } from '@pollium/vyva-core/content';
+import { escapeHtml } from '@pollium/vyva-core/escape';
+import { newId } from '@pollium/vyva-core/ids';
 
 const MAX_ELEMENTS = 300;
 const ANGLE_UNIT = 60000;

@@ -4,7 +4,7 @@ import Modal from '../../ui/Modal';
 import type { CellRef } from '../../../contracts/deck-editing';
 import { useMessages } from '../../../messages/context';
 import { columnsOf, insertColumn, insertRow, removeColumn, removeRow } from '../../../utils/deck/table-ops';
-import { MAX_CELL_TEXT, MAX_TABLE_COLUMNS, MAX_TABLE_ROWS, type TableElement } from '@vyva/core/content';
+import { MAX_CELL_TEXT, MAX_TABLE_COLUMNS, MAX_TABLE_ROWS, type TableElement } from '@pollium/vyva-core/content';
 import { BetweenHorizontalEnd, BetweenHorizontalStart, BetweenVerticalEnd, BetweenVerticalStart, TableColumnsSplit, TableRowsSplit } from 'lucide-react';
 import { useState } from 'react';
 

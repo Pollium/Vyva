@@ -1,7 +1,7 @@
 import type { StoredImage } from '../export/bundle';
-import type { DeckContent, DocumentContent } from '@vyva/core/content';
-import { layoutSlide } from '@vyva/core/slide-layouts';
-import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@vyva/core/themes';
+import type { DeckContent, DocumentContent } from '@pollium/vyva-core/content';
+import { layoutSlide } from '@pollium/vyva-core/slide-layouts';
+import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@pollium/vyva-core/themes';
 import PptxGenJS from 'pptxgenjs';
 
 export const PNG_BYTES = Buffer.from('89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4890000000d49444154789c636000000000050001a5f645400000000049454e44ae426082', 'hex');

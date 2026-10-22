@@ -1,6 +1,6 @@
 import App from './App';
-import '@vyva/react/fonts';
-import '@vyva/react/styles.css';
+import '@pollium/vyva-react/fonts';
+import '@pollium/vyva-react/styles.css';
 import './styles.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

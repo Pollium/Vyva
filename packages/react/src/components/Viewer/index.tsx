@@ -1,8 +1,8 @@
 import Canvas from '../Canvas';
 import { useMessages } from '../../messages/context';
 import { documentMarkup, slideMarkup } from '../../utils/markup';
-import type { Content } from '@vyva/core/content';
-import type { FileUrl } from '@vyva/core/render';
+import type { Content } from '@pollium/vyva-core/content';
+import type { FileUrl } from '@pollium/vyva-core/render';
 
 interface ViewerProps{
     content: Content;

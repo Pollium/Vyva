@@ -4,7 +4,7 @@ import { buildDocx } from './export/docx';
 import { buildHtml } from './export/html';
 import { buildPdf, type PdfEngine } from './export/pdf';
 import { buildPptx } from './export/pptx';
-import type { Content, ContentKind } from '@vyva/core/content';
+import type { Content, ContentKind } from '@pollium/vyva-core/content';
 
 export const EXPORT_FORMATS = {
     document: ['pdf', 'docx', 'html'],

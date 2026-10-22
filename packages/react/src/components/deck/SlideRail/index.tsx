@@ -1,8 +1,8 @@
 import RailItem, { type RailActions } from '../RailItem';
 import { useMediaQuery } from '../../../hooks/use-media-query';
 import { useMessages } from '../../../messages/context';
-import type { DeckContent } from '@vyva/core/content';
-import type { FileUrl } from '@vyva/core/render';
+import type { DeckContent } from '@pollium/vyva-core/content';
+import type { FileUrl } from '@pollium/vyva-core/render';
 import { useDeferredValue, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 
 const COLUMN_SCREEN = '(min-width: 64rem), (orientation: landscape)';

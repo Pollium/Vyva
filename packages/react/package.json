@@ -1,5 +1,5 @@
 {
-    "name": "@vyva/react",
+    "name": "@pollium/vyva-react",
     "version": "0.1.0",
     "description": "React viewer and editors for Vyva documents and decks.",
     "type": "module",
@@ -112,6 +112,7 @@
         "@fontsource-variable/open-sans": "^5.3.0",
         "@fontsource-variable/playfair-display": "^5.3.0",
         "@fontsource-variable/roboto": "^5.3.0",
+        "@pollium/vyva-core": "workspace:*",
         "@tiptap/extension-code-block-lowlight": "^3.31.4",
         "@tiptap/extension-highlight": "^3.31.4",
         "@tiptap/extension-image": "^3.31.4",
@@ -123,7 +124,6 @@
         "@tiptap/pm": "^3.31.4",
         "@tiptap/react": "^3.31.4",
         "@tiptap/starter-kit": "^3.31.4",
-        "@vyva/core": "workspace:*",
         "lowlight": "^3.3.0",
         "lucide-react": "^1.39.0",
         "react-aria-components": "^1.21.0",

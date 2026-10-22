@@ -1,10 +1,10 @@
 import type { ExportBundle, ExportedFile } from './bundle';
 import { fontFaces, fontFilesOf } from './fonts';
 import { bodyOf, pageHtml } from './html';
-import type { Content } from '@vyva/core/content';
-import { DECK_SIZES } from '@vyva/core/content';
-import { escapeHtml } from '@vyva/core/escape';
-import { CONTENT_CSS } from '@vyva/core/render';
+import type { Content } from '@pollium/vyva-core/content';
+import { DECK_SIZES } from '@pollium/vyva-core/content';
+import { escapeHtml } from '@pollium/vyva-core/escape';
+import { CONTENT_CSS } from '@pollium/vyva-core/render';
 
 export interface PdfFile{
     name: string;

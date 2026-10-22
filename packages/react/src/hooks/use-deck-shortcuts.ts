@@ -1,6 +1,6 @@
 import type { DeckEditorState } from './use-deck-editor';
 import type { StepDirection } from './use-wheel-step';
-import type { SlideElement } from '@vyva/core/content';
+import type { SlideElement } from '@pollium/vyva-core/content';
 import { useRef, type KeyboardEvent } from 'react';
 
 const NUDGE = 1;

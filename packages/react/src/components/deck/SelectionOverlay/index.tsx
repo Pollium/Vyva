@@ -1,5 +1,5 @@
 import type { MarqueeBox } from '../../../hooks/use-marquee';
-import type { SlideElement } from '@vyva/core/content';
+import type { SlideElement } from '@pollium/vyva-core/content';
 import { Lock } from 'lucide-react';
 
 const OUTLINE_PX = 2;

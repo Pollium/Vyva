@@ -7,7 +7,7 @@ import type { DeckEditing } from '../../../contracts/deck-editing';
 import { useMessages } from '../../../messages/context';
 import { holdsText } from '../../../utils/deck/deck-ops';
 import { SHAPES } from '../../../utils/deck/shape-kinds';
-import type { ShapeKind, SlideElement } from '@vyva/core/content';
+import type { ShapeKind, SlideElement } from '@pollium/vyva-core/content';
 import type { Editor } from '@tiptap/react';
 import { Check, Code2, Copy, ImagePlus, Shapes, Sparkles, Table2, Trash2, Type } from 'lucide-react';
 

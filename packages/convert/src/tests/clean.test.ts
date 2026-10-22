@@ -1,8 +1,8 @@
 import { cleanContent, cleanDeck } from '../clean-content';
 import { cleanHtml } from '../clean-html';
 import { textHeight } from '../text-measure';
-import type { DeckContent, ShapeElement, TextElement, TextStyle } from '@vyva/core/content';
-import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@vyva/core/themes';
+import type { DeckContent, ShapeElement, TextElement, TextStyle } from '@pollium/vyva-core/content';
+import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@pollium/vyva-core/themes';
 import { describe, expect, it } from 'vitest';
 
 const STYLE: TextStyle = { fontSize: 32, color: '#ffffff', align: 'center', verticalAlign: 'middle', lineHeight: 1.2, isBold: false };

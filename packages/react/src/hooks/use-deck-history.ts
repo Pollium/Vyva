@@ -1,4 +1,4 @@
-import type { DeckContent } from '@vyva/core/content';
+import type { DeckContent } from '@pollium/vyva-core/content';
 import { useCallback, useRef, useState } from 'react';
 
 const LIMIT = 100;

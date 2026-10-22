@@ -1,5 +1,5 @@
-import { ASSET_SCHEME } from '@vyva/core/markdown-blocks';
-import { protectMath } from '@vyva/core/math';
+import { ASSET_SCHEME } from '@pollium/vyva-core/markdown-blocks';
+import { protectMath } from '@pollium/vyva-core/math';
 import { gfm } from '@joplin/turndown-plugin-gfm';
 import TurndownService from 'turndown';
 

@@ -1,6 +1,6 @@
 import type { CellRef, DeckEditing } from '../../contracts/deck-editing';
 import { holdsText } from './deck-ops';
-import type { SlideElement } from '@vyva/core/content';
+import type { SlideElement } from '@pollium/vyva-core/content';
 import type { PointerEvent } from 'react';
 
 const FIRST_CELL: CellRef = { row: 0, column: 0 };

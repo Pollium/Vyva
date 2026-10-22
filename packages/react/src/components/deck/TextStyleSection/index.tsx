@@ -7,7 +7,7 @@ import { useMessages } from '../../../messages/context';
 import { textStyleOf, withTextStyle } from '../../../utils/deck/deck-ops';
 import { numberOptions } from '../../../utils/deck/number-options';
 import { TEXT_SIZES } from '../../../utils/deck/text-sizes';
-import type { DeckTheme, SlideElement, TextStyle } from '@vyva/core/content';
+import type { DeckTheme, SlideElement, TextStyle } from '@pollium/vyva-core/content';
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight, AlignVerticalJustifyCenter, AlignVerticalJustifyEnd, AlignVerticalJustifyStart, Baseline, Bold, PaintBucket } from 'lucide-react';
 import { useLocale } from 'react-aria-components';
 

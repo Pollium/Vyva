@@ -2,7 +2,7 @@ import HeaderSettings from '../HeaderSettings';
 import PageSettings from '../PageSettings';
 import TextSettings from '../TextSettings';
 import type { ImagePicker, PickedImage } from '../../../contracts/images';
-import type { DocumentDesign } from '@vyva/core/content';
+import type { DocumentDesign } from '@pollium/vyva-core/content';
 import { useEffect, useRef, useState } from 'react';
 
 export type DesignField = 'header' | 'footer';

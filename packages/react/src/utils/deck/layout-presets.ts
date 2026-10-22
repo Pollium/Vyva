@@ -1,5 +1,5 @@
 import type { Messages } from '../../messages/en';
-import type { SlideSpec } from '@vyva/core/slide-layouts';
+import type { SlideSpec } from '@pollium/vyva-core/slide-layouts';
 import { Columns2, Hash, Heading1, Image, LayoutTemplate, List, PanelLeft, PanelRight, Quote, Square, Table2, Type, type LucideIcon } from 'lucide-react';
 
 export const LAYOUT_PRESET_IDS = ['title', 'section', 'bullets', 'two-columns', 'image-left', 'image-right', 'image-full', 'quote', 'table', 'big-number', 'closing', 'blank'] as const;

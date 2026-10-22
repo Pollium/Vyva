@@ -2,8 +2,8 @@ import type { SelectionAction } from '../contracts/selection-action';
 import type { Align, Arrange } from '../utils/deck/deck-ops';
 import type { LayoutPresetId } from '../utils/deck/layout-presets';
 import type { BlockStyle } from '../utils/document-blocks';
-import type { CodeElement, DeckFormat, ImageElement, ShapeKind, SlideElement, TextStyle } from '@vyva/core/content';
-import type { SlideLayout, SlideSpec } from '@vyva/core/slide-layouts';
+import type { CodeElement, DeckFormat, ImageElement, ShapeKind, SlideElement, TextStyle } from '@pollium/vyva-core/content';
+import type { SlideLayout, SlideSpec } from '@pollium/vyva-core/slide-layouts';
 
 const LAYOUT_SAMPLES: Record<SlideLayout, Omit<SlideSpec, 'layout'>> = {
     title: { title: 'Presentation title', subtitle: 'Subject · Unit' },

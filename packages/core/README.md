@@ -1,16 +1,16 @@
-# @vyva/core
+# @pollium/vyva-core
 
 The Vyva content model, and the one renderer that turns it into HTML. It has no dependency on React
 or Node, so the same code renders in the browser, on a server and inside an export.
 
 ```sh
-npm install @vyva/core
+npm install @pollium/vyva-core
 ```
 
 ## The content
 
 ```ts
-import type { Content, DocumentContent, DeckContent } from '@vyva/core/content';
+import type { Content, DocumentContent, DeckContent } from '@pollium/vyva-core/content';
 ```
 
 - A **document** is a page design and a list of blocks, each one an HTML fragment with an id:
@@ -25,7 +25,7 @@ from a client with `typia.assert<Content>(body)`.
 ## Rendering
 
 ```ts
-import { renderDocument, renderSlide, CONTENT_CSS } from '@vyva/core/render';
+import { renderDocument, renderSlide, CONTENT_CSS } from '@pollium/vyva-core/render';
 
 const html = renderDocument(content, (fileId) => `/files/${fileId}`);
 ```
@@ -37,10 +37,10 @@ const html = renderDocument(content, (fileId) => `/files/${fileId}`);
 
 | Module | What it does |
 |---|---|
-| `@vyva/core/markdown-blocks` | `markdownToBlocks` turns Markdown into document blocks. `![alt](asset:<fileId>)` becomes an image |
-| `@vyva/core/slide-layouts` | `layoutSlide` builds a slide from a spec, such as a title, bullets, two columns, an image, a table or a quote |
-| `@vyva/core/slide-relayout` | `relayoutSlide` moves an existing slide into another layout |
-| `@vyva/core/deck-theme` | `retheme` and `reformat` change a deck's theme or format and adjust every slide |
-| `@vyva/core/themes` | The default deck theme and document design |
-| `@vyva/core/code` | Syntax highlighting for code elements, and code sizing |
-| `@vyva/core/math` | LaTeX between `$…$` and `$$…$$` rendered as MathML |
+| `@pollium/vyva-core/markdown-blocks` | `markdownToBlocks` turns Markdown into document blocks. `![alt](asset:<fileId>)` becomes an image |
+| `@pollium/vyva-core/slide-layouts` | `layoutSlide` builds a slide from a spec, such as a title, bullets, two columns, an image, a table or a quote |
+| `@pollium/vyva-core/slide-relayout` | `relayoutSlide` moves an existing slide into another layout |
+| `@pollium/vyva-core/deck-theme` | `retheme` and `reformat` change a deck's theme or format and adjust every slide |
+| `@pollium/vyva-core/themes` | The default deck theme and document design |
+| `@pollium/vyva-core/code` | Syntax highlighting for code elements, and code sizing |
+| `@pollium/vyva-core/math` | LaTeX between `$…$` and `$$…$$` rendered as MathML |

@@ -6,7 +6,7 @@ import type { StepDirection } from './use-wheel-step';
 import { deckOf } from '../utils/content-kind';
 import { cloneElements, duplicateSlide, holdsText, insertElements, insertSlide, moveSlide, newText, removeElements, removeSlide, updateElements } from '../utils/deck/deck-ops';
 import type { LayoutPreset } from '../utils/deck/layout-presets';
-import type { DeckContent, Slide, SlideElement } from '@vyva/core/content';
+import type { DeckContent, Slide, SlideElement } from '@pollium/vyva-core/content';
 import type { Editor } from '@tiptap/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 

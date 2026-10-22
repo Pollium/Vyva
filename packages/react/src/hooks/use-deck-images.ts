@@ -2,10 +2,10 @@ import type { PickedImage } from '../contracts/images';
 import type { DeckEditorState, ImageTarget } from './use-deck-editor';
 import { newImage, withSlide } from '../utils/deck/deck-ops';
 import type { LayoutPreset } from '../utils/deck/layout-presets';
-import { MAX_ALT_TEXT, type Slide } from '@vyva/core/content';
-import { newId } from '@vyva/core/ids';
-import { layoutSlide } from '@vyva/core/slide-layouts';
-import { relayoutSlide } from '@vyva/core/slide-relayout';
+import { MAX_ALT_TEXT, type Slide } from '@pollium/vyva-core/content';
+import { newId } from '@pollium/vyva-core/ids';
+import { layoutSlide } from '@pollium/vyva-core/slide-layouts';
+import { relayoutSlide } from '@pollium/vyva-core/slide-relayout';
 
 const BACKGROUND_DIM = 0.3;
 const UNKNOWN_SIZE = { width: 0, height: 0 };

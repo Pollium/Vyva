@@ -2,8 +2,8 @@ import SlideThumb from '../SlideThumb';
 import ActionMenu from '../../ui/ActionMenu';
 import MenuItem from '../../ui/MenuItem';
 import { useMessages } from '../../../messages/context';
-import type { DeckFormat, DeckTheme, Slide } from '@vyva/core/content';
-import type { FileUrl } from '@vyva/core/render';
+import type { DeckFormat, DeckTheme, Slide } from '@pollium/vyva-core/content';
+import type { FileUrl } from '@pollium/vyva-core/render';
 import { memo, useEffect, useRef } from 'react';
 
 export interface RailActions{

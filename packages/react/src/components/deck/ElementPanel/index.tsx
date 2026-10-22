@@ -11,7 +11,7 @@ import PanelSection from '../../editor/PanelSection';
 import type { DeckEditing } from '../../../contracts/deck-editing';
 import { useMessages } from '../../../messages/context';
 import type { Align, Arrange } from '../../../utils/deck/deck-ops';
-import type { CodeElement, DeckContent, ImageElement, ShapeElement, SlideElement, TableElement } from '@vyva/core/content';
+import type { CodeElement, DeckContent, ImageElement, ShapeElement, SlideElement, TableElement } from '@pollium/vyva-core/content';
 import type { Editor } from '@tiptap/react';
 
 interface ElementPanelProps{

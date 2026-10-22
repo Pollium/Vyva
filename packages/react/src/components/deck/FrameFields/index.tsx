@@ -1,7 +1,7 @@
 import NumberInput from '../../ui/NumberInput';
 import { useMessages } from '../../../messages/context';
 import { MIN_SIZE } from '../../../utils/deck/geometry';
-import type { SlideElement } from '@vyva/core/content';
+import type { SlideElement } from '@pollium/vyva-core/content';
 
 type FrameKey = 'x' | 'y' | 'w' | 'h' | 'rotation';
 

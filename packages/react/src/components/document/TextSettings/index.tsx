@@ -4,7 +4,7 @@ import ColorInput from '../../ui/ColorInput';
 import NumberInput from '../../ui/NumberInput';
 import SelectInput from '../../ui/SelectInput';
 import { useMessages } from '../../../messages/context';
-import { FONT_FAMILIES, type DocumentDesign } from '@vyva/core/content';
+import { FONT_FAMILIES, type DocumentDesign } from '@pollium/vyva-core/content';
 
 const MIN_BASE_SIZE = 8;
 const MAX_BASE_SIZE = 24;

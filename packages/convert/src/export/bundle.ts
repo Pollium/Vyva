@@ -1,7 +1,7 @@
 import { imageSize, type ImageSize } from './image-size';
-import { CODE_FONT } from '@vyva/core/code';
-import type { Content, FontFamily } from '@vyva/core/content';
-import { fileIdsOf } from '@vyva/core/render';
+import { CODE_FONT } from '@pollium/vyva-core/code';
+import type { Content, FontFamily } from '@pollium/vyva-core/content';
+import { fileIdsOf } from '@pollium/vyva-core/render';
 
 export interface StoredImage{
     data: Uint8Array;

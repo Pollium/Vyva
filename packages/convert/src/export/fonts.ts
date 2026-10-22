@@ -1,4 +1,4 @@
-import type { FontFamily } from '@vyva/core/content';
+import type { FontFamily } from '@pollium/vyva-core/content';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 

@@ -1,7 +1,7 @@
 import { cleanHtml } from '../clean-html';
 import { titleOf } from './titles';
-import type { DocumentBlock } from '@vyva/core/content';
-import { newId } from '@vyva/core/ids';
+import type { DocumentBlock } from '@pollium/vyva-core/content';
+import { newId } from '@pollium/vyva-core/ids';
 import { DomUtils, parseDocument } from 'htmlparser2';
 
 type ChildNode = ReturnType<typeof parseDocument>['children'][number];

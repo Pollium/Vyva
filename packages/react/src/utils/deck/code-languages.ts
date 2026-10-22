@@ -1,6 +1,6 @@
 import type { SelectOption } from '../../components/ui/SelectInput';
 import type { Messages } from '../../messages/en';
-import { CODE_LANGUAGES, type CodeLanguage } from '@vyva/core/content';
+import { CODE_LANGUAGES, type CodeLanguage } from '@pollium/vyva-core/content';
 
 const NAMES: Record<Exclude<CodeLanguage, 'plaintext'>, string> = {
     sql: 'SQL',

@@ -1,4 +1,4 @@
-import { MAX_TABLE_COLUMNS, MAX_TABLE_ROWS } from '@vyva/core/content';
+import { MAX_TABLE_COLUMNS, MAX_TABLE_ROWS } from '@pollium/vyva-core/content';
 
 export const columnsOf = (rows: string[][]): number => Math.max(1, ...rows.map((row) => row.length));
 

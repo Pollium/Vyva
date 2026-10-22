@@ -13,8 +13,8 @@ import { TextStyleKit } from '@tiptap/extension-text-style';
 import { Placeholder } from '@tiptap/extensions';
 import { useEditor, type Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import type { DocumentDesign } from '@vyva/core/content';
-import type { FileUrl } from '@vyva/core/render';
+import type { DocumentDesign } from '@pollium/vyva-core/content';
+import type { FileUrl } from '@pollium/vyva-core/render';
 import { common, createLowlight } from 'lowlight';
 import { useEffect, useRef, useState } from 'react';
 

@@ -12,7 +12,7 @@ import type { SelectionAction } from '../../../contracts/selection-action';
 import { useDocumentEditor } from '../../../hooks/use-document-editor';
 import { useInspector } from '../../../hooks/use-inspector';
 import { useMessages } from '../../../messages/context';
-import { CONTENT_CSS, type FileUrl } from '@vyva/core/render';
+import { CONTENT_CSS, type FileUrl } from '@pollium/vyva-core/render';
 import { useImperativeHandle, useState, type Ref } from 'react';
 
 export interface DocumentEditorHandle{

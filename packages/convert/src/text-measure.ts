@@ -1,6 +1,6 @@
 import { FONT_WIDTHS, MEASURED_CHARS } from './font-widths';
-import { CODE_FONT } from '@vyva/core/code';
-import type { FontFamily, TextStyle } from '@vyva/core/content';
+import { CODE_FONT } from '@pollium/vyva-core/code';
+import type { FontFamily, TextStyle } from '@pollium/vyva-core/content';
 
 const EM = 1000;
 const BLOCK_GAP_EMS = 0.35;

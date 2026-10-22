@@ -1,7 +1,7 @@
 import type { DeckHistory } from './use-deck-history';
 import { updateElements } from '../utils/deck/deck-ops';
-import type { Slide } from '@vyva/core/content';
-import { withTextHeight } from '@vyva/core/render';
+import type { Slide } from '@pollium/vyva-core/content';
+import { withTextHeight } from '@pollium/vyva-core/render';
 import { useCallback, useEffect, useLayoutEffect } from 'react';
 
 const HEIGHT_TOLERANCE = 1;

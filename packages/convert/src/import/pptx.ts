@@ -4,8 +4,8 @@ import PptxPackage from './pptx-package';
 import SlideReader from './pptx-slide';
 import { all, attr, first, num } from './pptx-xml';
 import { titleOf } from './titles';
-import type { DeckContent, DeckFormat, Slide, TextElement } from '@vyva/core/content';
-import { DECK_SIZES } from '@vyva/core/content';
+import type { DeckContent, DeckFormat, Slide, TextElement } from '@pollium/vyva-core/content';
+import { DECK_SIZES } from '@pollium/vyva-core/content';
 import { unzipSync } from 'fflate';
 import { posix } from 'node:path';
 

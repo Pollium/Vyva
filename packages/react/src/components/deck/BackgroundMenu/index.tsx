@@ -5,7 +5,7 @@ import ColorInput from '../../ui/ColorInput';
 import SelectInput from '../../ui/SelectInput';
 import SliderField from '../../ui/SliderField';
 import { useMessages } from '../../../messages/context';
-import { MAX_BACKGROUND_DIM, type DeckTheme, type SlideBackground } from '@vyva/core/content';
+import { MAX_BACKGROUND_DIM, type DeckTheme, type SlideBackground } from '@pollium/vyva-core/content';
 import { Image as ImageIcon, ImagePlus } from 'lucide-react';
 
 const MENU_WIDTH = 256;

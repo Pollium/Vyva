@@ -1,5 +1,5 @@
 import { GALLERY } from './gallery';
-import type { ImagePickerProps } from '@vyva/react/contracts/images';
+import type { ImagePickerProps } from '@pollium/vyva-react/contracts/images';
 
 const ImageGallery = ({ isOpen, onOpenChange, onPick }: ImagePickerProps) => {
     if(!isOpen) return null;

@@ -1,9 +1,9 @@
 import { cleanHtml } from './clean-html';
 import { textHeight } from './text-measure';
-import type { Content, DeckContent, DocumentContent, FontFamily, Slide, SlideElement } from '@vyva/core/content';
-import { TEXT_SHAPES } from '@vyva/core/content';
-import { newId } from '@vyva/core/ids';
-import { withTextHeight } from '@vyva/core/render';
+import type { Content, DeckContent, DocumentContent, FontFamily, Slide, SlideElement } from '@pollium/vyva-core/content';
+import { TEXT_SHAPES } from '@pollium/vyva-core/content';
+import { newId } from '@pollium/vyva-core/ids';
+import { withTextHeight } from '@pollium/vyva-core/render';
 
 const ID = /^[A-Za-z0-9_-]{1,40}$/;
 

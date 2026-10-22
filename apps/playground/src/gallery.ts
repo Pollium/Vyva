@@ -1,4 +1,4 @@
-import type { PickedImage } from '@vyva/react/contracts/images';
+import type { PickedImage } from '@pollium/vyva-react/contracts/images';
 
 const WIDTH = 1200;
 const HEIGHT = 800;

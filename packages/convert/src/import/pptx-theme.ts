@@ -1,7 +1,7 @@
 import { attr, first, kid, kids, num, tags, type XmlDocument, type XmlElement } from './pptx-xml';
-import type { DeckTheme, FontFamily } from '@vyva/core/content';
-import { FONT_FAMILIES } from '@vyva/core/content';
-import { DECK_THEME } from '@vyva/core/themes';
+import type { DeckTheme, FontFamily } from '@pollium/vyva-core/content';
+import { FONT_FAMILIES } from '@pollium/vyva-core/content';
+import { DECK_THEME } from '@pollium/vyva-core/themes';
 import { DomUtils } from 'htmlparser2';
 
 const PERCENT = 100000;

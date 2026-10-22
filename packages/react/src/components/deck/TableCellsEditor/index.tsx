@@ -1,8 +1,8 @@
 import type { CellRef } from '../../../contracts/deck-editing';
 import { useMessages } from '../../../messages/context';
 import { columnsOf } from '../../../utils/deck/table-ops';
-import { MAX_CELL_TEXT, MAX_TABLE_COLUMNS, MAX_TABLE_ROWS, type DeckContent, type TableElement } from '@vyva/core/content';
-import { deckFont, deckTextColor } from '@vyva/core/render';
+import { MAX_CELL_TEXT, MAX_TABLE_COLUMNS, MAX_TABLE_ROWS, type DeckContent, type TableElement } from '@pollium/vyva-core/content';
+import { deckFont, deckTextColor } from '@pollium/vyva-core/render';
 import { useEffect, useRef, type CSSProperties } from 'react';
 
 interface TableCellsEditorProps{

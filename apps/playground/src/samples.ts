@@ -1,7 +1,7 @@
-import type { DeckContent, DocumentContent } from '@vyva/core/content';
-import { markdownToBlocks } from '@vyva/core/markdown-blocks';
-import { layoutSlide } from '@vyva/core/slide-layouts';
-import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@vyva/core/themes';
+import type { DeckContent, DocumentContent } from '@pollium/vyva-core/content';
+import { markdownToBlocks } from '@pollium/vyva-core/markdown-blocks';
+import { layoutSlide } from '@pollium/vyva-core/slide-layouts';
+import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@pollium/vyva-core/themes';
 
 const DOCUMENT_MARKDOWN = `# Computer networks
 

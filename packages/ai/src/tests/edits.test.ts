@@ -2,10 +2,10 @@ import { applyDeckOperations, deckForModel, markdownToTextHtml } from '../deck-e
 import { applyDocumentOperations, documentForModel } from '../document-edits';
 import { EditRefused } from '../errors';
 import { htmlToMarkdown, PAGE_BREAK_MARKER } from '../html-markdown';
-import type { DeckContent, DocumentContent, ShapeElement } from '@vyva/core/content';
-import { markdownToBlocks } from '@vyva/core/markdown-blocks';
-import { layoutSlide } from '@vyva/core/slide-layouts';
-import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@vyva/core/themes';
+import type { DeckContent, DocumentContent, ShapeElement } from '@pollium/vyva-core/content';
+import { markdownToBlocks } from '@pollium/vyva-core/markdown-blocks';
+import { layoutSlide } from '@pollium/vyva-core/slide-layouts';
+import { DECK_THEME, DEFAULT_DOCUMENT_DESIGN } from '@pollium/vyva-core/themes';
 import { describe, expect, it } from 'vitest';
 
 const document = (): DocumentContent => ({ kind: 'document', design: DEFAULT_DOCUMENT_DESIGN, blocks: markdownToBlocks('# Worksheet\n\n## Goals\n\n## Steps\n\n## Delivery') });

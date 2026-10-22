@@ -3,7 +3,7 @@ import PanelRow from '../../editor/PanelRow';
 import NumberInput from '../../ui/NumberInput';
 import SelectInput from '../../ui/SelectInput';
 import { useMessages } from '../../../messages/context';
-import type { DocumentDesign, PageMargins } from '@vyva/core/content';
+import type { DocumentDesign, PageMargins } from '@pollium/vyva-core/content';
 import { useState } from 'react';
 
 const PRESETS = ['narrow', 'normal', 'wide'] as const;

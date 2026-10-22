@@ -2,9 +2,9 @@ import TableCellsEditor from '../TableCellsEditor';
 import TextBoxEditor from '../TextBoxEditor';
 import type { CellRef, DeckEditing } from '../../../contracts/deck-editing';
 import { useMessages } from '../../../messages/context';
-import type { DeckContent, SlideElement } from '@vyva/core/content';
-import { shapeSvg, shapeTextCss, textCss } from '@vyva/core/render';
-import { shapeTextStyle } from '@vyva/core/slide-layouts';
+import type { DeckContent, SlideElement } from '@pollium/vyva-core/content';
+import { shapeSvg, shapeTextCss, textCss } from '@pollium/vyva-core/render';
+import { shapeTextStyle } from '@pollium/vyva-core/slide-layouts';
 import type { Editor } from '@tiptap/react';
 
 interface InlineEditorProps{

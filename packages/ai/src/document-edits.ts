@@ -1,8 +1,8 @@
 import { EditRefused } from './errors';
 import { htmlToMarkdown } from './html-markdown';
-import type { DocumentBlock, DocumentContent } from '@vyva/core/content';
-import { newId } from '@vyva/core/ids';
-import { markdownToBlocks } from '@vyva/core/markdown-blocks';
+import type { DocumentBlock, DocumentContent } from '@pollium/vyva-core/content';
+import { newId } from '@pollium/vyva-core/ids';
+import { markdownToBlocks } from '@pollium/vyva-core/markdown-blocks';
 
 export type DocumentOperation =
     | { op: 'replace'; blockId: string; markdown: string }

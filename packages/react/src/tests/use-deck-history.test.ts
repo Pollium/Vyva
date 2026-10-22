@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
-import type { DeckContent } from '@vyva/core/content';
-import { DECK_THEME } from '@vyva/core/themes';
+import type { DeckContent } from '@pollium/vyva-core/content';
+import { DECK_THEME } from '@pollium/vyva-core/themes';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useDeckHistory } from '../hooks/use-deck-history';
 import { useLiveEdit } from '../hooks/use-live-edit';

@@ -3,7 +3,7 @@ import SelectInput from '../../ui/SelectInput';
 import { useMessages } from '../../../messages/context';
 import { codeLanguageOptions } from '../../../utils/deck/code-languages';
 import { numberOptions } from '../../../utils/deck/number-options';
-import type { CodeElement, CodeLanguage } from '@vyva/core/content';
+import type { CodeElement, CodeLanguage } from '@pollium/vyva-core/content';
 import { Code2 } from 'lucide-react';
 
 const CODE_SIZES = [14, 16, 18, 20, 24, 28, 32, 40, 48];

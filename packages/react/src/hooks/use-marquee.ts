@@ -1,5 +1,5 @@
 import { intersects, type Point } from '../utils/deck/geometry';
-import type { Slide } from '@vyva/core/content';
+import type { Slide } from '@pollium/vyva-core/content';
 import { useRef, useState, type PointerEvent, type RefObject } from 'react';
 
 export interface MarqueeBox{

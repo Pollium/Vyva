@@ -5,7 +5,7 @@ import ColorInput from '../../ui/ColorInput';
 import SelectInput from '../../ui/SelectInput';
 import TextInput from '../../ui/TextInput';
 import { useMessages } from '../../../messages/context';
-import { FONT_FAMILIES, MAX_FOOTER_TEXT, type DeckContent, type DeckFooter, type DeckFormat, type DeckTheme, type FontFamily, type Slide, type SlideBackground } from '@vyva/core/content';
+import { FONT_FAMILIES, MAX_FOOTER_TEXT, type DeckContent, type DeckFooter, type DeckFormat, type DeckTheme, type FontFamily, type Slide, type SlideBackground } from '@pollium/vyva-core/content';
 
 const FORMATS: readonly DeckFormat[] = ['16:9', '4:3', '1:1', 'a4-portrait', 'a4-landscape'];
 const THEME_COLORS = ['background', 'text', 'accent', 'muted'] as const;

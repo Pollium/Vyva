@@ -1,5 +1,5 @@
-import type { DocumentBlock } from '@vyva/core/content';
-import { withImageSources, type FileUrl } from '@vyva/core/render';
+import type { DocumentBlock } from '@pollium/vyva-core/content';
+import { withImageSources, type FileUrl } from '@pollium/vyva-core/render';
 
 const BLOCK_ID = 'data-block-id';
 const OPENING_TAG = /^<([a-z][a-z0-9]*)(\s|>)/i;

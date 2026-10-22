@@ -1,16 +1,16 @@
-# @vyva/convert
+# @pollium/vyva-convert
 
 Server-side tools for Vyva content. It cleans what clients send, imports Word, PowerPoint, PDF,
 Markdown and text files, and exports to PDF, Word, PowerPoint and HTML. It runs in Node.
 
 ```sh
-npm install @vyva/convert
+npm install @pollium/vyva-convert
 ```
 
 ## Cleaning what clients send
 
 ```ts
-import { cleanContent } from '@vyva/convert/clean-content';
+import { cleanContent } from '@pollium/vyva-convert/clean-content';
 
 const content = cleanContent(body.content);
 ```
@@ -18,14 +18,14 @@ const content = cleanContent(body.content);
 The cleaner keeps the editor's formatting. It removes scripts, event handlers, unsafe links and any
 image that does not point at a file id. Ids that repeat or are not valid get new ones. Each text box is
 saved as tall as its text. For a single HTML fragment, use `cleanHtml` from
-`@vyva/convert/clean-html`.
+`@pollium/vyva-convert/clean-html`.
 
 ## Exporting
 
 ```ts
-import { exportContent, isExportFormat } from '@vyva/convert/export';
-import { gotenberg } from '@vyva/convert/gotenberg';
-import { contentDisposition } from '@vyva/convert/attachment';
+import { exportContent, isExportFormat } from '@pollium/vyva-convert/export';
+import { gotenberg } from '@pollium/vyva-convert/gotenberg';
+import { contentDisposition } from '@pollium/vyva-convert/attachment';
 
 if(!isExportFormat(request.params.format)) return reply.code(400).send();
 
@@ -59,7 +59,7 @@ reply.header('content-disposition', contentDisposition('Subnetting guide', file.
 ## Importing
 
 ```ts
-import { importFile } from '@vyva/convert/import';
+import { importFile } from '@pollium/vyva-convert/import';
 
 const { title, content } = await importFile(upload.bytes, upload.filename, {
     saveImage: async ({ name, data, contentType }) => (await files.store(name, data, contentType)).id
@@ -78,7 +78,7 @@ const { title, content } = await importFile(upload.bytes, upload.filename, {
 
 ## Errors
 
-Expected failures are a `ConvertError` from `@vyva/convert/errors`, with a `code`. Anything else is
+Expected failures are a `ConvertError` from `@pollium/vyva-convert/errors`, with a `code`. Anything else is
 a bug or a broken file, so log it.
 
 | Code | Meaning |

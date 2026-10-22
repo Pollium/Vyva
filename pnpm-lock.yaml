@@ -23,10 +23,10 @@ importers:
 
   apps/playground:
     dependencies:
-      '@vyva/core':
+      '@pollium/vyva-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@vyva/react':
+      '@pollium/vyva-react':
         specifier: workspace:*
         version: link:../../packages/react
       react:
@@ -63,7 +63,7 @@ importers:
       '@joplin/turndown-plugin-gfm':
         specifier: ^1.0.68
         version: 1.0.68
-      '@vyva/core':
+      '@pollium/vyva-core':
         specifier: workspace:*
         version: link:../core
       turndown:
@@ -100,7 +100,7 @@ importers:
       '@fontsource-variable/roboto':
         specifier: ^5.3.0
         version: 5.3.0
-      '@vyva/core':
+      '@pollium/vyva-core':
         specifier: workspace:*
         version: link:../core
       docx:
@@ -177,6 +177,9 @@ importers:
       '@fontsource-variable/roboto':
         specifier: ^5.3.0
         version: 5.3.0
+      '@pollium/vyva-core':
+        specifier: workspace:*
+        version: link:../core
       '@tiptap/extension-code-block-lowlight':
         specifier: ^3.31.4
         version: 3.31.4(@tiptap/core@3.31.4(@tiptap/pm@3.31.4))(@tiptap/extension-code-block@3.31.4(@tiptap/core@3.31.4(@tiptap/pm@3.31.4))(@tiptap/pm@3.31.4))(@tiptap/pm@3.31.4)(highlight.js@11.12.0)(lowlight@3.3.0)
@@ -210,9 +213,6 @@ importers:
       '@tiptap/starter-kit':
         specifier: ^3.31.4
         version: 3.31.4
-      '@vyva/core':
-        specifier: workspace:*
-        version: link:../core
       lowlight:
         specifier: ^3.3.0
         version: 3.3.0

@@ -5,7 +5,7 @@ import CheckboxField from '../../ui/CheckboxField';
 import TextInput from '../../ui/TextInput';
 import type { ImagePicker, PickedImage } from '../../../contracts/images';
 import { useMessages } from '../../../messages/context';
-import type { DocumentDesign } from '@vyva/core/content';
+import type { DocumentDesign } from '@pollium/vyva-core/content';
 import { ImagePlus } from 'lucide-react';
 import { useState, type RefObject } from 'react';
 

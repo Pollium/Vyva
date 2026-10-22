@@ -1,23 +1,23 @@
-# @vyva/react
+# @pollium/vyva-react
 
 The React viewer and editors for Vyva content: a `Viewer`, a Word-style `DocumentEditor`, a
 Canva-style `DeckEditor` and a full-screen `PresentMode`. It needs React 19.
 
 ```sh
-npm install @vyva/react @vyva/core react react-dom
+npm install @pollium/vyva-react @pollium/vyva-core react react-dom
 ```
 
 ## Setup
 
 ```tsx
-import '@vyva/react/styles.css';
-import '@vyva/react/fonts';
+import '@pollium/vyva-react/styles.css';
+import '@pollium/vyva-react/fonts';
 ```
 
 - **`styles.css`** is already built. Every class starts with `vy:`, so it never collides with the
   host's styles. Colors come from `--vy-color-*` variables, which the host can override. Dark mode
   turns on with `.dark` or `data-theme="dark"` on `:root`.
-- **HeroUI hosts** also import `@vyva/react/heroui.css`, which points those variables at HeroUI's
+- **HeroUI hosts** also import `@pollium/vyva-react/heroui.css`, which points those variables at HeroUI's
   own colors.
 - **`fonts`** loads the eight fonts documents and decks can use. Leave it out if the host already
   serves them under the same family names.
@@ -27,7 +27,7 @@ import '@vyva/react/fonts';
 The editors edit a session, and the host decides where the content is stored.
 
 ```tsx
-import { SaveConflict, useVyvaSession } from '@vyva/react/use-vyva-session';
+import { SaveConflict, useVyvaSession } from '@pollium/vyva-react/use-vyva-session';
 
 const session = useVyvaSession({
     initial: { content: material.content, revision: material.revision },
@@ -53,10 +53,10 @@ const session = useVyvaSession({
 ## The components
 
 ```tsx
-import DocumentEditor from '@vyva/react/DocumentEditor';
-import DeckEditor from '@vyva/react/DeckEditor';
-import Viewer from '@vyva/react/Viewer';
-import SaveStatus from '@vyva/react/SaveStatus';
+import DocumentEditor from '@pollium/vyva-react/DocumentEditor';
+import DeckEditor from '@pollium/vyva-react/DeckEditor';
+import Viewer from '@pollium/vyva-react/Viewer';
+import SaveStatus from '@pollium/vyva-react/SaveStatus';
 
 <DocumentEditor session={session} readOnly={false} fileUrl={(fileId) => `/files/${fileId}`} />
 <DeckEditor session={session} readOnly={false} fileUrl={fileUrl} imagePicker={MyImagePicker} />
@@ -77,16 +77,16 @@ import SaveStatus from '@vyva/react/SaveStatus';
 | `ref` | both | `showPanel()` opens the host's tab. The deck editor also has `present()` |
 
 `PresentMode` shows a deck full screen and works with the keyboard and by touch. `Canvas` shows one
-page from `@vyva/react/markup` (`slideMarkup` or `documentMarkup`), scaled to the width it is given,
+page from `@pollium/vyva-react/markup` (`slideMarkup` or `documentMarkup`), scaled to the width it is given,
 which is what thumbnails need.
 
 ## Code editing with Monaco
 
-`@vyva/react/MonacoCodeEditor` is a ready code editor for decks. It needs
+`@pollium/vyva-react/MonacoCodeEditor` is a ready code editor for decks. It needs
 `@monaco-editor/react`:
 
 ```tsx
-import MonacoCodeEditor from '@vyva/react/MonacoCodeEditor';
+import MonacoCodeEditor from '@pollium/vyva-react/MonacoCodeEditor';
 
 <DeckEditor codeEditor={MonacoCodeEditor} ... />
 ```
@@ -100,8 +100,8 @@ The labels come in English and Spanish, and a host can bring its own. Numbers fo
 of React Aria's `I18nProvider`.
 
 ```tsx
-import { MessagesContext } from '@vyva/react/messages/context';
-import es from '@vyva/react/messages/es';
+import { MessagesContext } from '@pollium/vyva-react/messages/context';
+import es from '@pollium/vyva-react/messages/es';
 import { I18nProvider } from 'react-aria-components';
 
 <I18nProvider locale='es'>
@@ -111,5 +111,5 @@ import { I18nProvider } from 'react-aria-components';
 </I18nProvider>
 ```
 
-A new language is an object typed as `Messages` from `@vyva/react/messages/en`, so TypeScript
+A new language is an object typed as `Messages` from `@pollium/vyva-react/messages/en`, so TypeScript
 lists every label it still needs.

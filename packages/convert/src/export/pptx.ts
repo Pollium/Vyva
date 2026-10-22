@@ -1,9 +1,9 @@
 import type { ExportBundle, ExportedFile } from './bundle';
 import { blocksOfHtml, type Run } from './html-blocks';
-import { CODE_FONT, CODE_LINE_HEIGHT, CODE_PALETTES, codeLines } from '@vyva/core/code';
-import type { CodeElement, DeckContent, ImageElement, ShapeElement, Slide, TableElement, TextElement, TextStyle } from '@vyva/core/content';
-import { DECK_SIZES, TEXT_SHAPES } from '@vyva/core/content';
-import { bandHeight, footerHeight, footerSegments, hasBand, hasFooter, inkOn } from '@vyva/core/deck-frame';
+import { CODE_FONT, CODE_LINE_HEIGHT, CODE_PALETTES, codeLines } from '@pollium/vyva-core/code';
+import type { CodeElement, DeckContent, ImageElement, ShapeElement, Slide, TableElement, TextElement, TextStyle } from '@pollium/vyva-core/content';
+import { DECK_SIZES, TEXT_SHAPES } from '@pollium/vyva-core/content';
+import { bandHeight, footerHeight, footerSegments, hasBand, hasFooter, inkOn } from '@pollium/vyva-core/deck-frame';
 import PptxGenJS from 'pptxgenjs';
 
 const PPTX_MIME = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';

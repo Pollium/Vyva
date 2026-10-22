@@ -25,9 +25,9 @@ import { useWheelStep } from '../../../hooks/use-wheel-step';
 import { useMessages } from '../../../messages/context';
 import { align, arrange, newCode, newShape, newTable, updateElements, withSlide, withText } from '../../../utils/deck/deck-ops';
 import { layoutPresetsOf } from '../../../utils/deck/layout-presets';
-import type { CodeElement, SlideElement, TableElement } from '@vyva/core/content';
-import { reformat, retheme } from '@vyva/core/deck-theme';
-import { CONTENT_CSS, type FileUrl } from '@vyva/core/render';
+import type { CodeElement, SlideElement, TableElement } from '@pollium/vyva-core/content';
+import { reformat, retheme } from '@pollium/vyva-core/deck-theme';
+import { CONTENT_CSS, type FileUrl } from '@pollium/vyva-core/render';
 import { useImperativeHandle, useRef, useState, type Ref } from 'react';
 
 export interface DeckEditorHandle{

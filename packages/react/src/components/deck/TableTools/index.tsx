@@ -6,7 +6,7 @@ import type { CellRef } from '../../../contracts/deck-editing';
 import { useMessages } from '../../../messages/context';
 import { numberOptions } from '../../../utils/deck/number-options';
 import { insertColumn, insertRow, removeColumn, removeRow } from '../../../utils/deck/table-ops';
-import type { TableElement } from '@vyva/core/content';
+import type { TableElement } from '@pollium/vyva-core/content';
 import { BetweenHorizontalEnd, BetweenHorizontalStart, BetweenVerticalEnd, BetweenVerticalStart, Heading, PaintBucket, Square, TableColumnsSplit, TableRowsSplit } from 'lucide-react';
 
 const TABLE_SIZES = [14, 16, 20, 24, 28, 32, 40];

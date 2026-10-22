@@ -3,7 +3,7 @@ import ToolButton from '../../editor/ToolButton';
 import SliderField from '../../ui/SliderField';
 import { useMessages } from '../../../messages/context';
 import type { Align, Arrange } from '../../../utils/deck/deck-ops';
-import type { SlideElement } from '@vyva/core/content';
+import type { SlideElement } from '@pollium/vyva-core/content';
 import {
     AlignEndHorizontal,
     AlignEndVertical,

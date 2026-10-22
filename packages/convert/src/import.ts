@@ -2,7 +2,7 @@ import { ConvertError } from './errors';
 import { importDocx, importMarkdown, importPdf, importPlainText } from './import/documents';
 import type { SaveImage } from './import/images';
 import { importPptx } from './import/pptx';
-import type { Content } from '@vyva/core/content';
+import type { Content } from '@pollium/vyva-core/content';
 import { unzipSync } from 'fflate';
 
 export const MAX_IMPORT_BYTES = 25 * 1024 * 1024;

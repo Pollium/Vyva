@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import type { Content, DeckContent } from '@vyva/core/content';
-import { layoutSlide } from '@vyva/core/slide-layouts';
-import { DECK_THEME } from '@vyva/core/themes';
+import type { Content, DeckContent } from '@pollium/vyva-core/content';
+import { layoutSlide } from '@pollium/vyva-core/slide-layouts';
+import { DECK_THEME } from '@pollium/vyva-core/themes';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import DeckEditor from '../components/deck/DeckEditor';
 import type { ContentDraft } from '../contracts/editor-session';

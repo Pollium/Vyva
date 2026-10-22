@@ -6,7 +6,7 @@ import { useMessages } from '../../../messages/context';
 import { MIN_STROKE } from '../../../utils/deck/deck-ops';
 import { numberOptions } from '../../../utils/deck/number-options';
 import { SHAPES } from '../../../utils/deck/shape-kinds';
-import type { ShapeElement, ShapeKind } from '@vyva/core/content';
+import type { ShapeElement, ShapeKind } from '@pollium/vyva-core/content';
 import { PaintBucket, Square } from 'lucide-react';
 
 const STROKE_WIDTHS = [0, 2, 4, 6, 8, 12, 16, 24];

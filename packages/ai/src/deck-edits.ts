@@ -1,10 +1,10 @@
 import { EditRefused } from './errors';
 import { htmlToMarkdown } from './html-markdown';
-import { codeFenceOf, fitCodeSize } from '@vyva/core/code';
-import type { DeckContent, DeckTheme, Slide, SlideElement } from '@vyva/core/content';
-import { TEXT_SHAPES } from '@vyva/core/content';
-import { inlineMarkdown } from '@vyva/core/markdown-blocks';
-import { layoutSlide, shapeTextStyle, type SlideSpec } from '@vyva/core/slide-layouts';
+import { codeFenceOf, fitCodeSize } from '@pollium/vyva-core/code';
+import type { DeckContent, DeckTheme, Slide, SlideElement } from '@pollium/vyva-core/content';
+import { TEXT_SHAPES } from '@pollium/vyva-core/content';
+import { inlineMarkdown } from '@pollium/vyva-core/markdown-blocks';
+import { layoutSlide, shapeTextStyle, type SlideSpec } from '@pollium/vyva-core/slide-layouts';
 
 export type DeckOperation =
     | { op: 'add_slide'; afterSlideId: string | null; slide: SlideSpec }

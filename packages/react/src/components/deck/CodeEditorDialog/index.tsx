@@ -4,7 +4,7 @@ import SelectInput from '../../ui/SelectInput';
 import type { CodeEditor } from '../../../contracts/code-editor';
 import { useMessages } from '../../../messages/context';
 import { codeLanguageOptions } from '../../../utils/deck/code-languages';
-import { MAX_CODE_TEXT, type CodeElement, type CodeLanguage } from '@vyva/core/content';
+import { MAX_CODE_TEXT, type CodeElement, type CodeLanguage } from '@pollium/vyva-core/content';
 import { useState } from 'react';
 
 interface CodeEditorDialogProps{

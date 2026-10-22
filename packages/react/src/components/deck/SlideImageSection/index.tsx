@@ -4,7 +4,7 @@ import PanelSection from '../../editor/PanelSection';
 import SelectInput from '../../ui/SelectInput';
 import { useMessages } from '../../../messages/context';
 import { numberOptions } from '../../../utils/deck/number-options';
-import type { ImageElement } from '@vyva/core/content';
+import type { ImageElement } from '@pollium/vyva-core/content';
 
 const ROUND_RADIUS = 999;
 const RADII = [0, 12, 24, 48, ROUND_RADIUS];

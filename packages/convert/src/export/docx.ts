@@ -1,8 +1,8 @@
 import type { BundleImage, ExportBundle, ExportedFile } from './bundle';
 import { blocksOfHtml, type Align, type Block, type Run } from './html-blocks';
 import { fitWithin } from './image-size';
-import { CODE_FONT } from '@vyva/core/code';
-import type { DocumentContent } from '@vyva/core/content';
+import { CODE_FONT } from '@pollium/vyva-core/code';
+import type { DocumentContent } from '@pollium/vyva-core/content';
 import {
     AlignmentType,
     BorderStyle,

@@ -1,17 +1,17 @@
-# @vyva/ai
+# @pollium/vyva-ai
 
 Lets an AI model work on Vyva content. It gives the model a view of a document or a deck it can
 read, and applies the edits the model answers with. It calls no model itself: the host's agent
 does that, and uses this package for its tools.
 
 ```sh
-npm install @vyva/ai
+npm install @pollium/vyva-ai
 ```
 
 ## Documents
 
 ```ts
-import { applyDocumentOperations, documentForModel } from '@vyva/ai/document-edits';
+import { applyDocumentOperations, documentForModel } from '@pollium/vyva-ai/document-edits';
 
 const view = documentForModel(content, 40_000);
 const edited = applyDocumentOperations(content, [
@@ -26,7 +26,7 @@ const edited = applyDocumentOperations(content, [
 reached, and tells the model when blocks were left out.
 
 - Images appear as `![alt](asset:<fileId>)`.
-- Page breaks appear as `PAGE_BREAK_MARKER` (`[page break]`, from `@vyva/ai/html-markdown`).
+- Page breaks appear as `PAGE_BREAK_MARKER` (`[page break]`, from `@pollium/vyva-ai/html-markdown`).
 - Equations stay as the LaTeX the model wrote.
 
 The model can write all of these back. `insert_after` with a `null` block id inserts at the start.
@@ -34,7 +34,7 @@ The model can write all of these back. `insert_after` with a `null` block id ins
 ## Decks
 
 ```ts
-import { applyDeckOperations, deckForModel } from '@vyva/ai/deck-edits';
+import { applyDeckOperations, deckForModel } from '@pollium/vyva-ai/deck-edits';
 
 const view = deckForModel(content);
 const edited = applyDeckOperations(content, [
@@ -57,5 +57,5 @@ const edited = applyDeckOperations(content, [
 ## When an edit cannot be applied
 
 An unknown id, or text sent to a shape that cannot hold it, throws `EditRefused` from
-`@vyva/ai/errors`. Its message is written for the model, so hand it back as the tool's result and
+`@pollium/vyva-ai/errors`. Its message is written for the model, so hand it back as the tool's result and
 the model can try again.

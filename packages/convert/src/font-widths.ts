@@ -1,4 +1,4 @@
-import type { FontFamily } from '@vyva/core/content';
+import type { FontFamily } from '@pollium/vyva-core/content';
 
 export const MEASURED_CHARS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ–—‘’‚“”„•…€→←↑↓≤≥≠×÷✓";
 

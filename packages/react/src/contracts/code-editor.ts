@@ -1,4 +1,4 @@
-import type { CodeElement, CodeLanguage } from '@vyva/core/content';
+import type { CodeElement, CodeLanguage } from '@pollium/vyva-core/content';
 import type { ComponentType } from 'react';
 
 export interface CodeEditorProps{

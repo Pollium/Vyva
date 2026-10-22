@@ -1,6 +1,6 @@
-import type { DeckContent, DocumentContent, Content } from '@vyva/core/content';
-import { DECK_SIZES } from '@vyva/core/content';
-import { A4, CONTENT_CSS, renderDocument, renderSlide, type FileUrl } from '@vyva/core/render';
+import type { DeckContent, DocumentContent, Content } from '@pollium/vyva-core/content';
+import { DECK_SIZES } from '@pollium/vyva-core/content';
+import { A4, CONTENT_CSS, renderDocument, renderSlide, type FileUrl } from '@pollium/vyva-core/render';
 
 export interface PageMarkup{
     html: string;
