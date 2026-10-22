@@ -41,6 +41,9 @@ pnpm --filter playground dev
 pnpm build && pnpm typecheck && pnpm lint && pnpm test
 ```
 
+`pnpm release` builds every package and publishes the ones whose version is not on npm yet. It needs
+`npm login` with access to the pollium organization.
+
 ## License
 
 Not decided yet. No license is granted until one is chosen.
