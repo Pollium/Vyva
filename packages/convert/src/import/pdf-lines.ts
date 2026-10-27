@@ -216,7 +216,7 @@ const joinSlide = (slide: Slide, font: FontFamily, slideWidth: number, slideHeig
     const blocks = blocksOf(lines.filter((line) => !owned.has(line)));
     const replaced = new Map<SlideElement, TextElement | null>();
     for(const block of blocks){
-        if(block.lines.length === 1 && block.lines[0].marker === null) continue;
+        if(block.lines.length === 1 && block.lines[0].marker === null && right(block.lines[0].element) <= slideWidth - SLIDE_MARGIN) continue;
 
         const [head, ...rest] = block.lines;
         const own = new Set<SlideElement>([...block.lines.map((line) => line.element), ...[...owned].map((marker) => marker.element)]);

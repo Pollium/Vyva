@@ -1,4 +1,5 @@
 import { importFile } from '../import';
+import type { OfficeJob } from '../import/office';
 import { joinLines } from '../import/pdf-lines';
 import { libreOffice } from '../libreoffice';
 import { pdfWith, pptxOfLines } from './fixtures';
@@ -25,12 +26,12 @@ const joined = (elements: SlideElement[]): SlideElement[] => {
 
 const texts = (elements: SlideElement[]): string[] => elements.flatMap((element) => element.type === 'text' ? [element.html] : []);
 
-describe('importFile with PDF slides', () => {
+describe('importFile with an office engine', () => {
     it('turns a landscape PDF into slides through the engine and joins its lines into paragraphs', async () => {
-        const received: Uint8Array[] = [];
+        const received: OfficeJob[] = [];
         const pdf = pdfWith(['Potencial de accion'], LANDSCAPE);
-        const pdfSlides = async (data: Uint8Array) => {
-            received.push(data);
+        const officeEngine = async (job: OfficeJob) => {
+            received.push(job);
             return pptxOfLines([
                 { text: 'Introducción', x: 4.5, y: 0.6, w: 3, isBold: true },
                 { text: 'La bomba de sodio y potasio sostiene la', x: 2, y: 2, w: 6 },
@@ -38,9 +39,10 @@ describe('importFile with PDF slides', () => {
             ]);
         };
 
-        const { content } = await importFile(pdf, 'clase.pdf', { saveImage, pdfSlides });
+        const { content } = await importFile(pdf, 'clase.pdf', { saveImage, officeEngine });
 
-        expect(Buffer.from(received[0])).toEqual(pdf);
+        expect(received).toEqual([expect.objectContaining({ from: 'pdf', to: 'pptx' })]);
+        expect(Buffer.from(received[0].file)).toEqual(pdf);
         expect(content.kind).toBe('deck');
         expect(content.kind === 'deck' ? texts(content.slides[0].elements) : []).toEqual([
             '<p><strong>Introducción</strong></p>',
@@ -48,14 +50,21 @@ describe('importFile with PDF slides', () => {
         ]);
     });
 
-    it('keeps a portrait PDF as a document and never calls the engine', async () => {
-        const pdfSlides = async (): Promise<Uint8Array> => {
-            throw new Error('A portrait PDF went to the engine');
+    it('turns a portrait PDF into slides as well', async () => {
+        const officeEngine = async () => pptxOfLines([{ text: 'First page', x: 1, y: 1, w: 4 }]);
+
+        const { content } = await importFile(pdfWith(['First page']), 'notes.pdf', { saveImage, officeEngine });
+
+        expect(content.kind).toBe('deck');
+    });
+
+    it('refuses a PDF with more pages than a deck holds, without calling the engine', async () => {
+        const officeEngine = async (): Promise<Uint8Array> => {
+            throw new Error('A PDF too long for a deck went to the engine');
         };
+        const pages = Array.from({ length: 301 }, (_, index) => `Page ${index + 1}`);
 
-        const { content } = await importFile(pdfWith(['First page']), 'notes.pdf', { saveImage, pdfSlides });
-
-        expect(content.kind).toBe('document');
+        await expect(importFile(pdfWith(pages), 'book.pdf', { saveImage, officeEngine })).rejects.toMatchObject({ code: 'too-large' });
     });
 
     it('reports an engine that cannot make the slides', async () => {
@@ -64,8 +73,8 @@ describe('importFile with PDF slides', () => {
             throw new Error('soffice crashed');
         };
 
-        await expect(importFile(pdf, 'clase.pdf', { saveImage, pdfSlides: failing })).rejects.toMatchObject({ code: 'slides-failed' });
-        await expect(importFile(pdf, 'clase.pdf', { saveImage, pdfSlides: libreOffice({ command: '/nonexistent/soffice' }) })).rejects.toMatchObject({ code: 'slides-failed' });
+        await expect(importFile(pdf, 'clase.pdf', { saveImage, officeEngine: failing })).rejects.toMatchObject({ code: 'office-failed' });
+        await expect(importFile(pdf, 'clase.pdf', { saveImage, officeEngine: libreOffice({ command: '/nonexistent/soffice' }) })).rejects.toMatchObject({ code: 'office-failed' });
     });
 });
 
@@ -82,6 +91,13 @@ describe('joinLines', () => {
             '<ol><li>Umbral</li></ol>'
         ]);
         expect(elements[0].x).toBeLessThan(300);
+    });
+
+    it('wraps a lone line that would run past the edge of the slide', () => {
+        const [wrapped] = joined([line('a', 'La bomba de sodio y potasio mantiene la diferencia de concentraciones a ambos lados de la membrana', 1000, 300, 1500)]);
+
+        expect(wrapped.x + wrapped.w).toBeLessThanOrEqual(1920);
+        expect(wrapped.h).toBeGreaterThan(43);
     });
 
     it('reads a marker written at the start of a line and rejoins a word broken with a hyphen', () => {

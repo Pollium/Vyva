@@ -1,11 +1,12 @@
 import { ConvertError } from '../errors';
+import { formatFor } from './deck-format';
 import { imageSaver, type SaveImage } from './images';
 import PptxPackage, { type SlideParts } from './pptx-package';
 import SlideReader from './pptx-slide';
 import { familyOf } from './pptx-theme';
 import { all, attr, first, num, textOf } from './pptx-xml';
 import { titleOf } from './titles';
-import type { DeckContent, DeckFormat, FontFamily, Slide, TextElement } from '@pollium/vyva-core/content';
+import type { DeckContent, FontFamily, Slide, TextElement } from '@pollium/vyva-core/content';
 import { DECK_SIZES } from '@pollium/vyva-core/content';
 import { unzipSync } from 'fflate';
 import { posix } from 'node:path';
@@ -14,28 +15,15 @@ const EMU_PER_INCH = 914400;
 const PX_PER_INCH = 144;
 const DEFAULT_WIDTH = 12192000;
 const DEFAULT_HEIGHT = 6858000;
-const MAX_SLIDES = 300;
+export const MAX_SLIDES = 300;
 const MAX_IMAGES = 80;
 const MAX_UNZIPPED_BYTES = 120 * 1024 * 1024;
 const IMAGE_TYPES: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp' };
-
-const FORMATS: Array<{ format: DeckFormat; ratio: number }> = [
-    { format: '16:9', ratio: 16 / 9 },
-    { format: '4:3', ratio: 4 / 3 },
-    { format: '1:1', ratio: 1 },
-    { format: 'a4-landscape', ratio: 1527 / 1080 },
-    { format: 'a4-portrait', ratio: 1080 / 1527 }
-];
 
 export interface ImportedDeck{
     title: string;
     content: DeckContent;
 }
-
-const formatFor = (cx: number, cy: number): DeckFormat => {
-    const ratio = cx / Math.max(cy, 1);
-    return FORMATS.reduce((best, candidate) => Math.abs(candidate.ratio - ratio) < Math.abs(best.ratio - ratio) ? candidate : best).format;
-};
 
 const plainText = (html: string): string => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 

@@ -1,4 +1,4 @@
-export type ConvertErrorCode = 'too-large' | 'unsupported' | 'empty' | 'pdf-failed' | 'slides-failed';
+export type ConvertErrorCode = 'too-large' | 'unsupported' | 'empty' | 'pdf-failed' | 'office-failed';
 
 export class ConvertError extends Error{
     readonly code: ConvertErrorCode;

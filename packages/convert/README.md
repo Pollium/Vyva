@@ -1,7 +1,8 @@
 # @pollium/vyva-convert
 
 Server-side tools for Vyva content. It cleans what clients send, imports Word, PowerPoint, PDF,
-Markdown and text files, and exports to PDF, Word, PowerPoint and HTML. It runs in Node.
+OpenDocument, RTF, Markdown, text and image files, and exports to PDF, Word, PowerPoint and HTML.
+It runs in Node.
 
 ```sh
 npm install @pollium/vyva-convert
@@ -66,22 +67,32 @@ const { title, content } = await importFile(upload.bytes, upload.filename, {
 });
 ```
 
-- The file is recognized by its content, not its name. Word and PowerPoint files are told apart
-  by what their zip holds, and PDF by its signature. Only Markdown (`.md`) and text (`.txt`) are
-  recognized by their extension, and only when they are valid UTF-8.
+- The file is recognized by its content, not its name. Word, PowerPoint and OpenDocument files
+  are told apart by what their zip holds, Word 97 and PowerPoint 97 files by the streams they hold,
+  and PDF, RTF, PNG, JPEG, GIF and WebP by their signatures. Only Markdown (`.md`) and text
+  (`.txt`) are recognized by their extension, and only when they are valid UTF-8.
 - Word, PDF, Markdown and text files become documents, and PowerPoint files become decks. A deck
   keeps its theme colors and the font most of its text uses. What its slide master draws comes in
   locked, behind the slide's own elements, and freeform shapes come in as polygons.
-- With `pdfSlides`, a PDF whose pages are landscape becomes a deck instead: each page a slide, with
-  its pictures and shapes where they were, and the loose lines a PDF keeps joined back into
-  paragraphs and lists. A portrait PDF stays a document. `pdfSlides` takes the PDF and returns it as
-  a PowerPoint file; `libreOffice()` from `@pollium/vyva-convert/libreoffice` does that with the
-  `soffice` on the machine (`command` changes the path), one conversion per call:
+- A picture becomes a deck of one slide, in the format closest to its shape, with the picture
+  filling it. `saveImage` stores it like any other image; return `null` and the import is refused
+  as `empty`.
+- With `officeEngine`, Vyva reads what it cannot read alone. Every PDF becomes a deck: each page a
+  slide, portrait pages on a portrait slide, with its pictures and shapes where they were, and the
+  loose lines a PDF keeps joined back into paragraphs and lists. A PDF of more than 300 pages is
+  refused as `too-large` before the engine runs. Word 97, OpenDocument text and RTF files are
+  turned into Word, and PowerPoint 97 and OpenDocument presentations into PowerPoint, then imported
+  as those. Without an engine a PDF becomes a document of its text, and the older formats are
+  refused as `unsupported`.
+
+  `officeEngine` takes `{ file, from, to }` and returns the converted file. `libreOffice()` from
+  `@pollium/vyva-convert/libreoffice` does that with the `soffice` on the machine (`command` changes
+  the path), one conversion per call:
 
   ```ts
   import { libreOffice } from '@pollium/vyva-convert/libreoffice';
 
-  await importFile(upload.bytes, upload.filename, { saveImage, pdfSlides: libreOffice() });
+  await importFile(upload.bytes, upload.filename, { saveImage, officeEngine: libreOffice() });
   ```
 - `saveImage` stores each image and returns its file id, which must be a UUID. Return `null` to
   leave the image out. If it throws, the import fails with your error.
@@ -98,4 +109,4 @@ a bug or a broken file, so log it.
 | `too-large` | The file, or what it unzips to, is over the limit |
 | `empty` | The file has nothing to import |
 | `pdf-failed` | The PDF engine could not be reached or answered with an error |
-| `slides-failed` | `pdfSlides` could not turn a PDF into slides |
+| `office-failed` | `officeEngine` could not convert the file, or answered with something else |

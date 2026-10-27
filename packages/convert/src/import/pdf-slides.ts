@@ -1,23 +1,16 @@
 import { ConvertError } from '../errors';
 import type { SaveImage } from './images';
+import { runOffice, type OfficeEngine } from './office';
 import { joinLines } from './pdf-lines';
-import { importPptx, type ImportedDeck } from './pptx';
+import { importPptx, MAX_SLIDES, type ImportedDeck } from './pptx';
 import { getDocumentProxy } from 'unpdf';
 
-export type PdfSlides = (pdf: Uint8Array) => Promise<Uint8Array>;
+export const importPdfSlides = async (buffer: Buffer, filename: string, saveImage: SaveImage, officeEngine: OfficeEngine): Promise<ImportedDeck> => {
+    const { numPages } = await getDocumentProxy(new Uint8Array(buffer));
+    if(numPages > MAX_SLIDES) throw new ConvertError('too-large', `${filename} has ${numPages} pages, more than the ${MAX_SLIDES} slides a deck holds`);
 
-export const isLandscapePdf = async (buffer: Buffer): Promise<boolean> => {
-    const pdf = await getDocumentProxy(new Uint8Array(buffer));
-    const { width, height } = (await pdf.getPage(1)).getViewport({ scale: 1 });
-
-    return width > height;
-};
-
-export const importPdfSlides = async (buffer: Buffer, filename: string, saveImage: SaveImage, pdfSlides: PdfSlides): Promise<ImportedDeck> => {
-    const pptx = await pdfSlides(new Uint8Array(buffer)).catch((error: unknown) => {
-        throw error instanceof ConvertError ? error : new ConvertError('slides-failed', `${filename} could not be turned into slides`, { cause: error });
-    });
-    const { title, content } = await importPptx(Buffer.from(pptx), filename, saveImage);
+    const pptx = await runOffice(officeEngine, { file: buffer, from: 'pdf', to: 'pptx' }, filename);
+    const { title, content } = await importPptx(pptx, filename, saveImage);
 
     return { title, content: joinLines(content) };
 };
