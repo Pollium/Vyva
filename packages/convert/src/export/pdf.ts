@@ -1,8 +1,9 @@
 import type { ExportBundle, ExportedFile } from './bundle';
 import { fontFaces, fontFilesOf } from './fonts';
 import { bodyOf, pageHtml } from './html';
+import { onPdfPages } from './pdf-pages';
 import type { Content } from '@pollium/vyva-core/content';
-import { DECK_SIZES } from '@pollium/vyva-core/content';
+import { deckSize, hasPdfPages } from '@pollium/vyva-core/content';
 import { escapeHtml } from '@pollium/vyva-core/escape';
 import { CONTENT_CSS } from '@pollium/vyva-core/render';
 
@@ -56,7 +57,7 @@ const inches = (mm: number): number => mm / MM_PER_INCH;
 
 const pageOf = (content: Content): PdfPage => {
     if(content.kind === 'deck'){
-        const { width, height } = DECK_SIZES[content.format];
+        const { width, height } = deckSize(content.format);
         return { width: width / SLIDE_PX_PER_INCH, height: height / SLIDE_PX_PER_INCH, margins: NO_MARGINS };
     }
 
@@ -79,7 +80,7 @@ const footerOf = (content: Content): string | null => {
     return `<html><head><style>.vy-page-footer{box-sizing:border-box;display:flex;justify-content:space-between;width:100%;padding:0 ${side(design.margins.right)} 0 ${side(design.margins.left)};font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:8pt;color:#6b7280}</style></head><body><div class="vy-page-footer"><span>${text}</span>${number}</div></body></html>`;
 };
 
-export const buildPdf = async (content: Content, bundle: ExportBundle, engine: PdfEngine): Promise<ExportedFile> => {
+const print = async (content: Content, bundle: ExportBundle, engine: PdfEngine): Promise<Uint8Array> => {
     const fonts = await fontFilesOf(bundle.fonts);
     const css = `${fontFaces(fonts, (file) => file.name)}${CONTENT_CSS}${PRINT_CSS}`;
     const html = pageHtml(bundle, css, bodyOf(content, (id) => bundle.images.get(id)?.name ?? null));
@@ -88,6 +89,13 @@ export const buildPdf = async (content: Content, bundle: ExportBundle, engine: P
         ...fonts.map(({ name, data }) => ({ name, data, contentType: 'font/woff2' }))
     ];
 
-    const data = await engine({ html, files, footerHtml: footerOf(content), page: pageOf(content) });
+    return engine({ html, files, footerHtml: footerOf(content), page: pageOf(content) });
+};
+
+export const buildPdf = async (content: Content, bundle: ExportBundle, engine: PdfEngine): Promise<ExportedFile> => {
+    const data = content.kind === 'deck' && hasPdfPages(content)
+        ? await onPdfPages(content, bundle, () => print(content, bundle, engine))
+        : await print(content, bundle, engine);
+
     return { data, contentType: 'application/pdf', extension: 'pdf' };
 };

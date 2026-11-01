@@ -45,6 +45,7 @@
         "fflate": "^0.8.3",
         "htmlparser2": "^10.1.0",
         "mammoth": "^1.13.0",
+        "pdf-lib": "1.17.1",
         "pptxgenjs": "^4.0.1",
         "sanitize-html": "^2.18.0",
         "unpdf": "^1.8.1"

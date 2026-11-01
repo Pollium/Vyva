@@ -4,7 +4,7 @@ export type LegacyOffice = 'doc' | 'ppt' | 'odt' | 'odp' | 'rtf';
 
 export interface OfficeJob{
     file: Uint8Array;
-    from: 'pdf' | LegacyOffice;
+    from: LegacyOffice;
     to: 'docx' | 'pptx';
 }
 

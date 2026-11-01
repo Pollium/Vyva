@@ -4,6 +4,7 @@ import type { NewImage } from '../import/images';
 import type { OfficeJob } from '../import/office';
 import { FILE_ID, PNG_BYTES, pdfWith, pptxOfLines, readImage, SAMPLE_DOCUMENT } from './fixtures';
 import type { Content } from '@pollium/vyva-core/content';
+import { MAX_SLIDES } from '@pollium/vyva-core/content';
 import { strToU8, zipSync } from 'fflate';
 import { describe, expect, it } from 'vitest';
 
@@ -74,11 +75,39 @@ describe('importFile', () => {
         expect(blocksOf(imported.content)).toEqual(['<p>First idea<br />goes on here</p>', '<p>Second &lt;idea&gt;</p>']);
     });
 
-    it('imports a PDF page by page', async () => {
-        const imported = await importFile(pdfWith(['First page', 'Second page']), 'slides.pdf', keep());
+    it('opens a PDF as its own pages, one slide each at the size of the page, and stores the PDF once', async () => {
+        const { saved, saveImage } = keep();
+        const pdf = pdfWith(['First page', 'Second page']);
+
+        const imported = await importFile(pdf, 'slides.pdf', { saveImage });
 
         expect(imported.title).toBe('slides');
-        expect(blocksOf(imported.content)).toEqual(['<p>First page</p>', '<div data-type="page-break"></div>', '<p>Second page</p>']);
+        expect(imported.content).toMatchObject({
+            kind: 'deck',
+            format: { width: 1224, height: 1584 },
+            slides: [
+                { background: { type: 'pdf-page', fileId: STORED_ID, page: 1 }, elements: [] },
+                { background: { type: 'pdf-page', fileId: STORED_ID, page: 2 }, elements: [] }
+            ]
+        });
+        expect(saved).toEqual([{ name: 'slides.pdf', data: pdf, contentType: 'application/pdf' }]);
+    });
+
+    it('sizes the slides after a turned first page, and keeps a huge page within the largest slide', async () => {
+        const turned = await importFile(pdfWith(['Landscape'], { width: 612, height: 792, rotate: 90 }), 'turned.pdf', keep());
+        const poster = await importFile(pdfWith(['Poster'], { width: 14400, height: 7200 }), 'poster.pdf', keep());
+
+        expect(turned.content).toMatchObject({ format: { width: 1584, height: 1224 } });
+        expect(poster.content).toMatchObject({ format: { width: 20000, height: 10000 } });
+    });
+
+    it('refuses a PDF it cannot open, or with more pages than a deck holds, without storing it', async () => {
+        const { saved, saveImage } = keep();
+        const pages = Array.from({ length: MAX_SLIDES + 1 }, (_, index) => `Page ${index + 1}`);
+
+        await expect(importFile(Buffer.from('%PDF-1.7\nnot really'), 'broken.pdf', { saveImage })).rejects.toMatchObject({ code: 'unsupported' });
+        await expect(importFile(pdfWith(pages), 'book.pdf', { saveImage })).rejects.toMatchObject({ code: 'too-large' });
+        expect(saved).toEqual([]);
     });
 
     it('imports a picture as one slide shaped like it, stored through the host', async () => {

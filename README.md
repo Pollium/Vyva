@@ -23,7 +23,9 @@ small functions:
   be resolved by reloading or by keeping your own.
 - **`fileUrl(fileId)`**, so the editors and the viewer can show an image.
 - **`readImage(fileId)` and `saveImage(image)`** on the server, so `@pollium/vyva-convert` can export and
-  import files with their images.
+  import files with their images, and with the PDF behind a deck imported from one.
+- **A PDF page renderer** in the browser, given through `PdfPageContext`, which draws the pages
+  of a deck imported from a PDF.
 - **A PDF engine**, a function that prints HTML to PDF. `gotenberg({ url })` is one for a
   [Gotenberg](https://gotenberg.dev) server.
 

@@ -7,7 +7,7 @@ import { familyOf } from './pptx-theme';
 import { all, attr, first, num, textOf } from './pptx-xml';
 import { titleOf } from './titles';
 import type { DeckContent, FontFamily, Slide, TextElement } from '@pollium/vyva-core/content';
-import { DECK_SIZES } from '@pollium/vyva-core/content';
+import { DECK_SIZES, MAX_SLIDES } from '@pollium/vyva-core/content';
 import { unzipSync } from 'fflate';
 import { posix } from 'node:path';
 
@@ -15,7 +15,6 @@ const EMU_PER_INCH = 914400;
 const PX_PER_INCH = 144;
 const DEFAULT_WIDTH = 12192000;
 const DEFAULT_HEIGHT = 6858000;
-export const MAX_SLIDES = 300;
 const MAX_IMAGES = 80;
 const MAX_UNZIPPED_BYTES = 120 * 1024 * 1024;
 const IMAGE_TYPES: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp' };

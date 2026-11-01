@@ -2,11 +2,11 @@ import { ConvertError } from '../errors';
 import { imageSize } from '../export/image-size';
 import { formatFor } from './deck-format';
 import { imageSaver, type SaveImage } from './images';
+import { PLAIN_THEME } from './plain-theme';
 import type { ImportedDeck } from './pptx';
 import { titleOf } from './titles';
 import { DECK_SIZES } from '@pollium/vyva-core/content';
 import { newId } from '@pollium/vyva-core/ids';
-import { DECK_THEME } from '@pollium/vyva-core/themes';
 
 export type ImageType = 'image/png' | 'image/jpeg' | 'image/gif' | 'image/webp';
 
@@ -32,14 +32,13 @@ export const importImage = async (buffer: Buffer, filename: string, contentType:
     const scale = Math.min(slide.width / size.width, slide.height / size.height);
     const w = Math.round(size.width * scale);
     const h = Math.round(size.height * scale);
-    const { frame: _frame, ...theme } = DECK_THEME;
 
     return {
         title: titleOf('', filename),
         content: {
             kind: 'deck',
             format,
-            theme,
+            theme: PLAIN_THEME,
             slides: [{
                 id: newId(),
                 background: null,

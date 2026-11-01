@@ -4,10 +4,8 @@ import type { DocumentBlock, DocumentContent } from '@pollium/vyva-core/content'
 import { markdownToBlocks } from '@pollium/vyva-core/markdown-blocks';
 import { DEFAULT_DOCUMENT_DESIGN } from '@pollium/vyva-core/themes';
 import mammoth from 'mammoth';
-import { extractText, getDocumentProxy } from 'unpdf';
 
 const MAX_IMAGES = 60;
-const PAGE_BREAK = '<div data-type="page-break"></div>';
 
 export interface ImportedDocument{
     title: string;
@@ -43,10 +41,3 @@ export const importMarkdown = (text: string, filename: string): ImportedDocument
 
 export const importPlainText = (text: string, filename: string): ImportedDocument =>
     documentOf(htmlToBlocks(paragraphsHtml(text)), filename);
-
-export const importPdf = async (buffer: Buffer, filename: string): Promise<ImportedDocument> => {
-    const { text } = await extractText(await getDocumentProxy(new Uint8Array(buffer)), { mergePages: false });
-    const html = text.map((page) => paragraphsHtml(page)).filter((page) => page !== '').join(PAGE_BREAK);
-
-    return documentOf(htmlToBlocks(html), filename);
-};
