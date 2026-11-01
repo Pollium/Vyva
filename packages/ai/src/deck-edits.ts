@@ -27,7 +27,7 @@ export interface DeckElementForModel{
 export interface DeckForModel{
     format: DeckContent['format'];
     theme: DeckTheme;
-    slides: Array<{ id: string; number: number; elements: DeckElementForModel[] }>;
+    slides: Array<{ id: string; number: number; pdfPage?: number; elements: DeckElementForModel[] }>;
 }
 
 const BULLET = /^[-*•]\s+/;
@@ -72,6 +72,9 @@ const applyOne = (slides: Slide[], operation: DeckOperation, { format, theme }: 
     const at = slideIndex(slides, operation.slideId);
     const current = slides[at];
     if(operation.op === 'delete_slide') return [...slides.slice(0, at), ...slides.slice(at + 1)];
+    if(operation.op === 'replace_slide' && current.background?.type === 'pdf-page'){
+        throw new EditRefused(`Slide "${operation.slideId}" is page ${current.background.page} of the PDF, which cannot be rebuilt. Add a slide after it instead.`);
+    }
     if(operation.op === 'replace_slide') return slides.map((slide, index) => index === at ? { ...layoutSlide(operation.slide, format, theme), id: current.id } : slide);
     if(operation.op === 'move_slide'){
         const rest = [...slides.slice(0, at), ...slides.slice(at + 1)];
@@ -107,5 +110,10 @@ const elementForModel = (element: SlideElement): DeckElementForModel => ({
 export const deckForModel = (content: DeckContent): DeckForModel => ({
     format: content.format,
     theme: content.theme,
-    slides: content.slides.map((slide, index) => ({ id: slide.id, number: index + 1, elements: slide.elements.map(elementForModel) }))
+    slides: content.slides.map((slide, index) => ({
+        id: slide.id,
+        number: index + 1,
+        ...(slide.background?.type === 'pdf-page' ? { pdfPage: slide.background.page } : {}),
+        elements: slide.elements.map(elementForModel)
+    }))
 });
