@@ -15,9 +15,14 @@ import type { Content, DocumentContent, DeckContent } from '@pollium/vyva-core/c
 
 - A **document** is a page design and a list of blocks, each one an HTML fragment with an id:
   headings, paragraphs, lists, checklists, tables, code, images, equations and page breaks.
-- A **deck** has a format (`16:9`, `4:3`, `1:1`, `a4-portrait` or `a4-landscape`), a theme and
-  slides. Each slide holds positioned elements: text, images, shapes, tables and code.
-- An image is referenced by its file id, a UUID the host gives it. The content never holds a URL.
+- A **deck** has a format (`16:9`, `4:3`, `1:1`, `a4-portrait`, `a4-landscape`, or an exact
+  `{ width, height }`), a theme and slides. Each slide holds positioned elements: text, images,
+  shapes, tables and code. `deckSize(format)` gives the size of any format.
+- A slide's background is a color, an image, or a page of a PDF: `{ type: 'pdf-page', fileId,
+  page }`. The renderer leaves a PDF page clear, because the host draws it under the elements;
+  `hasPdfPages(content)` tells whether a deck has any.
+- An image or a PDF is referenced by its file id, a UUID the host gives it. The content never holds
+  a URL.
 
 The interfaces carry [typia](https://typia.io) tags, so a host with typia can validate content
 from a client with `typia.assert<Content>(body)`.

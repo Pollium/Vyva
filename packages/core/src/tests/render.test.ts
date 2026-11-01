@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DECK_SIZES, type DeckContent, type DeckFormat, type DeckTheme, type DocumentContent } from '../content';
+import { DECK_SIZES, deckSize, hasPdfPages, type DeckContent, type DeckFormat, type DeckPreset, type DeckTheme, type DocumentContent } from '../content';
 import { bandHeight } from '../deck-frame';
 import { reformat, retheme } from '../deck-theme';
 import { withoutInlineStyles } from '../inline-style';
@@ -59,11 +59,12 @@ describe('markdownToBlocks', () => {
 });
 
 describe('layoutSlide', () => {
-    const formats = Object.keys(DECK_SIZES) as DeckFormat[];
+    const LETTER_PAGE = { width: 1224, height: 1584 };
+    const formats: DeckFormat[] = [...Object.keys(DECK_SIZES) as DeckPreset[], LETTER_PAGE];
 
-    it('keeps every element of every layout inside the slide, in every format', () => {
+    it('keeps every element of every layout inside the slide, in every format and on a page of its own size', () => {
         for(const format of formats){
-            const { width, height } = DECK_SIZES[format];
+            const { width, height } = deckSize(format);
             for(const layout of SLIDE_LAYOUTS){
                 const slide = layoutSlide({
                     layout,
@@ -121,6 +122,17 @@ describe('rendering', () => {
         expect(withImageSources(html, noFiles)).toBe('<p></p>');
         expect(renderDocument({ kind: 'document', design: { ...DEFAULT_DOCUMENT_DESIGN, headerText: '<i>UCM</i>' }, blocks: [{ id: 'a', html }] }, noFiles)).toContain('&lt;i&gt;UCM&lt;/i&gt;');
         expect(fileIdsOf({ kind: 'document', design: DEFAULT_DOCUMENT_DESIGN, blocks: [{ id: 'a', html }] })).toEqual([FILE]);
+    });
+
+    it('leaves a pdf page clear for the host to draw under the elements, and lists the pdf among the files', () => {
+        const page = { width: 1190, height: 1684 };
+        const deck: DeckContent = { kind: 'deck', format: page, theme: PLAIN, slides: [{ id: 's1', background: { type: 'pdf-page', fileId: FILE, page: 3 }, elements: [] }] };
+        const html = renderSlide(deck.slides[0], deck, noFiles);
+
+        expect(html).toContain('width:1190px;height:1684px;background:transparent');
+        expect(fileIdsOf(deck)).toEqual([FILE]);
+        expect(hasPdfPages(deck)).toBe(true);
+        expect(hasPdfPages(sampleDeck())).toBe(false);
     });
 
     it('keeps previews small', () => {

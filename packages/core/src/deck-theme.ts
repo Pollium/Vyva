@@ -1,5 +1,5 @@
 import type { DeckContent, DeckFormat, DeckTheme, Slide, SlideElement, TextElement, TextStyle } from './content';
-import { DECK_SIZES } from './content';
+import { deckSize } from './content';
 import { inkOn } from './deck-frame';
 import { editInlineStyles } from './inline-style';
 import { canvasOf, isAccentBar } from './slide-layouts';
@@ -85,8 +85,8 @@ const scaleText = (html: string, style: TextStyle, factor: number) => ({ html: s
 export const reformat = (content: DeckContent, format: DeckFormat): DeckContent => {
     if(format === content.format) return content;
 
-    const from = DECK_SIZES[content.format];
-    const to = DECK_SIZES[format];
+    const from = deckSize(content.format);
+    const to = deckSize(format);
     const sx = to.width / from.width;
     const sy = to.height / from.height;
     const factor = Math.min(sx, sy);
