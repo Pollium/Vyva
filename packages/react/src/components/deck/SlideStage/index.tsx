@@ -2,6 +2,7 @@ import InlineEditor from '../InlineEditor';
 import SelectionOverlay from '../SelectionOverlay';
 import SlideElementView from '../SlideElementView';
 import type { CellRef, DeckEditing } from '../../../contracts/deck-editing';
+import { PdfPageContext } from '../../../contracts/pdf-page';
 import type { DeckHistory } from '../../../hooks/use-deck-history';
 import { useFittedTextHeights } from '../../../hooks/use-fitted-text-heights';
 import { useFrameGestures } from '../../../hooks/use-frame-gestures';
@@ -13,12 +14,13 @@ import { useMessages } from '../../../messages/context';
 import { cssToStyle } from '../../../utils/deck/css-style';
 import { holdsText, sizeOf } from '../../../utils/deck/deck-ops';
 import { editAt, editsInPlace } from '../../../utils/deck/edit-target';
+import { pdfPageOf } from '../../../utils/markup';
 import type { SlideElement } from '@pollium/vyva-core/content';
 import { frameLayers } from '@pollium/vyva-core/deck-frame';
 import { slideCss, type FileUrl } from '@pollium/vyva-core/render';
 import type { Editor } from '@tiptap/react';
 import Moveable from 'react-moveable';
-import { useCallback, useLayoutEffect, useRef, type PointerEvent } from 'react';
+import { useCallback, useContext, useLayoutEffect, useRef, type PointerEvent } from 'react';
 
 const SNAP_PX = 6;
 const ROTATE_STEP = 15;
@@ -51,6 +53,7 @@ interface SlideStageProps{
 const SlideStage = (props: SlideStageProps) => {
     const { history, slideIndex, fileUrl, selected, editing, isLocked, zoom, onFit, onSelect, onStartEdit, onFinishEdit } = props;
     const t = useMessages();
+    const renderPdfPage = useContext(PdfPageContext);
     const { deck } = history;
     const slide = deck.slides[slideIndex];
     const size = sizeOf(deck);
@@ -105,6 +108,7 @@ const SlideStage = (props: SlideStageProps) => {
     const outlined = slide.elements.filter((element) => selected.includes(element.id) && (isLocked || element.isLocked || element.id === editingId));
     const keepsRatio = targets.length === 1 && single?.type === 'image';
     const layers = frameLayers(slide, deck);
+    const page = renderPdfPage === null || scale === 0 ? null : pdfPageOf(slide, fileUrl);
     const isTextOnly = selected.length > 0 && slide.elements.every((element) => !selected.includes(element.id) || element.type === 'text');
     const writesOnClick = (element: SlideElement) => !isLocked && !element.isLocked && editingId !== element.id && (holdsText(element) || element.type === 'table') && single?.id === element.id;
 
@@ -123,6 +127,11 @@ const SlideStage = (props: SlideStageProps) => {
             <div ref={surface} className='vy:relative vy:m-auto vy:shrink-0' style={{ width: size.width * scale, height: size.height * scale }}>
                 <div className='vy:absolute vy:left-0 vy:top-0 vy:origin-top-left' style={{ width: size.width, height: size.height, transform: `scale(${scale})` }}>
                     <section ref={section} className='vy-slide vy:overflow-hidden' style={{ ...cssToStyle(slideCss(slide, deck, fileUrl)), borderRadius: SLIDE_RADIUS / scale }}>
+                        {renderPdfPage === null || page === null ? null : (
+                            <div className='vy:pointer-events-none vy:absolute vy:inset-0'>
+                                {renderPdfPage({ url: page.url, page: page.page, width: size.width, height: size.height, scale, isSelectable: false })}
+                            </div>
+                        )}
                         <div className='vy:contents' dangerouslySetInnerHTML={{ __html: layers.under }} />
                         {slide.elements.map((element) => (
                             <div

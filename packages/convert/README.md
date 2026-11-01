@@ -47,6 +47,9 @@ reply.header('content-disposition', contentDisposition('Subnetting guide', file.
 |---|---|
 | Document | `pdf`, `docx`, `html` |
 | Deck | `pptx`, `pdf` |
+| Deck of PDF pages | `pdf` |
+
+`exportFormatsOf(content)` lists them, and `canExport(content, format)` checks one.
 
 - `readImage` is called once for every image the content uses. Return `null` and the export goes
   on without that image.
@@ -56,6 +59,9 @@ reply.header('content-disposition', contentDisposition('Subnetting guide', file.
   page size in inches) and returns the PDF. Use `gotenberg` or write your own with Puppeteer or
   Playwright.
 - The `html` export is one self-contained file, with its images and fonts inline.
+- A deck of PDF pages exports as the original PDF, read through `readImage`, with what the slides
+  add printed on top of each page. Pages with nothing added are copied as they are, and a deck
+  nobody drew on never reaches the PDF engine. An encrypted PDF is refused as `unsupported`.
 
 ## Importing
 
@@ -71,19 +77,20 @@ const { title, content } = await importFile(upload.bytes, upload.filename, {
   are told apart by what their zip holds, Word 97 and PowerPoint 97 files by the streams they hold,
   and PDF, RTF, PNG, JPEG, GIF and WebP by their signatures. Only Markdown (`.md`) and text
   (`.txt`) are recognized by their extension, and only when they are valid UTF-8.
-- Word, PDF, Markdown and text files become documents, and PowerPoint files become decks. A deck
+- Word, Markdown and text files become documents, and PowerPoint files become decks. A deck
   keeps its theme colors and the font most of its text uses. What its slide master draws comes in
   locked, behind the slide's own elements, and freeform shapes come in as polygons.
+- A PDF becomes a deck of its own pages: one slide for each page, at the size of the first page,
+  with that page behind it. Nothing is converted, so it looks exactly like the original.
+  `saveImage` stores the PDF once, as `application/pdf`; return `null` and the import is refused as
+  `empty`. A PDF Vyva cannot open is refused as `unsupported`, and one of more than 1000 pages as
+  `too-large`.
 - A picture becomes a deck of one slide, in the format closest to its shape, with the picture
   filling it. `saveImage` stores it like any other image; return `null` and the import is refused
   as `empty`.
-- With `officeEngine`, Vyva reads what it cannot read alone. Every PDF becomes a deck: each page a
-  slide, portrait pages on a portrait slide, with its pictures and shapes where they were, and the
-  loose lines a PDF keeps joined back into paragraphs and lists. A PDF of more than 300 pages is
-  refused as `too-large` before the engine runs. Word 97, OpenDocument text and RTF files are
-  turned into Word, and PowerPoint 97 and OpenDocument presentations into PowerPoint, then imported
-  as those. Without an engine a PDF becomes a document of its text, and the older formats are
-  refused as `unsupported`.
+- With `officeEngine`, Vyva reads what it cannot read alone. Word 97, OpenDocument text and RTF
+  files are turned into Word, and PowerPoint 97 and OpenDocument presentations into PowerPoint,
+  then imported as those. Without an engine those formats are refused as `unsupported`.
 
   `officeEngine` takes `{ file, from, to }` and returns the converted file. `libreOffice()` from
   `@pollium/vyva-convert/libreoffice` does that with the `soffice` on the machine (`command` changes

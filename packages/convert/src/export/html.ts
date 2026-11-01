@@ -1,7 +1,7 @@
 import type { ExportBundle, ExportedFile } from './bundle';
 import { fontFaces, fontFilesOf } from './fonts';
 import type { Content } from '@pollium/vyva-core/content';
-import { DECK_SIZES } from '@pollium/vyva-core/content';
+import { deckSize } from '@pollium/vyva-core/content';
 import { escapeHtml } from '@pollium/vyva-core/escape';
 import { CONTENT_CSS, renderDocument, renderSlide, type FileUrl } from '@pollium/vyva-core/render';
 
@@ -14,7 +14,7 @@ const dataUrl = (contentType: string, data: Buffer): string => `data:${contentTy
 export const bodyOf = (content: Content, fileUrl: FileUrl): string => {
     if(content.kind === 'document') return renderDocument(content, fileUrl);
 
-    const { width, height } = DECK_SIZES[content.format];
+    const { width, height } = deckSize(content.format);
     const zoom = SCREEN_PX_PER_INCH / SLIDE_PX_PER_INCH;
     return content.slides
         .map((slide) => `<div class="vy-print-slide" style="width:${width * zoom}px;height:${height * zoom}px"><div style="width:${width}px;height:${height}px;transform:scale(${zoom});transform-origin:0 0">${renderSlide(slide, content, fileUrl)}</div></div>`)

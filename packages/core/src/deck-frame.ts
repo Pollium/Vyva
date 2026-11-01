@@ -1,5 +1,5 @@
 import type { DeckContent, DeckFormat, DeckTheme, Slide } from './content';
-import { DECK_SIZES } from './content';
+import { deckSize } from './content';
 import { escapeHtml } from './escape';
 
 const BAND = 150;
@@ -8,7 +8,7 @@ const HEX = /^#[0-9a-f]{6}$/i;
 const FALLBACK_ACCENT = '#3333b2';
 
 const unitOf = (format: DeckFormat): number => {
-    const { width, height } = DECK_SIZES[format] ?? DECK_SIZES['16:9'];
+    const { width, height } = deckSize(format);
 
     return Math.min(width / 1920, height / 1080);
 };

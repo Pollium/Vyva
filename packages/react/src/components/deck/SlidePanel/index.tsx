@@ -5,9 +5,9 @@ import ColorInput from '../../ui/ColorInput';
 import SelectInput from '../../ui/SelectInput';
 import TextInput from '../../ui/TextInput';
 import { useMessages } from '../../../messages/context';
-import { FONT_FAMILIES, MAX_FOOTER_TEXT, type DeckContent, type DeckFooter, type DeckFormat, type DeckTheme, type FontFamily, type Slide, type SlideBackground } from '@pollium/vyva-core/content';
+import { FONT_FAMILIES, MAX_FOOTER_TEXT, type DeckContent, type DeckFooter, type DeckPreset, type DeckTheme, type FontFamily, type Slide, type SlideBackground } from '@pollium/vyva-core/content';
 
-const FORMATS: readonly DeckFormat[] = ['16:9', '4:3', '1:1', 'a4-portrait', 'a4-landscape'];
+const FORMATS: readonly DeckPreset[] = ['16:9', '4:3', '1:1', 'a4-portrait', 'a4-landscape'];
 const THEME_COLORS = ['background', 'text', 'accent', 'muted'] as const;
 const FONT_OPTIONS = FONT_FAMILIES.map((font) => ({ value: font, label: font }));
 const NO_FOOTER: DeckFooter = { left: '', center: '' };
@@ -21,7 +21,7 @@ interface SlidePanelProps{
     onTheme: (theme: DeckTheme) => void;
     onThemeDone: () => void;
     onFooter: (footer: DeckFooter) => void;
-    onFormat: (format: DeckFormat) => void;
+    onFormat: (format: DeckPreset) => void;
 }
 
 const SlidePanel = ({ deck, slide, isLocked, onBackground, onBackgroundImage, onTheme, onThemeDone, onFooter, onFormat }: SlidePanelProps) => {
@@ -50,9 +50,11 @@ const SlidePanel = ({ deck, slide, isLocked, onBackground, onBackgroundImage, on
                 <PanelRow label={t.editor.font}>
                     <SelectInput label={t.editor.font} hideLabel className='vy:w-40' value={deck.theme.font} options={FONT_OPTIONS} onChange={changeFont} />
                 </PanelRow>
-                <PanelRow label={t.deck.format}>
-                    <SelectInput label={t.deck.format} hideLabel className='vy:w-40' value={deck.format} options={FORMATS.map((format) => ({ value: format, label: t.deck.formats[format] }))} onChange={onFormat} />
-                </PanelRow>
+                {typeof deck.format === 'string' ? (
+                    <PanelRow label={t.deck.format}>
+                        <SelectInput label={t.deck.format} hideLabel className='vy:w-40' value={deck.format} options={FORMATS.map((format) => ({ value: format, label: t.deck.formats[format] }))} onChange={onFormat} />
+                    </PanelRow>
+                ) : null}
             </PanelSection>
 
             <PanelSection title={t.deck.thisSlide}>

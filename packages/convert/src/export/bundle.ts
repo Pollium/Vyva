@@ -23,6 +23,7 @@ export interface ExportBundle{
     title: string;
     language: string;
     images: Map<string, BundleImage>;
+    pdfs: Map<string, Buffer>;
     fonts: FontFamily[];
 }
 
@@ -33,6 +34,7 @@ export interface ExportedFile{
 }
 
 const EXTENSIONS: Record<string, string> = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/gif': 'gif', 'image/webp': 'webp' };
+const PDF_TYPE = 'application/pdf';
 
 const fontsOf = (content: Content): FontFamily[] => {
     if(content.kind === 'document') return [content.design.font, CODE_FONT];
@@ -57,10 +59,12 @@ export interface BundleOptions{
 export const bundleOf = async (content: Content, { title, language, readImage }: BundleOptions): Promise<ExportBundle> => {
     const ids = fileIdsOf(content);
     const stored = await Promise.all(ids.map((id) => readImage(id)));
-    const images = new Map(ids.flatMap((id, index) => {
-        const image = stored[index];
-        return image === null ? [] : [[id, bundleImage(id, image)] as const];
-    }));
+    const found = ids.flatMap((id, index) => {
+        const file = stored[index];
+        return file === null ? [] : [{ id, file }];
+    });
+    const images = new Map(found.filter(({ file }) => file.contentType !== PDF_TYPE).map(({ id, file }) => [id, bundleImage(id, file)]));
+    const pdfs = new Map(found.filter(({ file }) => file.contentType === PDF_TYPE).map(({ id, file }) => [id, Buffer.from(file.data)]));
 
-    return { title, language, images, fonts: fontsOf(content) };
+    return { title, language, images, pdfs, fonts: fontsOf(content) };
 };

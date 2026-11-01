@@ -23,7 +23,6 @@ export const libreOffice = ({ command = 'soffice', timeoutMs = DEFAULT_TIMEOUT_M
         await run(command, [
             `-env:UserInstallation=${pathToFileURL(join(folder, 'profile')).href}`,
             '--headless',
-            ...(from === 'pdf' ? ['--infilter=impress_pdf_import'] : []),
             '--convert-to', to,
             '--outdir', folder,
             source

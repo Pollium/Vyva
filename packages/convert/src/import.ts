@@ -1,9 +1,9 @@
 import { ConvertError } from './errors';
-import { importDocx, importMarkdown, importPdf, importPlainText } from './import/documents';
+import { importDocx, importMarkdown, importPlainText } from './import/documents';
 import { imageTypeOf, importImage, type ImageType } from './import/image';
 import type { SaveImage } from './import/images';
 import { runOffice, type LegacyOffice, type OfficeEngine } from './import/office';
-import { importPdfSlides } from './import/pdf-slides';
+import { importPdf } from './import/pdf';
 import { importPptx } from './import/pptx';
 import type { Content } from '@pollium/vyva-core/content';
 import { strFromU8, unzipSync } from 'fflate';
@@ -119,7 +119,7 @@ const convert = async (detected: Detected, buffer: Buffer, filename: string, opt
         case 'pptx':
             return importPptx(buffer, filename, saveImage);
         case 'pdf':
-            return officeEngine === undefined ? importPdf(buffer, filename) : importPdfSlides(buffer, filename, saveImage, officeEngine);
+            return importPdf(buffer, filename, saveImage);
         case 'markdown':
             return importMarkdown(textOf(buffer), filename);
         case 'text':

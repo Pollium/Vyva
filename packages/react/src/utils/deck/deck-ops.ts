@@ -1,5 +1,5 @@
 import type { CodeElement, DeckContent, DeckTheme, ImageElement, ShapeElement, ShapeKind, Slide, SlideElement, TableElement, TextElement, TextStyle } from '@pollium/vyva-core/content';
-import { DECK_SIZES, MAX_ALT_TEXT, TEXT_SHAPES } from '@pollium/vyva-core/content';
+import { DECK_SIZES, deckSize, MAX_ALT_TEXT, TEXT_SHAPES } from '@pollium/vyva-core/content';
 import { escapeHtml } from '@pollium/vyva-core/escape';
 import { newId } from '@pollium/vyva-core/ids';
 import { withoutInlineStyles } from '@pollium/vyva-core/inline-style';
@@ -53,7 +53,7 @@ export const withTextStyle = (element: SlideElement, change: (style: TextStyle) 
     return { ...element, text: restyled(element.text ?? { html: '', style: shapeTextStyle(element, theme) }, change) };
 };
 
-export const sizeOf = (deck: DeckContent) => DECK_SIZES[deck.format];
+export const sizeOf = (deck: DeckContent) => deckSize(deck.format);
 const unitOf = (deck: DeckContent) => Math.min(sizeOf(deck).width / BASE_SIZE.width, sizeOf(deck).height / BASE_SIZE.height);
 
 export const withSlide = (deck: DeckContent, index: number, change: (slide: Slide) => Slide): DeckContent => ({

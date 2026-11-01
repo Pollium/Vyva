@@ -4,7 +4,7 @@ import { useWheelStep } from '../../hooks/use-wheel-step';
 import { useMessages } from '../../messages/context';
 import { slideMarkup } from '../../utils/markup';
 import type { DeckContent } from '@pollium/vyva-core/content';
-import { DECK_SIZES } from '@pollium/vyva-core/content';
+import { deckSize } from '@pollium/vyva-core/content';
 import type { FileUrl } from '@pollium/vyva-core/render';
 import { X } from 'lucide-react';
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
@@ -26,7 +26,7 @@ const PresentMode = ({ deck, start, fileUrl, onClose }: PresentModeProps) => {
     const root = useRef<HTMLDivElement | null>(null);
     const [index, setIndex] = useState(start);
     const [box, setBox] = useState({ width: window.innerWidth, height: window.innerHeight });
-    const { width, height } = DECK_SIZES[deck.format];
+    const { width, height } = deckSize(deck.format);
     const last = deck.slides.length - 1;
     const fit = Math.min(box.width / width, box.height / height);
     const markup = slideMarkup(deck, index, fileUrl);

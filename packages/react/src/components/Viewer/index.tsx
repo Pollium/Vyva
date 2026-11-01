@@ -23,7 +23,7 @@ const Viewer = ({ content, fileUrl, label }: ViewerProps) => {
                     return (
                         <li key={slide.id} className='vy:flex vy:flex-col vy:gap-2'>
                             <span className='vy:text-[0.75rem] vy:tabular-nums vy:text-muted'>{t.deck.slideOf(index + 1, content.slides.length)}</span>
-                            <Canvas markup={markup} label={t.deck.slide(index + 1)} className='vy:rounded-xl vy:border vy:border-foreground/10 vy:shadow-sm' />
+                            <Canvas markup={markup} label={t.deck.slide(index + 1)} isSelectable className='vy:rounded-xl vy:border vy:border-foreground/10 vy:shadow-sm' />
                         </li>
                     );
                 })}

@@ -78,6 +78,31 @@ import SaveStatus from '@pollium/vyva-react/SaveStatus';
 | `codeEditor` | deck | The editor for code elements. A plain text area by default |
 | `ref` | both | `showPanel()` opens the host's tab. The deck editor also has `present()` |
 
+## PDF pages
+
+A deck imported from a PDF has a page of that PDF behind each slide. Vyva does not read PDFs itself:
+the host draws each page through `PdfPageContext`, with the renderer of its choice, such as pdf.js.
+
+```tsx
+import { PdfPageContext, type PdfPageProps } from '@pollium/vyva-react/contracts/pdf-page';
+
+const renderPdfPage = (props: PdfPageProps) => <MyPdfPage {...props} />;
+
+<PdfPageContext.Provider value={renderPdfPage}>
+    <DeckEditor ... />
+</PdfPageContext.Provider>
+```
+
+| Prop | What it is |
+|---|---|
+| `url` | What `fileUrl` returned for the PDF |
+| `page` | The page to draw, from 1 |
+| `width`, `height` | The box to fill, in slide units. A page of another shape fits inside it |
+| `scale` | How many screen pixels a slide unit takes, so the page can be drawn sharp |
+| `isSelectable` | Whether the text of the page should be selectable. Only reading views ask for it |
+
+Without a provider the page is left blank. `Canvas` takes `isSelectable` for the same reason.
+
 `PresentMode` shows a deck full screen and works with the keyboard and by touch. `Canvas` shows one
 page from `@pollium/vyva-react/markup` (`slideMarkup` or `documentMarkup`), scaled to the width it is given,
 which is what thumbnails need.

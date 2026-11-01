@@ -2,7 +2,7 @@ import type { SelectionAction } from '../contracts/selection-action';
 import type { Align, Arrange } from '../utils/deck/deck-ops';
 import type { LayoutPresetId } from '../utils/deck/layout-presets';
 import type { BlockStyle } from '../utils/document-blocks';
-import type { CodeElement, DeckFormat, ImageElement, ShapeKind, SlideElement, TextStyle } from '@pollium/vyva-core/content';
+import type { CodeElement, DeckPreset, ImageElement, ShapeKind, SlideElement, TextStyle } from '@pollium/vyva-core/content';
 import type { SlideLayout, SlideSpec } from '@pollium/vyva-core/slide-layouts';
 
 const LAYOUT_SAMPLES: Record<SlideLayout, Omit<SlideSpec, 'layout'>> = {
@@ -326,7 +326,7 @@ const en = {
             '1:1': 'Square 1:1',
             'a4-portrait': 'A4 portrait',
             'a4-landscape': 'A4 landscape'
-        } satisfies Record<DeckFormat, string>,
+        } satisfies Record<DeckPreset, string>,
         thisSlide: 'This slide',
         background: 'Background',
         slideBackground: 'Background of this slide',

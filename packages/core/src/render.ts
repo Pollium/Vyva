@@ -9,7 +9,7 @@ import type {
     SlideElement,
     TextStyle
 } from './content';
-import { DECK_SIZES, FONT_FAMILIES, TEXT_SHAPES } from './content';
+import { deckSize, FONT_FAMILIES, TEXT_SHAPES } from './content';
 import { escapeHtml } from './escape';
 import { frameLayers } from './deck-frame';
 import { withMath } from './math';
@@ -115,6 +115,7 @@ export const renderDocument = (content: DocumentContent, fileUrl: FileUrl): stri
 export const backgroundStyle = (background: SlideBackground | null, fallback: string, fileUrl: FileUrl): string => {
     if(background === null) return `background:${fallback}`;
     if(background.type === 'color') return `background:${color(background.color, fallback)}`;
+    if(background.type === 'pdf-page') return 'background:transparent';
 
     const url = fileUrl(background.fileId);
     if(url === null) return `background:${fallback}`;
@@ -246,14 +247,14 @@ const elementHtml = (element: SlideElement, deck: DeckContent, fileUrl: FileUrl,
 };
 
 export const slideCss = (slide: Slide, deck: DeckContent, fileUrl: FileUrl): string => {
-    const { width, height } = DECK_SIZES[deck.format] ?? DECK_SIZES['16:9'];
+    const { width, height } = deckSize(deck.format);
 
     return `width:${width}px;height:${height}px;${backgroundStyle(slide.background, color(deck.theme.background, '#ffffff'), fileUrl)};font-family:${deckFont(deck)};color:${color(deck.theme.text, '#1d2433')}`;
 };
 
 export const renderSlide = (slide: Slide, deck: DeckContent, fileUrl: FileUrl): string => {
     const style = slideCss(slide, deck, fileUrl);
-    const { height } = DECK_SIZES[deck.format] ?? DECK_SIZES['16:9'];
+    const { height } = deckSize(deck.format);
     const frame = frameLayers(slide, deck);
 
     return `<section class="vy-slide" style="${attr(style)}">${frame.under}${slide.elements.map((element) => elementHtml(element, deck, fileUrl, height)).join('')}${frame.over}</section>`;
@@ -269,7 +270,7 @@ export const fileIdsOf = (content: Content): string[] => {
     }
     if(content.kind === 'deck'){
         for(const slide of content.slides){
-            if(slide.background?.type === 'image') ids.add(slide.background.fileId);
+            if(slide.background !== null && slide.background.type !== 'color') ids.add(slide.background.fileId);
             for(const element of slide.elements){
                 if(element.type === 'image') ids.add(element.fileId);
                 if(element.type === 'text') for(const match of element.html.matchAll(FILE_ID)) ids.add(match[1]);

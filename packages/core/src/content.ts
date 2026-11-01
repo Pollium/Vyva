@@ -41,15 +41,27 @@ export interface DocumentContent{
     blocks: DocumentBlock[] & tags.MaxItems<3000>;
 }
 
-export type DeckFormat = '16:9' | '4:3' | '1:1' | 'a4-portrait' | 'a4-landscape';
+export type DeckPreset = '16:9' | '4:3' | '1:1' | 'a4-portrait' | 'a4-landscape';
 
-export const DECK_SIZES: Record<DeckFormat, { width: number; height: number }> = {
+export const MAX_EXTENT = 20000;
+
+export interface DeckSize{
+    width: Extent;
+    height: Extent;
+}
+
+export type DeckFormat = DeckPreset | DeckSize;
+
+export const DECK_SIZES: Record<DeckPreset, { width: number; height: number }> = {
     '16:9': { width: 1920, height: 1080 },
     '4:3': { width: 1440, height: 1080 },
     '1:1': { width: 1080, height: 1080 },
     'a4-portrait': { width: 1080, height: 1527 },
     'a4-landscape': { width: 1527, height: 1080 }
 };
+
+export const deckSize = (format: DeckFormat): { width: number; height: number } =>
+    typeof format === 'string' ? DECK_SIZES[format] ?? DECK_SIZES['16:9'] : format;
 
 export interface DeckFrame{
     header: 'none' | 'band';
@@ -78,7 +90,10 @@ export const MAX_BACKGROUND_DIM = 0.9;
 
 export type SlideBackground =
     | { type: 'color'; color: Color }
-    | { type: 'image'; fileId: string & tags.Format<'uuid'>; fit: 'cover' | 'contain'; dim: number & tags.Minimum<0> & tags.Maximum<0.9> };
+    | { type: 'image'; fileId: string & tags.Format<'uuid'>; fit: 'cover' | 'contain'; dim: number & tags.Minimum<0> & tags.Maximum<0.9> }
+    | { type: 'pdf-page'; fileId: string & tags.Format<'uuid'>; page: number & tags.Type<'uint32'> & tags.Minimum<1> };
+
+export type PdfPageBackground = Extract<SlideBackground, { type: 'pdf-page' }>;
 
 interface ElementFrame{
     id: Id;
@@ -181,12 +196,17 @@ export interface Slide{
     frame?: SlideFrame;
 }
 
+export const MAX_SLIDES = 1000;
+
 export interface DeckContent{
     kind: 'deck';
     format: DeckFormat;
     theme: DeckTheme;
     footer?: DeckFooter;
-    slides: Slide[] & tags.MaxItems<300>;
+    slides: Slide[] & tags.MaxItems<1000>;
 }
 
 export type Content = DocumentContent | DeckContent;
+
+export const hasPdfPages = (content: Content): boolean =>
+    content.kind === 'deck' && content.slides.some((slide) => slide.background?.type === 'pdf-page');

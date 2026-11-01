@@ -119,6 +119,32 @@ describe('deck edits', () => {
     });
 });
 
+describe('decks of PDF pages', () => {
+    const FILE = '01a14188-5cb4-776b-815b-c6e977d07bc0';
+    const pages = (): DeckContent => ({
+        kind: 'deck',
+        format: { width: 1224, height: 1584 },
+        theme: DECK_THEME,
+        slides: [1, 2].map((page) => ({ id: `p${page}`, background: { type: 'pdf-page', fileId: FILE, page }, elements: [] }))
+    });
+
+    it('tells the model which page of the PDF each slide shows', () => {
+        expect(deckForModel(pages()).slides.map(({ number, pdfPage }) => [number, pdfPage])).toEqual([[1, 1], [2, 2]]);
+        expect(deckForModel(deck()).slides[0].pdfPage).toBeUndefined();
+    });
+
+    it('refuses to rebuild a page of the PDF and still lets the model add, move and delete slides around it', () => {
+        expect(() => applyDeckOperations(pages(), [{ op: 'replace_slide', slideId: 'p1', slide: { layout: 'title', title: 'Cover' } }])).toThrow(EditRefused);
+
+        const edited = applyDeckOperations(pages(), [
+            { op: 'add_slide', afterSlideId: 'p1', slide: { layout: 'bullets', title: 'Summary', bullets: ['First idea'] } },
+            { op: 'move_slide', slideId: 'p2', afterSlideId: null },
+            { op: 'delete_slide', slideId: 'p1' }
+        ]);
+        expect(deckForModel(edited).slides.map(({ pdfPage }) => pdfPage)).toEqual([2, undefined]);
+    });
+});
+
 describe('math', () => {
     it('gives the model back the LaTeX it wrote, without Markdown escapes', () => {
         const html = markdownToTextHtml('Total cost: $CT = DC + \\frac{D}{Q}S + \\frac{Q}{2}H$ with $x_1 * y_2$');

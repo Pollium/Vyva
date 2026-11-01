@@ -6,7 +6,7 @@ import SelectInput from '../../ui/SelectInput';
 import SliderField from '../../ui/SliderField';
 import { useMessages } from '../../../messages/context';
 import { MAX_BACKGROUND_DIM, type DeckTheme, type SlideBackground } from '@pollium/vyva-core/content';
-import { Image as ImageIcon, ImagePlus } from 'lucide-react';
+import { FileText, Image as ImageIcon, ImagePlus } from 'lucide-react';
 
 const MENU_WIDTH = 256;
 const PALETTE = ['#ffffff', '#f3f4f6', '#0f1720', '#e8eef8', '#fbf6ef', '#1f4e9a', '#0f7b6c', '#c4572e', '#8250df'];
@@ -25,9 +25,12 @@ const BackgroundMenu = ({ theme, background, onChange, onPickImage, onDone }: Ba
     const t = useMessages();
     const color = background?.type === 'color' ? background.color : theme.background;
     const swatches = [...new Set([theme.background, theme.accent, theme.text, ...PALETTE].map((swatch) => swatch.toLowerCase()))];
+    const isColor = background === null || background.type === 'color';
     const icon = background?.type === 'image'
         ? <ImageIcon className='vy:size-4' />
-        : <span className='vy:size-5 vy:rounded-full vy:ring-1 vy:ring-foreground/15' style={{ background: color }} />;
+        : background?.type === 'pdf-page'
+            ? <FileText className='vy:size-4' />
+            : <span className='vy:size-5 vy:rounded-full vy:ring-1 vy:ring-foreground/15' style={{ background: color }} />;
 
     return (
         <ToolPopover label={t.deck.slideBackground} width={MENU_WIDTH} onClosed={onDone} icon={icon}>
@@ -36,7 +39,7 @@ const BackgroundMenu = ({ theme, background, onChange, onPickImage, onDone }: Ba
                     <SwatchGrid
                         label={t.deck.slideBackground}
                         colors={swatches}
-                        value={background?.type === 'image' ? null : color.toLowerCase()}
+                        value={isColor ? color.toLowerCase() : null}
                         onPick={(swatch) => {
                             onChange({ type: 'color', color: swatch });
                             close();

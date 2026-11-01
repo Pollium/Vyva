@@ -15,7 +15,7 @@ export const readImage = async (fileId: string): Promise<StoredImage | null> =>
 
 export const LETTER = { width: 612, height: 792 };
 
-export const pdfWith = (pages: string[], { width, height } = LETTER): Buffer => {
+export const pdfWith = (pages: string[], { width, height, rotate = 0 }: { width: number; height: number; rotate?: number } = LETTER): Buffer => {
     const objects = [
         '<< /Type /Catalog /Pages 2 0 R >>',
         `<< /Type /Pages /Kids [${pages.map((_, index) => `${4 + index * 2} 0 R`).join(' ')}] /Count ${pages.length} >>`,
@@ -23,7 +23,7 @@ export const pdfWith = (pages: string[], { width, height } = LETTER): Buffer => 
         ...pages.flatMap((text, index) => {
             const stream = `BT /F1 24 Tf 72 720 Td (${text}) Tj ET`;
             return [
-                `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${width} ${height}] /Contents ${5 + index * 2} 0 R /Resources << /Font << /F1 3 0 R >> >> >>`,
+                `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${width} ${height}] /Rotate ${rotate} /Contents ${5 + index * 2} 0 R /Resources << /Font << /F1 3 0 R >> >> >>`,
                 `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`
             ];
         })

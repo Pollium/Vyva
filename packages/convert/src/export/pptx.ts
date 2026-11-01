@@ -2,7 +2,7 @@ import type { ExportBundle, ExportedFile } from './bundle';
 import { blocksOfHtml, type Run } from './html-blocks';
 import { CODE_FONT, CODE_LINE_HEIGHT, CODE_PALETTES, codeLines } from '@pollium/vyva-core/code';
 import type { CodeElement, DeckContent, ImageElement, ShapeElement, Slide, TableElement, TextElement, TextStyle } from '@pollium/vyva-core/content';
-import { DECK_SIZES, TEXT_SHAPES } from '@pollium/vyva-core/content';
+import { deckSize, TEXT_SHAPES } from '@pollium/vyva-core/content';
 import { bandHeight, footerHeight, footerSegments, hasBand, hasFooter, inkOn } from '@pollium/vyva-core/deck-frame';
 import PptxGenJS from 'pptxgenjs';
 
@@ -201,7 +201,7 @@ const addBackground = (slide: PptxGenJS.Slide, background: Slide['background'], 
         if(image !== undefined){
             slide.background = { data: dataUrl(image.contentType, image.data) };
             if(background.dim > 0){
-                const { width, height } = DECK_SIZES[deck.format];
+                const { width, height } = deckSize(deck.format);
                 slide.addShape('rect', { x: 0, y: 0, w: inch(width), h: inch(height), fill: { color: '000000', transparency: transparency(background.dim) }, line: { type: 'none' } });
             }
             return;
@@ -214,14 +214,14 @@ const addBackground = (slide: PptxGenJS.Slide, background: Slide['background'], 
 const addBand = (slide: PptxGenJS.Slide, source: Slide, deck: DeckContent) => {
     if(!hasBand(deck.theme, source)) return;
 
-    const { width } = DECK_SIZES[deck.format];
+    const { width } = deckSize(deck.format);
     slide.addShape('rect', { x: 0, y: 0, w: inch(width), h: inch(bandHeight(deck.format)), fill: { color: hex(deck.theme.accent) }, line: { type: 'none' } });
 };
 
 const addFooter = (slide: PptxGenJS.Slide, source: Slide, deck: DeckContent) => {
     if(!hasFooter(deck.theme, source)) return;
 
-    const { width, height } = DECK_SIZES[deck.format];
+    const { width, height } = deckSize(deck.format);
     const tall = footerHeight(deck.format);
     const third = width / 3;
     footerSegments(source, deck).forEach((segment, index) => {
@@ -234,7 +234,7 @@ const addFooter = (slide: PptxGenJS.Slide, source: Slide, deck: DeckContent) => 
 };
 
 export const buildPptx = async (deck: DeckContent, bundle: ExportBundle): Promise<ExportedFile> => {
-    const { width, height } = DECK_SIZES[deck.format];
+    const { width, height } = deckSize(deck.format);
     const pptx = new PptxGenJS();
     pptx.defineLayout({ name: LAYOUT, width: inch(width), height: inch(height) });
     pptx.layout = LAYOUT;

@@ -10,7 +10,7 @@ import type {
     TextElement,
     TextStyle
 } from './content';
-import { DECK_SIZES } from './content';
+import { deckSize } from './content';
 import { bandHeight, inkOn } from './deck-frame';
 import { newId } from './ids';
 import { codeFenceOf, codeHeight, fitCodeSize, type CodeFence } from './code';
@@ -333,7 +333,7 @@ function imageBeside(canvas: Canvas, spec: SlideSpec, side: 'left' | 'right'): P
 }
 
 export const canvasOf = (format: DeckFormat, theme: DeckTheme): Canvas => {
-    const { width, height } = DECK_SIZES[format];
+    const { width, height } = deckSize(format);
     const unit = Math.min(width / 1920, height / 1080);
 
     return { width, height, unit, margin: Math.round(Math.min(width, height) * 0.1), band: theme.frame?.header === 'band' ? bandHeight(format) : 0, theme };
