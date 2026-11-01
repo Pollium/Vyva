@@ -5,6 +5,7 @@ import { DECK_THEME } from '@pollium/vyva-core/themes';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import DeckEditor from '../components/deck/DeckEditor';
 import type { ContentDraft } from '../contracts/editor-session';
+import { PdfPageContext, type PdfPageProps } from '../contracts/pdf-page';
 
 const deck: DeckContent = {
     kind: 'deck',
@@ -14,6 +15,15 @@ const deck: DeckContent = {
         layoutSlide({ layout: 'title', title: 'Redes', subtitle: 'Unidad 1' }, '16:9', DECK_THEME),
         { id: 'blank', background: null, elements: [] }
     ]
+};
+
+const PDF_ID = '01a14188-5cb4-776b-815b-c6e977d07bc0';
+
+const pdfDeck: DeckContent = {
+    kind: 'deck',
+    format: { width: 1224, height: 1584 },
+    theme: DECK_THEME,
+    slides: [1, 2].map((page) => ({ id: `p${page}`, background: { type: 'pdf-page', fileId: PDF_ID, page }, elements: [] }))
 };
 
 const contentOf = (draft: ContentDraft): Content => typeof draft.content === 'function' ? draft.content() : draft.content;
@@ -73,6 +83,23 @@ describe('DeckEditor', () => {
         fireEvent.keyDown(screen.getByRole('region', { name: 'Canvas of slide 1' }), { key: 'ArrowRight' });
 
         expect(screen.getByRole('region', { name: 'Canvas of slide 2' })).toBeTruthy();
+    });
+
+    it('draws the page the host renders under a slide of a PDF, at the size of the page', () => {
+        const drawn: PdfPageProps[] = [];
+        const renderPdfPage = (props: PdfPageProps) => {
+            drawn.push(props);
+            return <div data-pdf-page={props.page} />;
+        };
+        render(
+            <PdfPageContext.Provider value={renderPdfPage}>
+                <DeckEditor session={{ content: pdfDeck, remoteVersion: 0, change: vi.fn() }} readOnly={false} fileUrl={(id) => id === PDF_ID ? '/files/lecture.pdf' : null} />
+            </PdfPageContext.Provider>
+        );
+
+        const stage = screen.getByRole('region', { name: 'Canvas of slide 1' });
+        expect(stage.querySelector('[data-pdf-page="1"]')).not.toBeNull();
+        expect(drawn.at(-1)).toMatchObject({ url: '/files/lecture.pdf', page: 1, width: 1224, height: 1584, isSelectable: false });
     });
 
     it('does not change a read-only deck', () => {

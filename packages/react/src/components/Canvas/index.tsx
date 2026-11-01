@@ -1,13 +1,16 @@
+import { PdfPageContext } from '../../contracts/pdf-page';
 import { SHADOW_CSS, type PageMarkup } from '../../utils/markup';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useContext, useLayoutEffect, useRef, useState } from 'react';
 
 interface CanvasProps{
     markup: PageMarkup;
     label: string;
     className?: string;
+    isSelectable?: boolean;
 }
 
-const Canvas = ({ markup, label, className = '' }: CanvasProps) => {
+const Canvas = ({ markup, label, className = '', isSelectable = false }: CanvasProps) => {
+    const renderPdfPage = useContext(PdfPageContext);
     const frame = useRef<HTMLDivElement | null>(null);
     const host = useRef<HTMLDivElement | null>(null);
     const [scale, setScale] = useState(0);
@@ -35,6 +38,8 @@ const Canvas = ({ markup, label, className = '' }: CanvasProps) => {
     }, [markup.width]);
 
     const height = markup.height ?? contentHeight;
+    const page = renderPdfPage === null || scale === 0 ? null : markup.pdfPage;
+    const placed = { width: markup.width, transform: `scale(${scale})` };
 
     return (
         <div
@@ -44,10 +49,15 @@ const Canvas = ({ markup, label, className = '' }: CanvasProps) => {
             className={`vy:relative vy:overflow-hidden ${className}`}
             style={markup.height === null ? { height: height * scale } : { aspectRatio: `${markup.width} / ${markup.height}` }}
         >
+            {renderPdfPage === null || page === null ? null : (
+                <div className='vy:absolute vy:left-0 vy:top-0 vy:origin-top-left' style={{ ...placed, height }}>
+                    {renderPdfPage({ url: page.url, page: page.page, width: markup.width, height, scale, isSelectable })}
+                </div>
+            )}
             <div
                 ref={host}
-                className='vy:absolute vy:left-0 vy:top-0 vy:origin-top-left'
-                style={{ width: markup.width, height: markup.height ?? undefined, transform: `scale(${scale})`, visibility: scale === 0 ? 'hidden' : 'visible' }}
+                className={`vy:absolute vy:left-0 vy:top-0 vy:origin-top-left ${page !== null && isSelectable ? 'vy:pointer-events-none' : ''}`}
+                style={{ ...placed, height: markup.height ?? undefined, visibility: scale === 0 ? 'hidden' : 'visible' }}
             />
         </div>
     );
